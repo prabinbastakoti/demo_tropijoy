@@ -31,6 +31,9 @@ const fruitFilters: (FruitType | "All")[] = [
   "Citrus",
 ];
 
+/** The window reserves this many card slots so its height never changes between tabs. */
+const GRID_SLOTS = 6;
+
 function selectProducts(tab: TabId, fruit: FruitType | "All"): Product[] {
   let list = products;
   if (tab === "slices")
@@ -44,7 +47,7 @@ function selectProducts(tab: TabId, fruit: FruitType | "All"): Product[] {
   if (tab === "mixes") list = list.filter((p) => p.tags.includes("Snack Mix"));
   if (tab === "top") list = list.filter((p) => p.tags.includes("Best Seller"));
   if (fruit !== "All") list = list.filter((p) => p.fruitType === fruit);
-  return list.slice(0, 6);
+  return list.slice(0, GRID_SLOTS);
 }
 
 export default function HeroWindow() {
@@ -65,7 +68,7 @@ export default function HeroWindow() {
   }
 
   return (
-    <section className="mesh-hero noise relative overflow-hidden pt-10 pb-20 sm:pt-14 sm:pb-24">
+    <section className="mesh-hero noise relative overflow-hidden pb-20 sm:pb-24 -mt-[var(--header-h)] pt-[calc(var(--header-h)+2.5rem)] sm:pt-[calc(var(--header-h)+3.5rem)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* headline */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -194,7 +197,7 @@ export default function HeroWindow() {
             </div>
 
             {/* product grid */}
-            <div className="p-3 sm:p-5 min-h-[340px]">
+            <div className="relative p-3 sm:p-5 min-h-[340px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${tab}-${fruit}`}
@@ -262,13 +265,40 @@ export default function HeroWindow() {
                       </motion.div>
                     );
                   })}
+
+                  {/* Invisible clones keep the grid at a constant number of
+                      rows, so the window doesn't resize between tabs. */}
+                  {Array.from({ length: GRID_SLOTS - visible.length }).map((_, i) => (
+                    <div
+                      key={`slot-${i}`}
+                      aria-hidden
+                      className="invisible rounded-2xl border border-transparent overflow-hidden"
+                    >
+                      <div className="aspect-[4/3]" />
+                      <div className="p-3">
+                        <p className="text-xs sm:text-sm font-semibold truncate">
+                          &nbsp;
+                        </p>
+                        <div className="flex items-center gap-1 mt-0.5 mb-2">
+                          <Star size={10} />
+                          <span className="text-[11px]">&nbsp;</span>
+                        </div>
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="text-sm font-bold">&nbsp;</span>
+                          <span className="block w-7 h-7 rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </motion.div>
               </AnimatePresence>
 
               {visible.length === 0 && (
-                <p className="text-center text-sm text-forest-deep/45 py-16">
-                  Nothing in this combination — try another fruit.
-                </p>
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <p className="text-center text-sm text-forest-deep/45">
+                    Nothing in this combination — try another fruit.
+                  </p>
+                </div>
               )}
             </div>
           </div>

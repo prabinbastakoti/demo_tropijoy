@@ -20,10 +20,16 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const secondaryLinks = [
+  { label: "Order History", href: "/orders", icon: Package },
+  { label: "Wishlist", href: "/wishlist", icon: Heart },
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
   const pathname = usePathname();
 
   const toggleCart = useCartStore((s) => s.toggleCart);
@@ -32,9 +38,9 @@ export default function Header() {
   const hydrated = useHydrated();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -51,61 +57,92 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+
+  /** The link the moving indicator should sit under. */
+  const indicatorFor = hovered ?? navLinks.find((l) => isActive(l.href))?.href;
+
   return (
     <>
+      {/* fixed so the hero's gradient runs underneath it */}
       <header
         className={cn(
-          "sticky top-0 z-40 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
           scrolled
-            ? "backdrop-blur-md bg-white/75 shadow-sm border-b border-forest/5"
-            : "bg-transparent"
+            ? "bg-white/80 backdrop-blur-xl border-b border-forest/8"
+            : "bg-transparent border-b border-transparent"
         )}
       >
+        {/* same container as the hero so the two align exactly */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-3">
-            <Link href="/" className="flex items-center shrink-0">
+          <div className="flex items-center justify-between h-[68px] sm:h-[84px]">
+            <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
               <Image
                 src="/logo.png"
                 alt="Tropijoy"
                 width={221}
                 height={100}
-                className="h-12 sm:h-14 w-auto object-contain"
                 priority
+                className="h-7 sm:h-9 w-auto object-contain"
               />
             </Link>
 
-            <nav className="hidden md:flex items-center gap-7">
+            {/* desktop nav with a single indicator that follows hover, resting on the active route */}
+            <nav
+              className="hidden md:flex items-center gap-0.5"
+              onMouseLeave={() => setHovered(null)}
+            >
               {navLinks.map((link) => {
-                const active =
-                  pathname === link.href || pathname.startsWith(`${link.href}/`);
+                const active = isActive(link.href);
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
+                    onMouseEnter={() => setHovered(link.href)}
                     className={cn(
-                      "text-sm font-semibold transition-colors relative group",
-                      active
-                        ? "text-forest"
-                        : "text-forest-deep/75 hover:text-forest"
+                      "relative rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
+                      active || hovered === link.href
+                        ? "text-forest-deep"
+                        : "text-forest-deep/60"
                     )}
                   >
+                    {indicatorFor === link.href && (
+                      <motion.span
+                        layoutId="nav-indicator"
+                        className={cn(
+                          "absolute inset-0 -z-10 rounded-full",
+                          active
+                            ? "bg-sunny shadow-[0_2px_10px_-2px_rgba(252,209,22,0.7)]"
+                            : "bg-white/70 shadow-[0_2px_10px_-4px_rgba(8,48,26,0.25)]"
+                        )}
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
                     {link.label}
-                    <span
-                      className={cn(
-                        "absolute -bottom-1 left-0 h-0.5 bg-sunny transition-all duration-300",
-                        active ? "w-full" : "w-0 group-hover:w-full"
-                      )}
-                    />
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="flex items-center gap-1 sm:gap-2">
+            {/* actions */}
+            <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-forest/10 text-forest transition-colors"
+                className="group hidden sm:flex items-center gap-2 rounded-full border border-forest/12 bg-white/60 px-3 py-1.5 text-forest-deep/50 transition-colors hover:border-forest/30 hover:text-forest"
+              >
+                <Search size={15} />
+                <span className="text-xs font-medium">Search</span>
+                <kbd className="rounded border border-forest/15 bg-white/70 px-1 text-[10px] font-semibold text-forest-deep/40">
+                  ⌘K
+                </kbd>
+              </button>
+
+              <button
+                onClick={() => setSearchOpen(true)}
+                aria-label="Search products"
+                className="sm:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
               >
                 <Search size={19} />
               </button>
@@ -113,7 +150,7 @@ export default function Header() {
               <Link
                 href="/orders"
                 aria-label="Order history"
-                className="hidden sm:flex w-10 h-10 rounded-full items-center justify-center hover:bg-forest/10 text-forest transition-colors"
+                className="hidden sm:flex w-10 h-10 rounded-full items-center justify-center text-forest hover:bg-forest/8 transition-colors"
               >
                 <Package size={19} />
               </Link>
@@ -121,11 +158,11 @@ export default function Header() {
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-forest/10 text-forest transition-colors"
+                className="relative w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
               >
                 <Heart size={19} />
                 {hydrated && wishlistCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-forest text-white text-[10px] font-bold rounded-full w-4.5 h-4.5 min-w-[18px] h-[18px] flex items-center justify-center border-2 border-cream">
+                  <span className="absolute top-0.5 right-0.5 bg-forest text-white text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1">
                     {wishlistCount > 9 ? "9+" : wishlistCount}
                   </span>
                 )}
@@ -134,7 +171,7 @@ export default function Header() {
               <button
                 onClick={toggleCart}
                 aria-label="Open cart"
-                className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-forest/10 text-forest transition-colors"
+                className="relative w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
               >
                 <ShoppingBag size={19} />
                 <AnimatePresence>
@@ -143,7 +180,7 @@ export default function Header() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute -top-0.5 -right-0.5 bg-sunny text-forest-deep text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center border-2 border-cream px-1"
+                      className="absolute top-0.5 right-0.5 bg-sunny text-forest-deep text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1"
                     >
                       {itemCount > 9 ? "9+" : itemCount}
                     </motion.span>
@@ -154,7 +191,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-forest/10 text-forest transition-colors"
+                className="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
               >
                 <Menu size={22} />
               </button>
@@ -163,6 +200,7 @@ export default function Header() {
         </div>
       </header>
 
+      {/* mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -177,7 +215,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 260 }}
-              className="absolute right-0 top-0 h-full w-72 bg-cream p-6 flex flex-col gap-6 overflow-y-auto"
+              className="absolute right-0 top-0 h-full w-[280px] bg-cream p-6 flex flex-col gap-6 overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center">
@@ -191,9 +229,9 @@ export default function Header() {
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="text-forest"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-forest hover:bg-forest/8"
                 >
-                  <X size={24} />
+                  <X size={22} />
                 </button>
               </div>
 
@@ -202,7 +240,12 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-lg font-semibold text-forest-deep py-2 hover:text-forest transition-colors"
+                    className={cn(
+                      "rounded-xl px-4 py-3 text-base font-semibold transition-colors",
+                      isActive(link.href)
+                        ? "bg-sunny text-forest-deep"
+                        : "text-forest-deep/75 hover:bg-forest/6"
+                    )}
                   >
                     {link.label}
                   </Link>
@@ -210,21 +253,18 @@ export default function Header() {
               </nav>
 
               <div className="border-t border-forest/10 pt-4 flex flex-col gap-1">
-                <Link
-                  href="/orders"
-                  className="text-sm font-medium text-forest-deep/70 py-2 flex items-center gap-2"
-                >
-                  <Package size={16} /> Order History
-                </Link>
-                <Link
-                  href="/wishlist"
-                  className="text-sm font-medium text-forest-deep/70 py-2 flex items-center gap-2"
-                >
-                  <Heart size={16} /> Wishlist
-                </Link>
+                {secondaryLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium text-forest-deep/65 hover:bg-forest/6 transition-colors"
+                  >
+                    <link.icon size={16} /> {link.label}
+                  </Link>
+                ))}
                 <Link
                   href="/faq"
-                  className="text-sm font-medium text-forest-deep/70 py-2"
+                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-forest-deep/65 hover:bg-forest/6 transition-colors"
                 >
                   FAQ
                 </Link>

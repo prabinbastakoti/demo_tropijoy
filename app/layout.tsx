@@ -45,7 +45,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${baloo.variable}`}>
       <body className="font-sans antialiased bg-cream min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1">
+        <main className="flex-1 pt-[var(--header-h)]">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
