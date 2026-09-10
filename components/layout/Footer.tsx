@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Facebook, Send, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Facebook, Send } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/app/actions/checkout";
+import HeritageBand from "@/components/brand/HeritageBand";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -31,19 +32,20 @@ export default function Footer() {
   }
 
   return (
-    <footer id='contact' className='bg-forest-deep text-cream mt-24'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-10'>
+    <footer id='contact' className='relative bg-forest-deep text-cream mt-24 overflow-hidden'>
+      <HeritageBand tone='dark' className='opacity-60' />
+      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10'>
           <div className='md:col-span-1'>
             <Image
-              src='/logo.png'
+              src='/brand/logo-white.png'
               alt='Tropijoy'
               width={221}
               height={100}
               className='h-11 w-auto object-contain mb-4'
             />
             <p className='text-cream/60 text-sm leading-relaxed max-w-xs'>
-              Premium dehydrated fruits &amp; fruit powders. Pure joy in every
+              Premium dehydrated fruits &amp; banana powder. Pure joy in every
               bite.
             </p>
             <div className='flex gap-3 mt-5'>
@@ -64,20 +66,38 @@ export default function Footer() {
             <ul className='space-y-2 text-sm text-cream/70'>
               <li>
                 <Link href='/shop' className='hover:text-sunny transition-colors'>
-                  Dehydrated Fruits
+                  All Products
                 </Link>
               </li>
               <li>
-                <Link href='/shop' className='hover:text-sunny transition-colors'>
-                  Fruit Powders
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/best-sellers'
-                  className='hover:text-sunny transition-colors'
-                >
+                <Link href='/best-sellers' className='hover:text-sunny transition-colors'>
                   Best Sellers
+                </Link>
+              </li>
+              <li>
+                <Link href='/gift-cards' className='hover:text-sunny transition-colors'>
+                  Gift Cards
+                </Link>
+              </li>
+              <li>
+                <Link href='/gifting' className='hover:text-sunny transition-colors'>
+                  Gifting &amp; Bulk Orders
+                </Link>
+              </li>
+              <li>
+                <Link href='/wholesale' className='hover:text-sunny transition-colors'>
+                  Wholesale &amp; Stockists
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className='font-display font-semibold text-sunny mb-4'>Company</h4>
+            <ul className='space-y-2 text-sm text-cream/70'>
+              <li>
+                <Link href='/our-farms' className='hover:text-sunny transition-colors'>
+                  Our Farms &amp; Process
                 </Link>
               </li>
               <li>
@@ -85,25 +105,61 @@ export default function Footer() {
                   About Us
                 </Link>
               </li>
+              <li>
+                <Link href='/sustainability' className='hover:text-sunny transition-colors'>
+                  Sustainability
+                </Link>
+              </li>
+              <li>
+                <Link href='/careers' className='hover:text-sunny transition-colors'>
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href='/press' className='hover:text-sunny transition-colors'>
+                  Press &amp; Media
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className='font-display font-semibold text-sunny mb-4'>
-              Contact
-            </h4>
-            <ul className='space-y-3 text-sm text-cream/70'>
-              <li className='flex items-center gap-2'>
-                <Mail size={16} className='text-sunny shrink-0' />{" "}
-                contact@tropijoynp.com
+            <h4 className='font-display font-semibold text-sunny mb-4'>Support</h4>
+            <ul className='space-y-2 text-sm text-cream/70'>
+              <li>
+                <Link href='/faq' className='hover:text-sunny transition-colors'>
+                  FAQ
+                </Link>
               </li>
-              <li className='flex items-center gap-2'>
-                <Phone size={16} className='text-sunny shrink-0' /> +977
-                9768530718
+              <li>
+                <Link href='/shipping-returns' className='hover:text-sunny transition-colors'>
+                  Shipping &amp; Returns
+                </Link>
               </li>
-              <li className='flex items-center gap-2'>
-                <MapPin size={16} className='text-sunny shrink-0' /> Kathmandu,
-                Nepal
+              <li>
+                <Link href='/track-order' className='hover:text-sunny transition-colors'>
+                  Track Your Order
+                </Link>
+              </li>
+              <li>
+                <Link href='/contact' className='hover:text-sunny transition-colors'>
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href='/refer' className='hover:text-sunny transition-colors'>
+                  Refer a Friend
+                </Link>
+              </li>
+              <li>
+                <Link href='/wishlist' className='hover:text-sunny transition-colors'>
+                  Wishlist
+                </Link>
+              </li>
+              <li>
+                <Link href='/orders' className='hover:text-sunny transition-colors'>
+                  Order History
+                </Link>
               </li>
             </ul>
           </div>
@@ -135,10 +191,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className='border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-cream/50'>
+        <div className='border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream/50'>
           <p>
             &copy; {new Date().getFullYear()} Tropijoy. All rights reserved.
           </p>
+          <nav className='flex flex-wrap justify-center items-center gap-x-4 gap-y-1.5'>
+            <Link href='/privacy' className='hover:text-cream transition-colors'>
+              Privacy
+            </Link>
+            <Link href='/terms' className='hover:text-cream transition-colors'>
+              Terms
+            </Link>
+            <Link href='/cookies' className='hover:text-cream transition-colors'>
+              Cookies
+            </Link>
+            <Link href='/accessibility' className='hover:text-cream transition-colors'>
+              Accessibility
+            </Link>
+            <Link href='/sitemap' className='hover:text-cream transition-colors'>
+              Sitemap
+            </Link>
+          </nav>
           <p>Pure joy in every bite 🌿</p>
         </div>
       </div>

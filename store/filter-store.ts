@@ -2,7 +2,7 @@ import { create } from "zustand";
 import type { FruitType, ProductCategory, SortOption } from "@/lib/types";
 
 export const PRICE_FLOOR = 0;
-export const PRICE_CEILING = 3500;
+export const PRICE_CEILING = 2000;
 
 interface FilterState {
   keyword: string;

@@ -36,9 +36,9 @@ export default function Testimonials() {
                     aria-hidden
                   />
                   <div className="flex items-center gap-0.5 mb-3">
-                    {Array.from({ length: 5 }).map((_, i) => (
+                    {Array.from({ length: 5 }).map((_, starIdx) => (
                       <Star
-                        key={i}
+                        key={starIdx}
                         size={13}
                         className="fill-sunny text-sunny-dark"
                       />

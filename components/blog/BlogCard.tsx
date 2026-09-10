@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
 import type { BlogPost } from "@/lib/types";
-import { accentStyles } from "@/lib/blog";
+import { getPostAccentChip, getPostAccentColor } from "@/lib/blog";
 import { cn, formatDate } from "@/lib/utils";
+import HeritageBand from "@/components/brand/HeritageBand";
 
 /**
- * Posts have no cover photography — the gradient panel keyed off `accent`
- * carries the visual weight instead.
+ * Posts have no cover photography — a flat accent bar (the fruit's real
+ * brand color when the post has a heroFruit, forest otherwise) plus the
+ * heritage skyline motif carry the visual weight instead.
  */
 export default function BlogCard({
   post,
@@ -15,7 +17,8 @@ export default function BlogCard({
   post: BlogPost;
   size?: "md" | "lg";
 }) {
-  const accent = accentStyles[post.accent];
+  const accentColor = getPostAccentColor(post);
+  const chip = getPostAccentChip(post);
 
   return (
     <Link
@@ -24,33 +27,33 @@ export default function BlogCard({
     >
       <div
         className={cn(
-          "relative overflow-hidden bg-gradient-to-br p-6 flex flex-col justify-between",
-          accent.gradient,
+          "relative overflow-hidden bg-cream p-6 flex flex-col justify-between",
           size === "lg" ? "min-h-[220px]" : "min-h-[160px]"
         )}
       >
-        <div className="absolute inset-0 dotted-grid opacity-20" />
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-1.5"
+          style={{ backgroundColor: accentColor }}
+        />
+        <HeritageBand />
         <div className="relative flex items-start justify-between gap-3">
           <span
             className={cn(
               "rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide",
-              accent.chip
+              chip
             )}
           >
             {post.category}
           </span>
           <ArrowUpRight
             size={20}
-            className={cn(
-              "shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1",
-              accent.text
-            )}
+            className="shrink-0 text-forest-deep/40 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-forest"
           />
         </div>
         <h3
           className={cn(
-            "relative font-display font-extrabold leading-tight text-balance mt-6",
-            accent.text,
+            "relative font-display font-extrabold leading-tight text-balance mt-6 text-forest-deep",
             size === "lg" ? "text-2xl sm:text-3xl" : "text-lg"
           )}
         >

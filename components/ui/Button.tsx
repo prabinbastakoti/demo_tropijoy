@@ -9,10 +9,9 @@ type Variant = "primary" | "secondary" | "outline" | "ghost" | "dark";
 type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-sunny text-forest-deep font-semibold hover:bg-sunny-bright shadow-glow-yellow",
+  primary: "bg-forest text-white font-semibold hover:bg-forest-light shadow-lift",
   secondary:
-    "bg-forest text-white font-semibold hover:bg-forest-light shadow-glow-green",
+    "bg-sunny text-forest-deep font-semibold hover:bg-sunny-bright",
   outline:
     "border-2 border-forest text-forest font-semibold hover:bg-forest hover:text-white",
   ghost: "text-forest hover:bg-forest/10 font-medium",

@@ -17,6 +17,7 @@ import {
 import { toast } from "sonner";
 import type { Product } from "@/lib/types";
 import { calculateDiscount, cn, formatPrice } from "@/lib/utils";
+import { FRUIT_ACCENTS, getDefaultVariant } from "@/lib/products";
 import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useHydrated } from "@/lib/use-hydrated";
@@ -33,19 +34,22 @@ const guarantees = [
 export default function ProductDetail({ product }: { product: Product }) {
   const [activeImage, setActiveImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [variantId, setVariantId] = useState(getDefaultVariant(product).id);
   const addItem = useCartStore((s) => s.addItem);
   const wishlisted = useWishlistStore((s) => s.productIds.includes(product.id));
   const toggleWishlist = useWishlistStore((s) => s.toggle);
   const hydrated = useHydrated();
 
-  const discount = calculateDiscount(product.price, product.originalPrice);
+  const accent = FRUIT_ACCENTS[product.fruitType];
+  const variant =
+    product.variants.find((v) => v.id === variantId) ?? product.variants[0];
+  const discount = calculateDiscount(variant.price, variant.originalPrice);
+  const hasMultipleSizes = product.variants.length > 1;
 
   function handleAdd() {
-    if (!product.inStock) return;
-    addItem(product.id, quantity);
-    toast.success(
-      `${quantity} × ${product.name} added to cart`
-    );
+    if (!variant.inStock) return;
+    addItem(product.id, variant.id, quantity);
+    toast.success(`${quantity} × ${product.name} (${variant.weight}) added to cart`);
   }
 
   return (
@@ -68,7 +72,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-contain p-10"
               />
             </motion.div>
           </AnimatePresence>
@@ -89,7 +93,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 onClick={() => setActiveImage(i)}
                 aria-label={`View image ${i + 1}`}
                 className={cn(
-                  "relative w-20 h-20 rounded-2xl overflow-hidden border-2 transition-colors",
+                  "relative w-20 h-20 rounded-2xl overflow-hidden border-2 bg-white transition-colors",
                   activeImage === i
                     ? "border-forest"
                     : "border-transparent hover:border-forest/30"
@@ -100,7 +104,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   alt=""
                   fill
                   sizes="80px"
-                  className="object-cover"
+                  className="object-contain p-2"
                 />
               </button>
             ))}
@@ -110,7 +114,12 @@ export default function ProductDetail({ product }: { product: Product }) {
 
       {/* info */}
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.15em] text-forest/55 mb-3">
+        <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-forest/55 mb-3">
+          <span
+            aria-hidden
+            className="w-2 h-2 rounded-full shrink-0"
+            style={{ backgroundColor: accent.hex }}
+          />
           {product.category} &middot; {product.fruitType}
         </p>
         <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-display-sm text-forest-deep leading-tight text-balance">
@@ -127,15 +136,43 @@ export default function ProductDetail({ product }: { product: Product }) {
 
         <div className="flex items-baseline gap-3 mt-5">
           <span className="font-display font-extrabold text-3xl text-forest-deep">
-            {formatPrice(product.price)}
+            {formatPrice(variant.price)}
           </span>
-          {product.originalPrice && (
+          {variant.originalPrice && (
             <span className="text-lg text-forest-deep/35 line-through">
-              {formatPrice(product.originalPrice)}
+              {formatPrice(variant.originalPrice)}
             </span>
           )}
-          <span className="text-sm text-forest-deep/45">/ {product.weight}</span>
         </div>
+
+        {/* size/weight selector */}
+        {hasMultipleSizes ? (
+          <div className="mt-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-forest/50 mb-2">
+              Size
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {product.variants.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => setVariantId(v.id)}
+                  disabled={!v.inStock}
+                  className={cn(
+                    "rounded-full border px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
+                    variantId === v.id
+                      ? "border-forest bg-forest text-white"
+                      : "border-forest/20 text-forest-deep/70 hover:border-forest/50"
+                  )}
+                >
+                  {v.weight}
+                  {!v.inStock && " — Sold Out"}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="mt-4 text-sm text-forest-deep/50">{variant.weight} pouch</p>
+        )}
 
         <p className="mt-5 text-forest-deep/70 leading-relaxed">
           {product.description}
@@ -196,12 +233,12 @@ export default function ProductDetail({ product }: { product: Product }) {
           <Button
             size="lg"
             onClick={handleAdd}
-            disabled={!product.inStock}
+            disabled={!variant.inStock}
             className="flex-1 min-w-[200px]"
           >
             <ShoppingBag size={18} />
-            {product.inStock
-              ? `Add to Cart · ${formatPrice(product.price * quantity)}`
+            {variant.inStock
+              ? `Add to Cart · ${formatPrice(variant.price * quantity)}`
               : "Out of Stock"}
           </Button>
 
@@ -231,10 +268,10 @@ export default function ProductDetail({ product }: { product: Product }) {
           </button>
         </div>
 
-        {!product.inStock && (
+        {!variant.inStock && (
           <p className="mt-3 text-sm text-forest-deep/55">
-            This one sold out — we restock seasonally. Check back after the next
-            harvest.
+            This size sold out — we restock seasonally. Check back after the
+            next harvest.
           </p>
         )}
 

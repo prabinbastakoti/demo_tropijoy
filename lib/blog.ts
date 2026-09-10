@@ -1,6 +1,7 @@
 import blogData from "@/data/blog.json";
 import faqData from "@/data/faq.json";
 import type { BlogCategory, BlogPost, FaqCategory } from "./types";
+import { FRUIT_ACCENTS } from "./products";
 
 export const posts = (blogData as BlogPost[])
   .slice()
@@ -29,7 +30,12 @@ export const BLOG_CATEGORIES: BlogCategory[] = [
   "Guides",
 ];
 
-/** Tailwind class sets keyed by a post's accent — replaces cover photography. */
+/**
+ * Legacy tailwind class sets keyed by a post's `accent` field — the original
+ * stand-in for cover photography. Superseded by `getPostAccent` below, which
+ * prefers the real per-fruit brand color (`heroFruit`) when a post has one.
+ * Kept as the fallback for posts with no `heroFruit`.
+ */
 export const accentStyles: Record<
   BlogPost["accent"],
   { gradient: string; chip: string; text: string }
@@ -55,3 +61,17 @@ export const accentStyles: Record<
     text: "text-forest-deep",
   },
 };
+
+/**
+ * A post's real brand accent color: the fruit's actual packaging-label color
+ * when the post has a `heroFruit`, otherwise a flat forest fallback.
+ */
+export function getPostAccentColor(post: BlogPost): string {
+  return post.heroFruit ? FRUIT_ACCENTS[post.heroFruit].hex : "#116530";
+}
+
+export function getPostAccentChip(post: BlogPost): string {
+  return post.heroFruit
+    ? FRUIT_ACCENTS[post.heroFruit].chip
+    : "bg-forest/10 text-forest-deep";
+}

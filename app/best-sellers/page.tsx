@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Trophy } from "lucide-react";
-import { getBestSellers } from "@/lib/products";
+import { getBestSellers, priceFrom } from "@/lib/products";
 import { formatPrice } from "@/lib/utils";
 import ProductCard from "@/components/product/ProductCard";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -38,7 +38,7 @@ export default function BestSellersPage() {
         {podium.map((product, i) => (
           <Reveal key={product.id} delay={i * 0.1}>
             <div className="relative">
-              <span className="absolute -top-3 -left-3 z-10 w-11 h-11 rounded-2xl bg-sunny text-forest-deep font-display font-extrabold text-lg flex items-center justify-center shadow-glow-yellow border-2 border-cream">
+              <span className="absolute -top-3 -left-3 z-10 w-11 h-11 rounded-2xl bg-sunny text-forest-deep font-display font-extrabold text-lg flex items-center justify-center shadow-lift border-2 border-cream">
                 {i + 1}
               </span>
               <div className="rounded-3xl bg-white border border-forest/10 p-5 h-full">
@@ -57,7 +57,7 @@ export default function BestSellersPage() {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-forest-deep">
-                    {formatPrice(product.price)}
+                    {formatPrice(priceFrom(product))}
                   </span>
                   <ButtonLink href={`/shop/${product.slug}`} size="sm">
                     View

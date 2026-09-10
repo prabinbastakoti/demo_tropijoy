@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
-import { products } from "@/lib/products";
+import { products, getDefaultVariant, priceFrom } from "@/lib/products";
 import { formatPrice } from "@/lib/utils";
 
 interface SearchModalProps {
@@ -83,7 +83,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                     else if (query.trim()) goToShop();
                   }
                 }}
-                placeholder="Search mango, powders, dragonfruit…"
+                placeholder="Search apple, lemon, banana powder…"
                 className="flex-1 bg-transparent outline-none text-forest-deep placeholder:text-forest/40 text-base"
               />
               <button
@@ -109,7 +109,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                         alt={product.name}
                         fill
                         sizes="48px"
-                        className="object-cover"
+                        className="object-contain p-1"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -117,11 +117,11 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                         {product.name}
                       </p>
                       <p className="text-xs text-forest/60">
-                        {product.category} &middot; {product.weight}
+                        {product.category} &middot; {getDefaultVariant(product).weight}
                       </p>
                     </div>
                     <span className="text-sm font-bold text-forest shrink-0">
-                      {formatPrice(product.price)}
+                      {formatPrice(priceFrom(product))}
                     </span>
                   </button>
                 ))}
@@ -146,7 +146,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                   Popular
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["Mango", "Powder", "Berry", "Best Seller"].map((term) => (
+                  {["Apple", "Lemon", "Banana Powder", "Best Seller"].map((term) => (
                     <button
                       key={term}
                       onClick={() => setQuery(term)}

@@ -5,6 +5,7 @@ import ProcessTimeline from "@/components/home/ProcessTimeline";
 import Reveal from "@/components/motion/Reveal";
 import CountUp from "@/components/motion/CountUp";
 import { ButtonLink } from "@/components/ui/Button";
+import HeritageBand from "@/components/brand/HeritageBand";
 import { products } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ const pillars = [
   {
     icon: Leaf,
     title: "Gently dried",
-    body: "Slices dry at 45–55°C over 8–14 hours. Powders are freeze-dried under vacuum so nothing ever cooks — which is why the pitaya powder is genuinely magenta.",
+    body: "Slices dry at 45–55°C over 8–14 hours. Our banana powder is freeze-dried under vacuum so nothing ever cooks — which is why it stays a true pale gold instead of browning.",
   },
   {
     icon: Package,
@@ -60,10 +61,10 @@ export default function AboutPage() {
             </h1>
             <div className="mt-6 space-y-4 text-forest-deep/70 leading-relaxed">
               <p>
-                In 2023 we picked up a packet of dried mango in a Kathmandu
+                In 2023 we picked up a packet of dried fruit in a Kathmandu
                 supermarket and read the back. Sugar was the second ingredient.
                 Then a sulphite preservative. Then an artificial colour to keep
-                the orange looking bright.
+                it looking bright.
               </p>
               <p>
                 None of that was there to make the fruit better. It was there to
@@ -86,7 +87,7 @@ export default function AboutPage() {
           {/* stat panel — typography instead of photography */}
           <Reveal delay={0.15}>
             <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest via-forest-light to-forest-deep p-8 sm:p-10 noise">
-              <div className="absolute inset-0 dotted-grid opacity-15" />
+              <HeritageBand tone="dark" />
               <div className="relative grid grid-cols-2 gap-8">
                 {stats.map((stat) => (
                   <div key={stat.label}>

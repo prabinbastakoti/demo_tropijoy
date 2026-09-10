@@ -7,7 +7,14 @@ import { motion } from "framer-motion";
 import { Heart, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import type { Product } from "@/lib/types";
-import { cn, calculateDiscount, formatPrice } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
+import {
+  FRUIT_ACCENTS,
+  bestDiscount,
+  getDefaultVariant,
+  isProductInStock,
+  priceFrom,
+} from "@/lib/products";
 import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useHydrated } from "@/lib/use-hydrated";
@@ -27,13 +34,17 @@ export default function ProductCard({
   const toggleWishlist = useWishlistStore((s) => s.toggle);
   const hydrated = useHydrated();
 
-  const discount = calculateDiscount(product.price, product.originalPrice);
+  const inStock = isProductInStock(product);
+  const discount = bestDiscount(product);
+  const defaultVariant = getDefaultVariant(product);
+  const accent = FRUIT_ACCENTS[product.fruitType];
+  const hasMultipleSizes = product.variants.length > 1;
 
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    if (!product.inStock) return;
-    addItem(product.id);
+    if (!inStock) return;
+    addItem(product.id, defaultVariant.id);
     toast.success(`${product.name} added to cart`);
   }
 
@@ -67,7 +78,7 @@ export default function ProductCard({
             fill
             onLoad={() => setImgLoaded(true)}
             className={cn(
-              "object-cover transition-transform duration-500 group-hover:scale-110",
+              "object-contain p-6 transition-transform duration-500 group-hover:scale-105",
               !imgLoaded && "opacity-0"
             )}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -78,7 +89,7 @@ export default function ProductCard({
             {product.tags.includes("Best Seller") && (
               <Badge variant="sunny">Best Seller</Badge>
             )}
-            {!product.inStock && <Badge variant="outline">Sold Out</Badge>}
+            {!inStock && <Badge variant="outline">Sold Out</Badge>}
           </div>
 
           <button
@@ -99,18 +110,24 @@ export default function ProductCard({
           <div className="absolute inset-x-3 bottom-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hidden sm:block">
             <button
               onClick={handleAdd}
-              disabled={!product.inStock}
+              disabled={!inStock}
               className="w-full flex items-center justify-center gap-2 rounded-full bg-forest-deep/95 backdrop-blur text-white text-sm font-semibold py-2.5 hover:bg-forest disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ShoppingBag size={15} />
-              {product.inStock ? "Quick Add" : "Sold Out"}
+              {inStock ? "Quick Add" : "Sold Out"}
             </button>
           </div>
         </div>
 
         <div className="p-4 flex flex-col flex-1">
-          <p className="text-[11px] font-semibold text-forest/50 uppercase tracking-wide mb-1">
-            {product.category} &middot; {product.weight}
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-forest/50 uppercase tracking-wide mb-1">
+            <span
+              aria-hidden
+              className="w-1.5 h-1.5 rounded-full shrink-0"
+              style={{ backgroundColor: accent.hex }}
+            />
+            {product.category} &middot;{" "}
+            {hasMultipleSizes ? `${product.variants.length} sizes` : defaultVariant.weight}
           </p>
           <h3 className="font-semibold text-forest-deep leading-snug mb-1.5 line-clamp-2 group-hover:text-forest transition-colors">
             {product.name}
@@ -122,19 +139,17 @@ export default function ProductCard({
           />
 
           <div className="mt-auto flex items-center justify-between gap-2">
-            <div className="flex items-baseline gap-2 min-w-0">
-              <span className="font-bold text-forest-deep">
-                {formatPrice(product.price)}
-              </span>
-              {product.originalPrice && (
-                <span className="text-xs text-forest-deep/40 line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
+            <div className="flex items-baseline gap-1.5 min-w-0">
+              {hasMultipleSizes && (
+                <span className="text-[11px] text-forest-deep/45">From</span>
               )}
+              <span className="font-bold text-forest-deep">
+                {formatPrice(priceFrom(product))}
+              </span>
             </div>
             <button
               onClick={handleAdd}
-              disabled={!product.inStock}
+              disabled={!inStock}
               aria-label={`Add ${product.name} to cart`}
               className="sm:hidden shrink-0 w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center disabled:opacity-40"
             >

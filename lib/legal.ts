@@ -226,3 +226,71 @@ export const shippingDocument: LegalDocument = {
     },
   ],
 };
+
+export const cookiesDocument: LegalDocument = {
+  title: "Cookie Policy",
+  updated: "2026-08-01",
+  intro:
+    "What we store in your browser, why, and how to control it. Short version: nothing invasive, and most of it is your own data, not ours.",
+  sections: [
+    {
+      heading: "1. We don't use tracking or advertising cookies",
+      paragraphs: [
+        "This site doesn't run third-party ad trackers, analytics pixels, or cross-site cookies. We're a small team shipping dried fruit, not an ad business.",
+      ],
+    },
+    {
+      heading: "2. What is stored in your browser",
+      list: [
+        "Your cart, wishlist, order history and any reviews you write — via localStorage, so this data lives on your device",
+        "A session flag noting you've seen the site this tab — via sessionStorage, cleared when you close the tab",
+        "Your cookie-notice preference, if we show one",
+      ],
+      paragraphs: [
+        "None of this is a tracking cookie in the advertising sense — it's functional storage that makes the cart and wishlist work without an account.",
+      ],
+    },
+    {
+      heading: "3. Controlling it",
+      paragraphs: [
+        "Clear your browser's site data for tropijoynp.com at any time to remove all of the above. Doing so will empty your cart and wishlist and clear your local order history — it does not cancel or affect orders we've already confirmed.",
+      ],
+    },
+    {
+      heading: "4. Changes",
+      paragraphs: [
+        "If that ever changes — for example if we add analytics — we'll update this page and the date above.",
+      ],
+    },
+  ],
+};
+
+export const accessibilityDocument: LegalDocument = {
+  title: "Accessibility Statement",
+  updated: "2026-08-01",
+  intro:
+    "We want this site to be usable by everyone, including people using screen readers, keyboard navigation, or browsing with reduced motion. Here's where we stand.",
+  sections: [
+    {
+      heading: "1. What we've done",
+      list: [
+        "Semantic HTML and labelled form fields throughout checkout, search and reviews",
+        "Visible keyboard focus states on every interactive element",
+        "Motion and animation are reduced or skipped when your system's 'reduce motion' setting is on",
+        "Colour choices checked for reasonable contrast against our cream and white backgrounds",
+      ],
+    },
+    {
+      heading: "2. Known gaps",
+      paragraphs: [
+        "We're a small team and this is an ongoing process, not a finished checklist. Some third-party embeds (like payment confirmation flows once we integrate real payment) may not fully match this standard on day one.",
+      ],
+    },
+    {
+      heading: "3. Tell us what's not working",
+      paragraphs: [
+        `If something on this site is difficult to use with assistive technology, we want to know. Email ${BUSINESS.email} with what you were trying to do and what happened — we treat these reports as bugs, not feedback for a backlog.`,
+      ],
+    },
+  ],
+};

@@ -101,7 +101,7 @@ export default function OrdersPage() {
                           alt={item.name}
                           fill
                           sizes="48px"
-                          className="object-cover"
+                          className="object-contain p-1.5"
                         />
                       </div>
                     ))}

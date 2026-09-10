@@ -12,6 +12,7 @@ import { cn, formatDate, formatPrice } from "@/lib/utils";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import EmptyState from "@/components/ui/EmptyState";
 import { ButtonLink } from "@/components/ui/Button";
+import HeritageBand from "@/components/brand/HeritageBand";
 import { statusStyles, ORDER_JOURNEY } from "@/components/orders/status";
 
 export default function OrderDetailPage({
@@ -110,7 +111,7 @@ export default function OrderDetailPage({
           transition={{ type: "spring", damping: 20, stiffness: 260 }}
           className="mt-6 rounded-3xl bg-gradient-to-br from-forest via-forest-light to-forest-deep p-7 sm:p-9 text-center text-white noise relative overflow-hidden"
         >
-          <div className="absolute inset-0 dotted-grid opacity-15" />
+          <HeritageBand tone="dark" />
           <div className="relative">
             <motion.div
               initial={{ scale: 0 }}
@@ -247,7 +248,7 @@ export default function OrderDetailPage({
                   alt={item.name}
                   fill
                   sizes="56px"
-                  className="object-cover"
+                  className="object-contain p-2"
                 />
               </div>
               <div className="flex-1 min-w-0">

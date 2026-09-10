@@ -1,18 +1,18 @@
 [
   {
     "id": "rv-001",
-    "productId": "df-mango-01",
+    "productId": "dried-apple",
     "author": "Sabina Bhandari",
     "rating": 5,
     "title": "Absolutely worth it",
-    "body": "Ordered as an office snack and it disappeared in a day. Genuinely no added sugar taste, just concentrated fruit.",
+    "body": "Ordered the dried apple as an office snack and it disappeared in a day. Genuinely no added sugar taste, just concentrated fruit.",
     "date": "2025-07-07T12:00:00Z",
     "verified": true,
     "helpfulCount": 4
   },
   {
     "id": "rv-002",
-    "productId": "df-mango-01",
+    "productId": "dried-apple",
     "author": "Bibek Gurung",
     "rating": 4,
     "title": "Tasty, packaging could improve",
@@ -23,18 +23,18 @@
   },
   {
     "id": "rv-003",
-    "productId": "df-mango-01",
+    "productId": "dried-apple",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "So glad I tried this",
-    "body": "Texture is spot on — chewy without being tough. My daughter takes it in her tiffin every day now.",
+    "body": "The apple slices have spot-on texture — chewy without being tough. My daughter takes them in her tiffin every day now.",
     "date": "2025-04-15T12:00:00Z",
     "verified": true,
     "helpfulCount": 21
   },
   {
     "id": "rv-004",
-    "productId": "df-mango-01",
+    "productId": "dried-apple",
     "author": "Alisha Pradhan",
     "rating": 5,
     "title": "Better than I expected",
@@ -45,7 +45,7 @@
   },
   {
     "id": "rv-005",
-    "productId": "df-mango-01",
+    "productId": "dried-apple",
     "author": "Sneha Maharjan",
     "rating": 5,
     "title": "Fantastic quality",
@@ -56,18 +56,18 @@
   },
   {
     "id": "rv-006",
-    "productId": "df-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Kiran Adhikari",
     "rating": 4,
     "title": "Tasty, packaging could improve",
-    "body": "Really enjoying the taste. Only note is that I'd love a larger pack size for the price.",
+    "body": "Really enjoying the pineapple taste. Only note is that I'd love a larger pack size for the price.",
     "date": "2025-06-21T12:00:00Z",
     "verified": false,
     "helpfulCount": 6
   },
   {
     "id": "rv-007",
-    "productId": "df-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Rojan Karki",
     "rating": 5,
     "title": "Genuinely fresh",
@@ -78,7 +78,7 @@
   },
   {
     "id": "rv-008",
-    "productId": "df-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Pemba Sherpa",
     "rating": 4,
     "title": "Pretty good overall",
@@ -89,7 +89,7 @@
   },
   {
     "id": "rv-009",
-    "productId": "df-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "My new daily snack",
@@ -100,18 +100,18 @@
   },
   {
     "id": "rv-010",
-    "productId": "df-dragonfruit-01",
+    "productId": "dried-apple",
     "author": "Sabina Bhandari",
     "rating": 4,
     "title": "Pretty good overall",
-    "body": "Quality is clearly good and it tastes fresh. Slightly pricier than I hoped, but I understand it's a premium product.",
+    "body": "The dried apple quality is clearly good and it tastes fresh. Slightly pricier than I hoped, but I understand it's a premium product.",
     "date": "2025-07-28T12:00:00Z",
     "verified": true,
     "helpfulCount": 11
   },
   {
     "id": "rv-011",
-    "productId": "df-dragonfruit-01",
+    "productId": "dried-apple",
     "author": "Kiran Adhikari",
     "rating": 5,
     "title": "Fantastic quality",
@@ -122,7 +122,7 @@
   },
   {
     "id": "rv-012",
-    "productId": "df-dragonfruit-01",
+    "productId": "dried-apple",
     "author": "Bibek Gurung",
     "rating": 5,
     "title": "My new daily snack",
@@ -133,7 +133,7 @@
   },
   {
     "id": "rv-013",
-    "productId": "df-dragonfruit-01",
+    "productId": "dried-apple",
     "author": "Nabin Thapa",
     "rating": 5,
     "title": "So glad I tried this",
@@ -144,18 +144,18 @@
   },
   {
     "id": "rv-014",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Kiran Adhikari",
     "rating": 5,
     "title": "Best in Kathmandu",
-    "body": "Great for trekking — light, doesn't melt, and gives a real energy lift on long walks.",
+    "body": "The dried banana is great for trekking — light, doesn't melt, and gives a real energy lift on long walks.",
     "date": "2025-08-01T12:00:00Z",
     "verified": false,
     "helpfulCount": 0
   },
   {
     "id": "rv-015",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Bikash Magar",
     "rating": 5,
     "title": "Repeat customer now",
@@ -166,7 +166,7 @@
   },
   {
     "id": "rv-016",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Bibek Gurung",
     "rating": 5,
     "title": "Perfect texture",
@@ -177,18 +177,18 @@
   },
   {
     "id": "rv-017",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Samjhana Limbu",
     "rating": 4,
     "title": "Nice — would buy again",
-    "body": "Flavour is lovely. The pouch seal was a little stiff to open the first time, otherwise no complaints.",
+    "body": "Banana flavour is lovely. The pouch seal was a little stiff to open the first time, otherwise no complaints.",
     "date": "2025-04-11T12:00:00Z",
     "verified": true,
     "helpfulCount": 10
   },
   {
     "id": "rv-018",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Sneha Maharjan",
     "rating": 5,
     "title": "Fantastic quality",
@@ -199,7 +199,7 @@
   },
   {
     "id": "rv-019",
-    "productId": "df-banana-01",
+    "productId": "dried-banana",
     "author": "Sabina Bhandari",
     "rating": 3,
     "title": "Decent but not for me",
@@ -210,18 +210,18 @@
   },
   {
     "id": "rv-020",
-    "productId": "df-berry-01",
+    "productId": "dried-orange",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "Better than I expected",
-    "body": "Packaging arrived intact despite monsoon delivery. Smells incredible the moment you open it.",
+    "body": "The dried orange packaging arrived intact despite monsoon delivery. Smells incredible the moment you open it.",
     "date": "2025-07-18T12:00:00Z",
     "verified": true,
     "helpfulCount": 15
   },
   {
     "id": "rv-021",
-    "productId": "df-berry-01",
+    "productId": "dried-orange",
     "author": "Dipesh Basnet",
     "rating": 5,
     "title": "Perfect texture",
@@ -232,7 +232,7 @@
   },
   {
     "id": "rv-022",
-    "productId": "df-berry-01",
+    "productId": "dried-orange",
     "author": "Nabin Thapa",
     "rating": 5,
     "title": "Genuinely fresh",
@@ -243,7 +243,7 @@
   },
   {
     "id": "rv-023",
-    "productId": "df-berry-01",
+    "productId": "dried-orange",
     "author": "Bibek Gurung",
     "rating": 5,
     "title": "Fantastic quality",
@@ -254,7 +254,7 @@
   },
   {
     "id": "rv-024",
-    "productId": "df-berry-01",
+    "productId": "dried-orange",
     "author": "Sneha Maharjan",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -265,18 +265,18 @@
   },
   {
     "id": "rv-025",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Sujan Lama",
     "rating": 5,
     "title": "Best in Kathmandu",
-    "body": "Resealable pouch keeps everything crisp, which was my worry ordering online. Third order now and quality has been identical each time.",
+    "body": "Resealable pouch keeps the orange slices crisp, which was my worry ordering online. Third order now and quality has been identical each time.",
     "date": "2025-06-18T12:00:00Z",
     "verified": false,
     "helpfulCount": 20
   },
   {
     "id": "rv-026",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Utsav Regmi",
     "rating": 4,
     "title": "Tasty, packaging could improve",
@@ -287,7 +287,7 @@
   },
   {
     "id": "rv-027",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Samjhana Limbu",
     "rating": 5,
     "title": "So glad I tried this",
@@ -298,7 +298,7 @@
   },
   {
     "id": "rv-028",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Kiran Adhikari",
     "rating": 4,
     "title": "Nice — would buy again",
@@ -309,7 +309,7 @@
   },
   {
     "id": "rv-029",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Priya Dahal",
     "rating": 5,
     "title": "Kids devour these",
@@ -320,7 +320,7 @@
   },
   {
     "id": "rv-030",
-    "productId": "df-citrus-01",
+    "productId": "dried-orange",
     "author": "Manisha Poudel",
     "rating": 3,
     "title": "Expected a bit more",
@@ -331,18 +331,18 @@
   },
   {
     "id": "rv-031",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Priya Dahal",
     "rating": 5,
     "title": "Absolutely worth it",
-    "body": "I was sceptical about the price but the portion lasts far longer than expected. Little goes a long way.",
+    "body": "I was sceptical about the price of the dried banana but the portion lasts far longer than expected. Little goes a long way.",
     "date": "2025-08-04T12:00:00Z",
     "verified": true,
     "helpfulCount": 4
   },
   {
     "id": "rv-032",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Kiran Adhikari",
     "rating": 5,
     "title": "Fantastic quality",
@@ -353,7 +353,7 @@
   },
   {
     "id": "rv-033",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Alisha Pradhan",
     "rating": 5,
     "title": "Better than I expected",
@@ -364,7 +364,7 @@
   },
   {
     "id": "rv-034",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Nirajan Khadka",
     "rating": 3,
     "title": "Expected a bit more",
@@ -375,7 +375,7 @@
   },
   {
     "id": "rv-035",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Manisha Poudel",
     "rating": 5,
     "title": "Kids devour these",
@@ -386,7 +386,7 @@
   },
   {
     "id": "rv-036",
-    "productId": "df-mix-01",
+    "productId": "dried-banana",
     "author": "Aayush Shrestha",
     "rating": 5,
     "title": "Absolutely worth it",
@@ -397,7 +397,7 @@
   },
   {
     "id": "rv-037",
-    "productId": "fp-mango-01",
+    "productId": "dried-apple",
     "author": "Priya Dahal",
     "rating": 4,
     "title": "Pretty good overall",
@@ -408,7 +408,7 @@
   },
   {
     "id": "rv-038",
-    "productId": "fp-mango-01",
+    "productId": "dried-apple",
     "author": "Bibek Gurung",
     "rating": 5,
     "title": "My new daily snack",
@@ -419,7 +419,7 @@
   },
   {
     "id": "rv-039",
-    "productId": "fp-mango-01",
+    "productId": "dried-apple",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -430,7 +430,7 @@
   },
   {
     "id": "rv-040",
-    "productId": "fp-mango-01",
+    "productId": "dried-apple",
     "author": "Aayush Shrestha",
     "rating": 5,
     "title": "So glad I tried this",
@@ -441,18 +441,18 @@
   },
   {
     "id": "rv-041",
-    "productId": "fp-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Alisha Pradhan",
     "rating": 5,
     "title": "Fantastic quality",
-    "body": "Texture is spot on — chewy without being tough. My daughter takes it in her tiffin every day now.",
+    "body": "The dried pineapple rings have spot-on texture — chewy without being tough. My daughter takes them in her tiffin every day now.",
     "date": "2025-08-01T12:00:00Z",
     "verified": true,
     "helpfulCount": 20
   },
   {
     "id": "rv-042",
-    "productId": "fp-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Bikash Magar",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -463,7 +463,7 @@
   },
   {
     "id": "rv-043",
-    "productId": "fp-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Utsav Regmi",
     "rating": 3,
     "title": "Expected a bit more",
@@ -474,7 +474,7 @@
   },
   {
     "id": "rv-044",
-    "productId": "fp-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Dipesh Basnet",
     "rating": 5,
     "title": "Fantastic quality",
@@ -485,7 +485,7 @@
   },
   {
     "id": "rv-045",
-    "productId": "fp-pineapple-01",
+    "productId": "dried-pineapple",
     "author": "Ritika Joshi",
     "rating": 5,
     "title": "So glad I tried this",
@@ -496,18 +496,18 @@
   },
   {
     "id": "rv-046",
-    "productId": "fp-dragonfruit-01",
+    "productId": "dried-lemon",
     "author": "Rojan Karki",
     "rating": 5,
     "title": "Better than I expected",
-    "body": "The flavour is so much brighter than the supermarket stuff — you can actually taste the fruit rather than sugar. Delivery to Lalitpur took two days.",
+    "body": "The lemon flavour is so much brighter than the supermarket stuff — you can actually taste the fruit rather than sugar. Delivery to Lalitpur took two days.",
     "date": "2025-06-14T12:00:00Z",
     "verified": true,
     "helpfulCount": 8
   },
   {
     "id": "rv-047",
-    "productId": "fp-dragonfruit-01",
+    "productId": "dried-lemon",
     "author": "Alisha Pradhan",
     "rating": 5,
     "title": "So glad I tried this",
@@ -518,7 +518,7 @@
   },
   {
     "id": "rv-048",
-    "productId": "fp-dragonfruit-01",
+    "productId": "dried-lemon",
     "author": "Nirajan Khadka",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -529,7 +529,7 @@
   },
   {
     "id": "rv-049",
-    "productId": "fp-dragonfruit-01",
+    "productId": "dried-lemon",
     "author": "Sujan Lama",
     "rating": 5,
     "title": "Perfect texture",
@@ -540,18 +540,18 @@
   },
   {
     "id": "rv-050",
-    "productId": "fp-banana-01",
+    "productId": "banana-powder",
     "author": "Anisha Tamang",
     "rating": 5,
     "title": "Genuinely fresh",
-    "body": "Great for trekking — light, doesn't melt, and gives a real energy lift on long walks.",
+    "body": "The banana powder is great for smoothies — light to carry, doesn't melt, and gives a real energy lift on long walks.",
     "date": "2025-07-22T12:00:00Z",
     "verified": true,
     "helpfulCount": 4
   },
   {
     "id": "rv-051",
-    "productId": "fp-banana-01",
+    "productId": "banana-powder",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "Fantastic quality",
@@ -562,7 +562,7 @@
   },
   {
     "id": "rv-052",
-    "productId": "fp-banana-01",
+    "productId": "banana-powder",
     "author": "Bikash Magar",
     "rating": 4,
     "title": "Tasty, packaging could improve",
@@ -573,7 +573,7 @@
   },
   {
     "id": "rv-053",
-    "productId": "fp-banana-01",
+    "productId": "banana-powder",
     "author": "Nirajan Khadka",
     "rating": 4,
     "title": "Tasty, packaging could improve",
@@ -584,18 +584,18 @@
   },
   {
     "id": "rv-054",
-    "productId": "fp-berry-01",
+    "productId": "dried-lemon",
     "author": "Bibek Gurung",
     "rating": 5,
     "title": "Genuinely fresh",
-    "body": "Packaging arrived intact despite monsoon delivery. Smells incredible the moment you open it.",
+    "body": "The dried lemon packaging arrived intact despite monsoon delivery. Smells incredible the moment you open it.",
     "date": "2025-04-20T12:00:00Z",
     "verified": true,
     "helpfulCount": 13
   },
   {
     "id": "rv-055",
-    "productId": "fp-berry-01",
+    "productId": "dried-lemon",
     "author": "Samjhana Limbu",
     "rating": 5,
     "title": "My new daily snack",
@@ -606,7 +606,7 @@
   },
   {
     "id": "rv-056",
-    "productId": "fp-berry-01",
+    "productId": "dried-lemon",
     "author": "Bikash Magar",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -617,7 +617,7 @@
   },
   {
     "id": "rv-057",
-    "productId": "fp-berry-01",
+    "productId": "dried-lemon",
     "author": "Rojan Karki",
     "rating": 5,
     "title": "So glad I tried this",
@@ -628,7 +628,7 @@
   },
   {
     "id": "rv-058",
-    "productId": "fp-berry-01",
+    "productId": "dried-lemon",
     "author": "Sujan Lama",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -639,7 +639,7 @@
   },
   {
     "id": "rv-059",
-    "productId": "fp-citrus-01",
+    "productId": "dried-lemon",
     "author": "Priya Dahal",
     "rating": 4,
     "title": "Nice — would buy again",
@@ -650,7 +650,7 @@
   },
   {
     "id": "rv-060",
-    "productId": "fp-citrus-01",
+    "productId": "dried-lemon",
     "author": "Prashamsa Rai",
     "rating": 5,
     "title": "Repeat customer now",
@@ -661,7 +661,7 @@
   },
   {
     "id": "rv-061",
-    "productId": "fp-citrus-01",
+    "productId": "dried-lemon",
     "author": "Utsav Regmi",
     "rating": 5,
     "title": "Best in Kathmandu",
@@ -672,7 +672,7 @@
   },
   {
     "id": "rv-062",
-    "productId": "fp-citrus-01",
+    "productId": "dried-lemon",
     "author": "Ritika Joshi",
     "rating": 3,
     "title": "Expected a bit more",
@@ -683,18 +683,18 @@
   },
   {
     "id": "rv-063",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Manisha Poudel",
     "rating": 5,
     "title": "Fantastic quality",
-    "body": "The flavour is so much brighter than the supermarket stuff — you can actually taste the fruit rather than sugar. Delivery to Lalitpur took two days.",
+    "body": "The banana powder flavour is so much brighter than the supermarket stuff — you can actually taste the fruit rather than sugar. Delivery to Lalitpur took two days.",
     "date": "2025-07-10T12:00:00Z",
     "verified": true,
     "helpfulCount": 22
   },
   {
     "id": "rv-064",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Prashamsa Rai",
     "rating": 4,
     "title": "Tasty, packaging could improve",
@@ -705,7 +705,7 @@
   },
   {
     "id": "rv-065",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Alisha Pradhan",
     "rating": 5,
     "title": "Better than I expected",
@@ -716,7 +716,7 @@
   },
   {
     "id": "rv-066",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Pemba Sherpa",
     "rating": 5,
     "title": "Repeat customer now",
@@ -727,7 +727,7 @@
   },
   {
     "id": "rv-067",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Nabin Thapa",
     "rating": 5,
     "title": "Perfect texture",
@@ -738,7 +738,7 @@
   },
   {
     "id": "rv-068",
-    "productId": "fp-tropical-01",
+    "productId": "banana-powder",
     "author": "Priya Dahal",
     "rating": 5,
     "title": "Better than I expected",

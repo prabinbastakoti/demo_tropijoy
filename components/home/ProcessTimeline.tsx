@@ -55,7 +55,7 @@ export default function ProcessTimeline() {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: "easeOut" }}
             style={{ originX: 0 }}
-            className="h-full bg-gradient-to-r from-forest via-sunny to-forest"
+            className="h-full bg-gradient-to-r from-forest via-forest-light to-forest"
           />
         </div>
 

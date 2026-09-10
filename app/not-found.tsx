@@ -1,23 +1,26 @@
 import Link from "next/link";
 import { ArrowRight, Compass } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
+import HeritageBand from "@/components/brand/HeritageBand";
 
 const suggestions = [
   { label: "Shop all products", href: "/shop" },
   { label: "Best sellers", href: "/best-sellers" },
+  { label: "Our Farms & Process", href: "/our-farms" },
   { label: "The journal", href: "/blog" },
   { label: "Contact us", href: "/contact" },
 ];
 
 export default function NotFound() {
   return (
-    <div className="mesh-hero noise relative min-h-[70vh] flex items-center justify-center px-4 py-20">
+    <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-20 overflow-hidden">
+      <HeritageBand />
       <div className="relative text-center max-w-lg">
-        <div className="w-20 h-20 rounded-3xl bg-white/70 backdrop-blur border border-forest/10 flex items-center justify-center mx-auto mb-7">
+        <div className="w-20 h-20 rounded-3xl bg-white border border-forest/10 flex items-center justify-center mx-auto mb-7">
           <Compass size={32} className="text-forest" />
         </div>
 
-        <p className="font-display font-extrabold text-display-md sm:text-display-lg text-gradient-brand leading-none">
+        <p className="font-display font-extrabold text-display-md sm:text-display-lg text-accent-apple leading-none">
           404
         </p>
         <h1 className="mt-4 font-display font-extrabold text-2xl sm:text-3xl text-forest-deep text-balance">
@@ -39,7 +42,7 @@ export default function NotFound() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full bg-white/70 backdrop-blur border border-forest/10 px-4 py-2 text-sm font-medium text-forest-deep/70 hover:text-forest hover:border-forest/30 transition-colors"
+              className="rounded-full bg-white border border-forest/10 px-4 py-2 text-sm font-medium text-forest-deep/70 hover:text-forest hover:border-forest/30 transition-colors"
             >
               {item.label}
             </Link>

@@ -1,28 +1,87 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Menu, Package, Search, ShoppingBag, X } from "lucide-react";
+import {
+  Briefcase,
+  ChefHat,
+  ChevronDown,
+  Gift,
+  Heart,
+  HelpCircle,
+  Leaf,
+  Mail,
+  Menu,
+  Newspaper,
+  Package,
+  PackageSearch,
+  Search,
+  ShoppingBag,
+  Sprout,
+  Star,
+  Store,
+  Trophy,
+  Truck,
+  Users,
+  X,
+} from "lucide-react";
 import { useCartStore, useCartTotals } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 import SearchModal from "./SearchModal";
+import MegaMenu, { type MegaId } from "./MegaMenu";
 
-const navLinks = [
-  { label: "Shop", href: "/shop" },
-  { label: "Best Sellers", href: "/best-sellers" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+const navLinks: { label: string; href: string; mega?: MegaId }[] = [
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop", mega: "shop" },
+  { label: "Journal", href: "/blog", mega: "journal" },
+  { label: "Company", href: "/about", mega: "company" },
+  { label: "Support", href: "/faq", mega: "support" },
 ];
 
-const secondaryLinks = [
-  { label: "Order History", href: "/orders", icon: Package },
-  { label: "Wishlist", href: "/wishlist", icon: Heart },
+const mobileGroups = [
+  {
+    heading: "Shop",
+    links: [
+      { label: "Best Sellers", href: "/best-sellers", icon: Trophy },
+      { label: "Gift Cards", href: "/gift-cards", icon: Gift },
+      { label: "Gifting & Bulk Orders", href: "/gifting", icon: Gift },
+      { label: "Recipes & Uses", href: "/recipes", icon: ChefHat },
+      { label: "Reviews", href: "/reviews", icon: Star },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "Our Farms & Process", href: "/our-farms", icon: Sprout },
+      { label: "About Us", href: "/about", icon: Users },
+      { label: "Sustainability", href: "/sustainability", icon: Leaf },
+      { label: "Careers", href: "/careers", icon: Briefcase },
+      { label: "Press & Media", href: "/press", icon: Newspaper },
+    ],
+  },
+  {
+    heading: "Support",
+    links: [
+      { label: "FAQ", href: "/faq", icon: HelpCircle },
+      { label: "Shipping & Returns", href: "/shipping-returns", icon: Truck },
+      { label: "Track Your Order", href: "/track-order", icon: PackageSearch },
+      { label: "Contact", href: "/contact", icon: Mail },
+      { label: "Wholesale & Stockists", href: "/wholesale", icon: Store },
+      { label: "Refer a Friend", href: "/refer", icon: Gift },
+    ],
+  },
+  {
+    heading: "Account",
+    links: [
+      { label: "Order History", href: "/orders", icon: Package },
+      { label: "Wishlist", href: "/wishlist", icon: Heart },
+    ],
+  },
 ];
 
 export default function Header() {
@@ -30,7 +89,22 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [activeMega, setActiveMega] = useState<MegaId | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
+
+  /** Opens (or switches) the mega menu, cancelling any pending close. */
+  function openMega(id: MegaId | null) {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setActiveMega(id);
+  }
+
+  /** Closes after a short delay so moving the pointer from the trigger link
+   *  down into the portaled panel doesn't clip it shut mid-transit. */
+  function scheduleCloseMega() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setActiveMega(null), 150);
+  }
 
   const toggleCart = useCartStore((s) => s.toggleCart);
   const { itemCount } = useCartTotals();
@@ -45,6 +119,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => setMobileOpen(false), [pathname]);
+  useEffect(() => setActiveMega(null), [pathname]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -62,6 +137,7 @@ export default function Header() {
 
   /** The link the moving indicator should sit under. */
   const indicatorFor = hovered ?? navLinks.find((l) => isActive(l.href))?.href;
+  const solidHeader = scrolled || activeMega !== null;
 
   return (
     <>
@@ -69,7 +145,7 @@ export default function Header() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
-          scrolled
+          solidHeader
             ? "bg-white/80 backdrop-blur-xl border-b border-forest/8"
             : "bg-transparent border-b border-transparent"
         )}
@@ -79,7 +155,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-[68px] sm:h-[84px]">
             <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
               <Image
-                src="/logo.png"
+                src="/brand/logo-green.png"
                 alt="Tropijoy"
                 width={221}
                 height={100}
@@ -91,18 +167,34 @@ export default function Header() {
             {/* desktop nav with a single indicator that follows hover, resting on the active route */}
             <nav
               className="hidden md:flex items-center gap-0.5"
-              onMouseLeave={() => setHovered(null)}
+              onMouseLeave={() => {
+                setHovered(null);
+                scheduleCloseMega();
+              }}
             >
               {navLinks.map((link) => {
                 const active = isActive(link.href);
+                // The pill only actually sits behind this link when nothing
+                // else is hovered (or this one is). If hover moved the pill
+                // elsewhere, this link must fall back to a readable color —
+                // `active` alone isn't enough, since that stays true for the
+                // current route even while its pill has slid away.
+                const pillHere = indicatorFor === link.href;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    onMouseEnter={() => setHovered(link.href)}
+                    onMouseEnter={() => {
+                      setHovered(link.href);
+                      openMega(link.mega ?? null);
+                    }}
                     className={cn(
-                      "relative rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
-                      active || hovered === link.href
+                      "relative flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
+                      pillHere
+                        ? active
+                          ? "text-white"
+                          : "text-forest-deep"
+                        : active
                         ? "text-forest-deep"
                         : "text-forest-deep/60"
                     )}
@@ -113,17 +205,32 @@ export default function Header() {
                         className={cn(
                           "absolute inset-0 -z-10 rounded-full",
                           active
-                            ? "bg-sunny shadow-[0_2px_10px_-2px_rgba(252,209,22,0.7)]"
+                            ? "bg-forest shadow-[0_2px_10px_-2px_rgba(17,101,48,0.5)]"
                             : "bg-white/70 shadow-[0_2px_10px_-4px_rgba(8,48,26,0.25)]"
                         )}
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
                     {link.label}
+                    {link.mega && (
+                      <ChevronDown
+                        size={13}
+                        className={cn(
+                          "transition-transform duration-200",
+                          activeMega === link.mega && "rotate-180"
+                        )}
+                      />
+                    )}
                   </Link>
                 );
               })}
             </nav>
+
+            <MegaMenu
+              activeMega={activeMega}
+              onMouseEnter={() => openMega(activeMega)}
+              onMouseLeave={scheduleCloseMega}
+            />
 
             {/* actions */}
             <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
@@ -220,7 +327,7 @@ export default function Header() {
             >
               <div className="flex justify-between items-center">
                 <Image
-                  src="/logo.png"
+                  src="/brand/logo-green.png"
                   alt="Tropijoy"
                   width={177}
                   height={80}
@@ -243,7 +350,7 @@ export default function Header() {
                     className={cn(
                       "rounded-xl px-4 py-3 text-base font-semibold transition-colors",
                       isActive(link.href)
-                        ? "bg-sunny text-forest-deep"
+                        ? "bg-forest text-white"
                         : "text-forest-deep/75 hover:bg-forest/6"
                     )}
                   >
@@ -252,23 +359,22 @@ export default function Header() {
                 ))}
               </nav>
 
-              <div className="border-t border-forest/10 pt-4 flex flex-col gap-1">
-                {secondaryLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium text-forest-deep/65 hover:bg-forest/6 transition-colors"
-                  >
-                    <link.icon size={16} /> {link.label}
-                  </Link>
-                ))}
-                <Link
-                  href="/faq"
-                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-forest-deep/65 hover:bg-forest/6 transition-colors"
-                >
-                  FAQ
-                </Link>
-              </div>
+              {mobileGroups.map((group) => (
+                <div key={group.heading} className="border-t border-forest/10 pt-4 flex flex-col gap-1">
+                  <p className="px-4 pb-1 text-[11px] font-bold uppercase tracking-wider text-forest-deep/35">
+                    {group.heading}
+                  </p>
+                  {group.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium text-forest-deep/65 hover:bg-forest/6 transition-colors"
+                    >
+                      <link.icon size={16} /> {link.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
             </motion.div>
           </motion.div>
         )}

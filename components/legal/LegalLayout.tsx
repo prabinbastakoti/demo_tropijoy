@@ -7,6 +7,8 @@ const legalLinks = [
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Shipping & Returns", href: "/shipping-returns" },
+  { label: "Cookie Policy", href: "/cookies" },
+  { label: "Accessibility", href: "/accessibility" },
 ];
 
 export default function LegalLayout({

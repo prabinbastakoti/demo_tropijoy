@@ -1,391 +1,145 @@
 [
   {
-    "id": "df-mango-01",
-    "name": "Sun-Dried Mango Slices",
-    "slug": "sun-dried-mango-slices",
+    "id": "dried-apple",
+    "name": "Dried Apple",
+    "slug": "dried-apple",
     "category": "Dehydrated Fruit",
-    "fruitType": "Mango",
-    "price": 1150,
-    "originalPrice": 1550,
-    "weight": "250g",
-    "rating": 4.8,
-    "reviewsCount": 5,
-    "tags": [
-      "Best Seller",
-      "100% Organic",
-      "No Added Sugar"
-    ],
-    "description": "Hand-picked Alphonso mangoes, slow dehydrated to lock in that golden sweetness. Naturally chewy, sun-bright, and packed with nothing but fruit.",
+    "fruitType": "Apple",
+    "accentColor": "#9B2B19",
+    "tags": ["Best Seller", "100% Natural", "No Added Sugar"],
+    "description": "Crisp Nepali apples, sliced thin and gently dehydrated until naturally sweet and chewy. One ingredient on the label: apple. No sugar, no preservatives, no artificial colour.",
     "nutritionHighlights": [
-      "Rich in Vitamin A",
-      "High in Fiber",
-      "No preservatives",
-      "220 kcal per 100g"
+      "Rich in fiber",
+      "No artificial preservatives",
+      "No artificial colors",
+      "No added sugar"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1553279768-865429fa0078?w=1200&q=80",
-      "https://plus.unsplash.com/premium_photo-1724255863045-2ad716767715?w=1200&q=80"
+    "images": ["/products/apple.png"],
+    "variants": [
+      { "id": "100g", "weight": "100g", "price": 850, "originalPrice": null, "sku": "TJ-APPLE-100", "inStock": true },
+      { "id": "200g", "weight": "200g", "price": 1550, "originalPrice": 1750, "sku": "TJ-APPLE-200", "inStock": true }
     ],
-    "inStock": true
+    "defaultVariantId": "100g",
+    "rating": 4.8,
+    "reviewsCount": 13
   },
   {
-    "id": "df-pineapple-01",
-    "name": "Crispy Pineapple Rings",
-    "slug": "crispy-pineapple-rings",
+    "id": "dried-lemon",
+    "name": "Dried Lemon",
+    "slug": "dried-lemon",
     "category": "Dehydrated Fruit",
-    "fruitType": "Pineapple",
-    "price": 950,
-    "originalPrice": null,
-    "weight": "200g",
-    "rating": 4.5,
-    "reviewsCount": 4,
-    "tags": [
-      "Vegan",
-      "No Added Sugar"
-    ],
-    "description": "Golden pineapple rings dehydrated to a light, crispy crunch. A tangy-sweet snack that tastes like sunshine in every bite.",
+    "fruitType": "Lemon",
+    "accentColor": "#E8C31E",
+    "tags": ["100% Natural", "No Added Sugar", "Vegan"],
+    "description": "Thin-cut lemon wheels, dehydrated slow and low until the pith turns golden and chewy. Tart, fragrant, and ready for tea, cocktails, or straight out of the pouch.",
     "nutritionHighlights": [
       "High in Vitamin C",
-      "Natural digestive enzymes",
-      "190 kcal per 100g"
+      "No artificial preservatives",
+      "No artificial colors",
+      "Naturally tangy — no added sugar"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=1200&q=80",
-      "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=1200&q=80&sat=-20"
+    "images": ["/products/lemon.png"],
+    "variants": [
+      { "id": "100g", "weight": "100g", "price": 900, "originalPrice": null, "sku": "TJ-LEMON-100", "inStock": true },
+      { "id": "200g", "weight": "200g", "price": 1650, "originalPrice": null, "sku": "TJ-LEMON-200", "inStock": true }
     ],
-    "inStock": true
-  },
-  {
-    "id": "df-dragonfruit-01",
-    "name": "Dragonfruit Crystal Chips",
-    "slug": "dragonfruit-crystal-chips",
-    "category": "Dehydrated Fruit",
-    "fruitType": "Dragonfruit",
-    "price": 1400,
-    "originalPrice": 1800,
-    "weight": "100g",
-    "rating": 4.8,
-    "reviewsCount": 4,
-    "tags": [
-      "100% Organic",
-      "Vegan",
-      "Instagram Favorite"
-    ],
-    "description": "Delicately freeze-dried dragonfruit with a crystalline crunch and a subtly sweet, melon-like finish. As beautiful as it is nutritious.",
-    "nutritionHighlights": [
-      "Antioxidant-rich",
-      "Low glycemic index",
-      "185 kcal per 100g"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1676630034207-5e6e627420d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1676630034207-5e6e627420d9?w=1200&q=80&sat=20"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "df-banana-01",
-    "name": "Golden Banana Chips",
-    "slug": "golden-banana-chips",
-    "category": "Dehydrated Fruit",
-    "fruitType": "Banana",
-    "price": 850,
-    "originalPrice": null,
-    "weight": "250g",
-    "rating": 4.5,
-    "reviewsCount": 6,
-    "tags": [
-      "Best Seller",
-      "Vegan"
-    ],
-    "description": "Slow-dried Cavendish bananas with a naturally caramelized flavor and satisfying crunch. No frying, no added oil, just pure banana.",
-    "nutritionHighlights": [
-      "High in Potassium",
-      "Great energy snack",
-      "260 kcal per 100g"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1534882406436-6b6b0152efae?w=1200&q=80",
-      "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=1200&q=80"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "df-berry-01",
-    "name": "Wild Berry Medley Bites",
-    "slug": "wild-berry-medley-bites",
-    "category": "Dehydrated Fruit",
-    "fruitType": "Berry",
-    "price": 1650,
-    "originalPrice": 2050,
-    "weight": "150g",
-    "rating": 5.0,
-    "reviewsCount": 5,
-    "tags": [
-      "Best Seller",
-      "100% Organic",
-      "No Added Sugar"
-    ],
-    "description": "A vibrant blend of dehydrated strawberries, blueberries, and raspberries. Tart, sweet, and bursting with color in every handful.",
-    "nutritionHighlights": [
-      "Rich in antioxidants",
-      "High in fiber",
-      "210 kcal per 100g"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1547714695-bed5d1fef848?w=1200&q=80",
-      "https://images.unsplash.com/photo-1547714695-bed5d1fef848?w=1200&q=80&sat=20"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "df-citrus-01",
-    "name": "Citrus Sunset Slices",
-    "slug": "citrus-sunset-slices",
-    "category": "Dehydrated Fruit",
-    "fruitType": "Citrus",
-    "price": 1050,
-    "originalPrice": null,
-    "weight": "150g",
-    "rating": 4.3,
-    "reviewsCount": 6,
-    "tags": [
-      "Vegan",
-      "No Added Sugar"
-    ],
-    "description": "Thin-cut orange and blood orange slices, dehydrated until translucent and chewy. A fragrant, zesty snack or cocktail garnish.",
-    "nutritionHighlights": [
-      "High in Vitamin C",
-      "Caffeine-free energy",
-      "205 kcal per 100g"
-    ],
-    "images": [
-      "https://plus.unsplash.com/premium_photo-1675011400562-e0e49dfd07b3?w=1200&q=80",
-      "https://plus.unsplash.com/premium_photo-1675011400562-e0e49dfd07b3?w=1200&q=80&sat=20"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "df-mix-01",
-    "name": "Tropical Trail Snack Mix",
-    "slug": "tropical-trail-snack-mix",
-    "category": "Dehydrated Fruit",
-    "fruitType": "Mango",
-    "price": 1800,
-    "originalPrice": 2200,
-    "weight": "500g",
-    "rating": 4.7,
-    "reviewsCount": 6,
-    "tags": [
-      "Best Seller",
-      "Vegan",
-      "Snack Mix"
-    ],
-    "description": "Our signature blend of dehydrated mango, pineapple, banana, and coconut shavings. The ultimate on-the-go tropical escape.",
-    "nutritionHighlights": [
-      "Balanced natural sugars",
-      "Great trail snack",
-      "240 kcal per 100g"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1498507297833-5373e346b4e0?w=1200&q=80",
-      "https://images.unsplash.com/photo-1553279768-865429fa0078?w=1200&q=80&sat=20"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "fp-mango-01",
-    "name": "Organic Mango Powder",
-    "slug": "organic-mango-powder",
-    "category": "Fruit Powder",
-    "fruitType": "Mango",
-    "price": 1900,
-    "originalPrice": 2450,
-    "weight": "250g",
-    "rating": 4.8,
-    "reviewsCount": 4,
-    "tags": [
-      "100% Organic",
-      "Best Seller",
-      "Vegan"
-    ],
-    "description": "Freeze-dried and finely milled mango, perfect for smoothies, yogurt bowls, and baking. All the tropical flavor, zero additives.",
-    "nutritionHighlights": [
-      "High in Vitamin A & C",
-      "No fillers",
-      "No added sugar",
-      "95 kcal per 30g scoop"
-    ],
-    "images": [
-      "https://plus.unsplash.com/premium_photo-1724255863045-2ad716767715?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "fp-pineapple-01",
-    "name": "Pineapple Powder Boost",
-    "slug": "pineapple-powder-boost",
-    "category": "Fruit Powder",
-    "fruitType": "Pineapple",
-    "price": 1750,
-    "originalPrice": null,
-    "weight": "200g",
+    "defaultVariantId": "100g",
     "rating": 4.6,
-    "reviewsCount": 5,
-    "tags": [
-      "100% Organic",
-      "Vegan"
-    ],
-    "description": "A bright, tangy powder made from freeze-dried pineapple. Stir into water, smoothies, or marinades for an instant tropical lift.",
+    "reviewsCount": 13
+  },
+  {
+    "id": "dried-orange",
+    "name": "Dried Orange",
+    "slug": "dried-orange",
+    "category": "Dehydrated Fruit",
+    "fruitType": "Orange",
+    "accentColor": "#E46C0B",
+    "tags": ["Best Seller", "100% Natural", "Vegan"],
+    "description": "Whole orange slices dried until they turn nearly translucent at the edges — sweet-tart, chewy, and fragrant. A snack, a garnish, or a tea infusion, all in one pouch.",
     "nutritionHighlights": [
-      "Contains bromelain enzyme",
       "High in Vitamin C",
-      "90 kcal per 30g scoop"
+      "No artificial preservatives",
+      "No artificial colors",
+      "Caffeine-free energy"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
+    "images": ["/products/orange.png"],
+    "variants": [
+      { "id": "100g", "weight": "100g", "price": 950, "originalPrice": null, "sku": "TJ-ORANGE-100", "inStock": true },
+      { "id": "200g", "weight": "200g", "price": 1700, "originalPrice": 1900, "sku": "TJ-ORANGE-200", "inStock": true }
     ],
-    "inStock": true
+    "defaultVariantId": "100g",
+    "rating": 4.7,
+    "reviewsCount": 11
   },
   {
-    "id": "fp-dragonfruit-01",
-    "name": "Dragonfruit Pitaya Powder",
-    "slug": "dragonfruit-pitaya-powder",
-    "category": "Fruit Powder",
-    "fruitType": "Dragonfruit",
-    "price": 2200,
-    "originalPrice": 2550,
-    "weight": "150g",
-    "rating": 5.0,
-    "reviewsCount": 4,
-    "tags": [
-      "Best Seller",
-      "100% Organic",
-      "Instagram Favorite"
-    ],
-    "description": "Vivid magenta pitaya powder for smoothie bowls that photograph as good as they taste. Subtly sweet with an earthy finish.",
+    "id": "dried-pineapple",
+    "name": "Dried Pineapple",
+    "slug": "dried-pineapple",
+    "category": "Dehydrated Fruit",
+    "fruitType": "Pineapple",
+    "accentColor": "#ECB722",
+    "tags": ["100% Natural", "No Added Sugar", "Vegan"],
+    "description": "Golden pineapple rings, slow-dried to a light chew with none of the syrupy stickiness you get from candied versions. Just sunshine and fruit.",
     "nutritionHighlights": [
-      "Rich in antioxidants",
-      "Natural food coloring",
-      "85 kcal per 30g scoop"
+      "Contains natural bromelain enzyme",
+      "High in Vitamin C",
+      "No artificial preservatives",
+      "No added sugar"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1676630034207-5e6e627420d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
+    "images": ["/products/pineapple.png"],
+    "variants": [
+      { "id": "100g", "weight": "100g", "price": 1000, "originalPrice": null, "sku": "TJ-PINEAPPLE-100", "inStock": true },
+      { "id": "200g", "weight": "200g", "price": 1800, "originalPrice": null, "sku": "TJ-PINEAPPLE-200", "inStock": true }
     ],
-    "inStock": true
+    "defaultVariantId": "100g",
+    "rating": 4.5,
+    "reviewsCount": 9
   },
   {
-    "id": "fp-banana-01",
-    "name": "Banana Energy Powder Blend",
-    "slug": "banana-energy-powder-blend",
-    "category": "Fruit Powder",
+    "id": "dried-banana",
+    "name": "Dried Banana",
+    "slug": "dried-banana",
+    "category": "Dehydrated Fruit",
     "fruitType": "Banana",
-    "price": 1650,
-    "originalPrice": null,
-    "weight": "250g",
-    "rating": 4.5,
-    "reviewsCount": 4,
-    "tags": [
-      "Vegan",
-      "No Added Sugar"
-    ],
-    "description": "Pure freeze-dried banana milled to a silky powder. A natural sweetener and thickener for shakes, oatmeal, and baked goods.",
+    "accentColor": "#D4AE59",
+    "tags": ["Best Seller", "100% Natural", "Vegan"],
+    "description": "Slow-dried banana coins with a naturally caramelized flavor and a satisfying, dense chew. No frying, no added oil, no added sugar — just banana.",
     "nutritionHighlights": [
       "High in Potassium",
-      "Natural energy source",
-      "100 kcal per 30g scoop"
+      "No artificial preservatives",
+      "No artificial colors",
+      "Great energy snack"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1534882406436-6b6b0152efae?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
+    "images": ["/products/banana.png"],
+    "variants": [
+      { "id": "100g", "weight": "100g", "price": 880, "originalPrice": null, "sku": "TJ-BANANA-100", "inStock": true },
+      { "id": "200g", "weight": "200g", "price": 1600, "originalPrice": 1750, "sku": "TJ-BANANA-200", "inStock": true }
     ],
-    "inStock": true
-  },
-  {
-    "id": "fp-berry-01",
-    "name": "Wild Berry Antioxidant Powder",
-    "slug": "wild-berry-antioxidant-powder",
-    "category": "Fruit Powder",
-    "fruitType": "Berry",
-    "price": 2300,
-    "originalPrice": 2850,
-    "weight": "200g",
-    "rating": 5.0,
-    "reviewsCount": 5,
-    "tags": [
-      "Best Seller",
-      "100% Organic",
-      "No Added Sugar"
-    ],
-    "description": "A potent blend of freeze-dried blueberry, acai, and raspberry. Stir into your morning smoothie for a deep-purple antioxidant boost.",
-    "nutritionHighlights": [
-      "Very high in antioxidants",
-      "Supports immunity",
-      "80 kcal per 30g scoop"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1547714695-bed5d1fef848?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
-    ],
-    "inStock": true
-  },
-  {
-    "id": "fp-citrus-01",
-    "name": "Citrus Vitamin-C Powder",
-    "slug": "citrus-vitamin-c-powder",
-    "category": "Fruit Powder",
-    "fruitType": "Citrus",
-    "price": 1550,
-    "originalPrice": null,
-    "weight": "200g",
-    "rating": 4.2,
-    "reviewsCount": 4,
-    "tags": [
-      "100% Organic",
-      "Vegan"
-    ],
-    "description": "Zesty orange and lemon peel powder, cold-milled to preserve every bit of natural Vitamin C. Brightens teas, water, and desserts.",
-    "nutritionHighlights": [
-      "Exceptional Vitamin C content",
-      "Natural flavor enhancer",
-      "70 kcal per 30g scoop"
-    ],
-    "images": [
-      "https://plus.unsplash.com/premium_photo-1675011400562-e0e49dfd07b3?w=1200&q=80",
-      "https://images.unsplash.com/photo-1704650311974-8ce378f0e8b0?w=1200&q=80"
-    ],
-    "inStock": false
-  },
-  {
-    "id": "fp-tropical-01",
-    "name": "Tropical Green Superfood Powder",
-    "slug": "tropical-green-superfood-powder",
-    "category": "Fruit Powder",
-    "fruitType": "Mango",
-    "price": 2550,
-    "originalPrice": 3200,
-    "weight": "250g",
+    "defaultVariantId": "100g",
     "rating": 4.8,
-    "reviewsCount": 6,
-    "tags": [
-      "Best Seller",
-      "100% Organic",
-      "Vegan",
-      "Snack Mix"
-    ],
-    "description": "Mango, pineapple, and moringa leaf combined into one potent daily superfood blend. Effortless nutrition, tropical taste.",
+    "reviewsCount": 12
+  },
+  {
+    "id": "banana-powder",
+    "name": "Banana Powder",
+    "slug": "banana-powder",
+    "category": "Fruit Powder",
+    "fruitType": "Banana",
+    "accentColor": "#D4AE59",
+    "tags": ["100% Natural", "No Added Sugar", "Vegan"],
+    "description": "Pure dried banana, milled to a fine, naturally sweet powder. Stir into smoothies, porridge, or baking for banana flavor with zero fillers and zero additives.",
     "nutritionHighlights": [
-      "Multi-fruit nutrient blend",
-      "Supports daily wellness",
-      "105 kcal per 30g scoop"
+      "High in Potassium",
+      "No fillers, no additives",
+      "Natural sweetener and thickener",
+      "No added sugar"
     ],
-    "images": [
-      "https://images.unsplash.com/photo-1566373104181-133b57c9fd98?w=1200&q=80",
-      "https://images.unsplash.com/photo-1498507297833-5373e346b4e0?w=1200&q=80"
+    "images": ["/products/banana-powder.png", "/products/banana-powder-alt.png"],
+    "variants": [
+      { "id": "50g", "weight": "50g", "price": 1250, "originalPrice": null, "sku": "TJ-BANPOWDER-50", "inStock": true }
     ],
-    "inStock": true
+    "defaultVariantId": "50g",
+    "rating": 4.9,
+    "reviewsCount": 10
   }
 ]

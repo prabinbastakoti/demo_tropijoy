@@ -2,7 +2,7 @@
 
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useFilterStore, PRICE_CEILING } from "@/store/filter-store";
-import { FRUIT_TYPES, CATEGORIES } from "@/lib/products";
+import { FRUIT_TYPES, CATEGORIES, FRUIT_ACCENTS } from "@/lib/products";
 import { cn, formatPrice } from "@/lib/utils";
 import type { ProductCategory, SortOption } from "@/lib/types";
 
@@ -70,7 +70,7 @@ export default function FilterPanel({ className }: { className?: string }) {
             id="filter-keyword"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="Mango, powder, berry…"
+            placeholder="Apple, lemon, banana powder…"
             className="w-full rounded-xl border border-forest/15 pl-9 pr-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-forest/30 bg-white"
           />
         </div>
@@ -113,6 +113,11 @@ export default function FilterPanel({ className }: { className?: string }) {
                 checked={fruitTypes.includes(fruit)}
                 onChange={() => toggleFruitType(fruit)}
                 className="w-4 h-4 rounded accent-forest cursor-pointer"
+              />
+              <span
+                aria-hidden
+                className="w-2.5 h-2.5 rounded-full shrink-0"
+                style={{ backgroundColor: FRUIT_ACCENTS[fruit].hex }}
               />
               <span className="text-sm text-forest-deep/80 group-hover:text-forest-deep">
                 {fruit}

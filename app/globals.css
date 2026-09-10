@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  background-color: #f4f9f5;
+  background-color: #f6f1e4;
   color: #14261a;
 }
 
@@ -59,35 +59,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.text-gradient-brand {
-  background: linear-gradient(135deg, #fcd116 0%, #ffc72c 60%, #f0b400 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .text-balance {
   text-wrap: balance;
-}
-
-/* ---------- ambient art (replaces photography) ---------- */
-
-.mesh-hero {
-  position: relative;
-  isolation: isolate;
-}
-.mesh-hero::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  z-index: -1;
-  background:
-    radial-gradient(40% 45% at 15% 20%, rgba(252, 209, 22, 0.4) 0%, transparent 60%),
-    radial-gradient(38% 42% at 85% 15%, rgba(26, 125, 62, 0.28) 0%, transparent 60%),
-    radial-gradient(45% 50% at 70% 85%, rgba(181, 23, 158, 0.14) 0%, transparent 60%),
-    radial-gradient(35% 40% at 25% 90%, rgba(247, 127, 0, 0.18) 0%, transparent 60%);
-  filter: blur(40px);
-  animation: aurora 18s ease-in-out infinite;
 }
 
 .noise::after {
@@ -97,11 +70,6 @@ body {
   pointer-events: none;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.dotted-grid {
-  background-image: radial-gradient(rgba(17, 101, 48, 0.14) 1px, transparent 1px);
-  background-size: 22px 22px;
 }
 
 .spotlight {
@@ -117,7 +85,7 @@ body {
   pointer-events: none;
   background: radial-gradient(
     360px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(252, 209, 22, 0.16),
+    rgba(17, 101, 48, 0.12),
     transparent 65%
   );
 }
@@ -151,6 +119,34 @@ body {
   }
 }
 
+/*
+ * Raw @keyframes for the two custom CSS-class animations below. These are
+ * declared here (not just in tailwind.config.ts) because .skeleton and
+ * .marquee-track apply `animation: <name> ...` as plain CSS, not via a
+ * Tailwind `animate-*` utility class — Tailwind only emits a keyframes
+ * block into the compiled CSS when a matching `animate-*` class is actually
+ * used somewhere in scanned source, so relying on the theme config alone
+ * silently produces a no-op animation referencing a keyframe that was
+ * never generated.
+ */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .skeleton {
   background: linear-gradient(90deg, #e8f0ea 25%, #f4f9f5 37%, #e8f0ea 63%);
   background-size: 400% 100%;
@@ -176,8 +172,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .mesh-hero::before {
-    animation: none;
   }
 }

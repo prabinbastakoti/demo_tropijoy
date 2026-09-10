@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
-import { posts, getPostBySlug, getRelatedPosts, accentStyles } from "@/lib/blog";
+import { posts, getPostBySlug, getRelatedPosts, getPostAccentChip } from "@/lib/blog";
 import { cn, formatDate } from "@/lib/utils";
 import BlogBlocks from "@/components/blog/BlogBlocks";
 import BlogCard from "@/components/blog/BlogCard";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import HeritageBand from "@/components/brand/HeritageBand";
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -39,18 +40,13 @@ export default async function BlogPostPage({ params }: PageParams) {
   if (!post) notFound();
 
   const related = getRelatedPosts(post, 3);
-  const accent = accentStyles[post.accent];
+  const chip = getPostAccentChip(post);
 
   return (
     <article>
-      {/* header panel — gradient stands in for a cover photo */}
-      <header
-        className={cn(
-          "relative overflow-hidden bg-gradient-to-br py-14 sm:py-20 noise",
-          accent.gradient
-        )}
-      >
-        <div className="absolute inset-0 dotted-grid opacity-20" />
+      {/* header panel — flat accent bar + heritage motif stand in for a cover photo */}
+      <header className="relative overflow-hidden bg-cream py-14 sm:py-20">
+        <HeritageBand />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
@@ -62,25 +58,15 @@ export default async function BlogPostPage({ params }: PageParams) {
           <span
             className={cn(
               "inline-block mt-6 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide",
-              accent.chip
+              chip
             )}
           >
             {post.category}
           </span>
-          <h1
-            className={cn(
-              "mt-4 font-display font-extrabold text-3xl sm:text-5xl leading-[1.08] text-balance",
-              accent.text
-            )}
-          >
+          <h1 className="mt-4 font-display font-extrabold text-3xl sm:text-5xl leading-[1.08] text-balance text-forest-deep">
             {post.title}
           </h1>
-          <div
-            className={cn(
-              "mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm opacity-75",
-              accent.text
-            )}
-          >
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-forest-deep/60">
             <span className="font-semibold">{post.author}</span>
             <span>·</span>
             <span>{formatDate(post.date)}</span>

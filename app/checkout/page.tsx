@@ -105,11 +105,11 @@ export default function CheckoutPage() {
         shipping,
         contactPlatform: platform,
         contactHandle: handle,
-        items: detailed.map(({ product, quantity }) => ({
+        items: detailed.map(({ product, variant, quantity }) => ({
           name: product.name,
           quantity,
-          price: product.price,
-          weight: product.weight,
+          price: variant.price,
+          weight: variant.weight,
         })),
         subtotal,
         shipping_cost: shippingCost,
@@ -122,11 +122,12 @@ export default function CheckoutPage() {
       }
 
       const orderId = addOrder({
-        items: detailed.map(({ product, quantity }) => ({
+        items: detailed.map(({ product, variant, quantity }) => ({
           productId: product.id,
+          variantId: variant.id,
           name: product.name,
-          weight: product.weight,
-          price: product.price,
+          weight: variant.weight,
+          price: variant.price,
           quantity,
           image: product.images[0],
         })),
@@ -442,22 +443,25 @@ export default function CheckoutPage() {
                       Order items
                     </p>
                     <div className="space-y-3">
-                      {detailed.map(({ product, quantity }) => (
-                        <div key={product.id} className="flex items-center gap-3">
+                      {detailed.map(({ product, variant, quantity }) => (
+                        <div
+                          key={`${product.id}:${variant.id}`}
+                          className="flex items-center gap-3"
+                        >
                           <div className="relative w-11 h-11 rounded-lg overflow-hidden bg-cream shrink-0">
                             <Image
                               src={product.images[0]}
                               alt={product.name}
                               fill
                               sizes="44px"
-                              className="object-cover"
+                              className="object-contain p-1"
                             />
                           </div>
                           <p className="text-sm text-forest-deep flex-1 min-w-0 truncate">
-                            {product.name} &times;{quantity}
+                            {product.name} ({variant.weight}) &times;{quantity}
                           </p>
                           <p className="text-sm font-semibold text-forest-deep shrink-0">
-                            {formatPrice(product.price * quantity)}
+                            {formatPrice(variant.price * quantity)}
                           </p>
                         </div>
                       ))}
@@ -498,9 +502,9 @@ export default function CheckoutPage() {
             </h2>
 
             <div className="space-y-3 mb-5 max-h-72 overflow-y-auto">
-              {detailed.map(({ product, quantity }) => (
+              {detailed.map(({ product, variant, quantity }) => (
                 <Link
-                  key={product.id}
+                  key={`${product.id}:${variant.id}`}
                   href={`/shop/${product.slug}`}
                   className="flex items-center gap-3 group"
                 >
@@ -510,17 +514,17 @@ export default function CheckoutPage() {
                       alt={product.name}
                       fill
                       sizes="48px"
-                      className="object-cover"
+                      className="object-contain p-1"
                     />
                     <span className="absolute -top-1 -right-1 bg-forest text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                       {quantity}
                     </span>
                   </div>
                   <p className="text-sm text-forest-deep/80 flex-1 min-w-0 truncate group-hover:text-forest">
-                    {product.name}
+                    {product.name} <span className="text-forest-deep/40">({variant.weight})</span>
                   </p>
                   <span className="text-sm font-semibold text-forest-deep shrink-0">
-                    {formatPrice(product.price * quantity)}
+                    {formatPrice(variant.price * quantity)}
                   </span>
                 </Link>
               ))}

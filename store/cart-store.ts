@@ -1,73 +1,86 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CartItem, Product } from "@/lib/types";
-import { getProductById } from "@/lib/products";
+import type { CartItem, Product, ProductVariant } from "@/lib/types";
+import { getProductById, getVariant } from "@/lib/products";
 import { FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE } from "@/lib/utils";
 
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
-  addItem: (productId: string, quantity?: number) => void;
-  removeItem: (productId: string) => void;
-  incrementItem: (productId: string) => void;
-  decrementItem: (productId: string) => void;
-  setQuantity: (productId: string, quantity: number) => void;
+  addItem: (productId: string, variantId: string, quantity?: number) => void;
+  removeItem: (productId: string, variantId: string) => void;
+  incrementItem: (productId: string, variantId: string) => void;
+  decrementItem: (productId: string, variantId: string) => void;
+  setQuantity: (productId: string, variantId: string, quantity: number) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
 }
 
+const sameLine = (i: CartItem, productId: string, variantId: string) =>
+  i.productId === productId && i.variantId === variantId;
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
       isOpen: false,
-      addItem: (productId, quantity = 1) => {
+      addItem: (productId, variantId, quantity = 1) => {
         const items = get().items;
-        const existing = items.find((i) => i.productId === productId);
+        const existing = items.find((i) => sameLine(i, productId, variantId));
         if (existing) {
           set({
             items: items.map((i) =>
-              i.productId === productId
+              sameLine(i, productId, variantId)
                 ? { ...i, quantity: i.quantity + quantity }
                 : i
             ),
           });
         } else {
-          set({ items: [...items, { productId, quantity }] });
+          set({ items: [...items, { productId, variantId, quantity }] });
         }
         set({ isOpen: true });
       },
-      removeItem: (productId) =>
-        set({ items: get().items.filter((i) => i.productId !== productId) }),
-      incrementItem: (productId) =>
+      removeItem: (productId, variantId) =>
+        set({
+          items: get().items.filter((i) => !sameLine(i, productId, variantId)),
+        }),
+      incrementItem: (productId, variantId) =>
         set({
           items: get().items.map((i) =>
-            i.productId === productId ? { ...i, quantity: i.quantity + 1 } : i
+            sameLine(i, productId, variantId)
+              ? { ...i, quantity: i.quantity + 1 }
+              : i
           ),
         }),
-      decrementItem: (productId) => {
+      decrementItem: (productId, variantId) => {
         const items = get().items;
-        const target = items.find((i) => i.productId === productId);
+        const target = items.find((i) => sameLine(i, productId, variantId));
         if (target && target.quantity <= 1) {
-          set({ items: items.filter((i) => i.productId !== productId) });
+          set({
+            items: items.filter((i) => !sameLine(i, productId, variantId)),
+          });
         } else {
           set({
             items: items.map((i) =>
-              i.productId === productId ? { ...i, quantity: i.quantity - 1 } : i
+              sameLine(i, productId, variantId)
+                ? { ...i, quantity: i.quantity - 1 }
+                : i
             ),
           });
         }
       },
-      setQuantity: (productId, quantity) => {
+      setQuantity: (productId, variantId, quantity) => {
         if (quantity <= 0) {
-          set({ items: get().items.filter((i) => i.productId !== productId) });
+          set({
+            items: get().items.filter((i) => !sameLine(i, productId, variantId)),
+          });
           return;
         }
         set({
           items: get().items.map((i) =>
-            i.productId === productId ? { ...i, quantity } : i
+            sameLine(i, productId, variantId) ? { ...i, quantity } : i
           ),
         });
       },
@@ -78,6 +91,8 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: "tropijoy-cart",
+      version: 2,
+      migrate: () => ({ items: [] }),
       partialize: (state) => ({ items: state.items }),
     }
   )
@@ -85,6 +100,7 @@ export const useCartStore = create<CartState>()(
 
 export interface DetailedCartLine {
   product: Product;
+  variant: ProductVariant;
   quantity: number;
 }
 
@@ -93,12 +109,14 @@ export function useCartTotals() {
 
   const detailed: DetailedCartLine[] = items.flatMap((item) => {
     const product = getProductById(item.productId);
-    return product ? [{ product, quantity: item.quantity }] : [];
+    if (!product) return [];
+    const variant = getVariant(product, item.variantId);
+    return [{ product, variant, quantity: item.quantity }];
   });
 
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = detailed.reduce(
-    (sum, { product, quantity }) => sum + product.price * quantity,
+    (sum, { variant, quantity }) => sum + variant.price * quantity,
     0
   );
   const shippingCost =

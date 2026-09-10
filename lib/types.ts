@@ -1,14 +1,17 @@
 export type ProductCategory = "Dehydrated Fruit" | "Fruit Powder";
 
-export type FruitType =
-  | "Mango"
-  | "Pineapple"
-  | "Dragonfruit"
-  | "Banana"
-  | "Berry"
-  | "Citrus";
+export type FruitType = "Apple" | "Lemon" | "Orange" | "Pineapple" | "Banana";
 
-export type ProductWeight = "100g" | "150g" | "200g" | "250g" | "500g" | "1kg";
+export type WeightOption = "50g" | "100g" | "200g";
+
+export interface ProductVariant {
+  id: string;
+  weight: WeightOption;
+  price: number;
+  originalPrice: number | null;
+  sku: string;
+  inStock: boolean;
+}
 
 export interface Product {
   id: string;
@@ -16,20 +19,21 @@ export interface Product {
   slug: string;
   category: ProductCategory;
   fruitType: FruitType;
-  price: number;
-  originalPrice: number | null;
-  weight: ProductWeight;
-  rating: number;
-  reviewsCount: number;
+  /** Hex accent color pulled from the real packaging label for this fruit. */
+  accentColor: string;
   tags: string[];
   description: string;
   nutritionHighlights: string[];
   images: string[];
-  inStock: boolean;
+  variants: ProductVariant[];
+  defaultVariantId: string;
+  rating: number;
+  reviewsCount: number;
 }
 
 export interface CartItem {
   productId: string;
+  variantId: string;
   quantity: number;
 }
 
@@ -106,6 +110,8 @@ export interface BlogPost {
   date: string;
   readTime: number;
   accent: AccentColor;
+  /** When set, the post's card/header uses this fruit's real brand accent instead of `accent`. */
+  heroFruit?: FruitType;
   blocks: BlogBlock[];
 }
 
@@ -115,6 +121,7 @@ export type OrderStatus = "Pending" | "Confirmed" | "Shipped" | "Delivered";
 
 export interface OrderItem {
   productId: string;
+  variantId?: string;
   name: string;
   weight: string;
   price: number;

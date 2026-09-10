@@ -105,7 +105,7 @@ export default function CartDrawer() {
                       <motion.div
                         animate={{ width: `${progress}%` }}
                         transition={{ duration: 0.4 }}
-                        className="h-full rounded-full bg-gradient-to-r from-forest to-sunny"
+                        className="h-full rounded-full bg-forest"
                       />
                     </div>
                   </div>
@@ -113,9 +113,9 @@ export default function CartDrawer() {
 
                 <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
                   <AnimatePresence initial={false}>
-                    {detailed.map(({ product, quantity }) => (
+                    {detailed.map(({ product, variant, quantity }) => (
                       <motion.div
-                        key={product.id}
+                        key={`${product.id}:${variant.id}`}
                         layout
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -132,7 +132,7 @@ export default function CartDrawer() {
                             alt={product.name}
                             fill
                             sizes="80px"
-                            className="object-cover"
+                            className="object-contain p-2"
                           />
                         </Link>
                         <div className="flex-1 min-w-0 flex flex-col">
@@ -144,7 +144,7 @@ export default function CartDrawer() {
                               {product.name}
                             </Link>
                             <button
-                              onClick={() => removeItem(product.id)}
+                              onClick={() => removeItem(product.id, variant.id)}
                               className="text-forest-deep/30 hover:text-red-500 shrink-0"
                               aria-label={`Remove ${product.name}`}
                             >
@@ -152,17 +152,17 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <p className="text-xs text-forest-deep/50 mb-2">
-                            {product.weight}
+                            {variant.weight}
                           </p>
                           <div className="mt-auto flex items-center justify-between">
                             <QuantityStepper
                               size="sm"
                               quantity={quantity}
-                              onIncrement={() => incrementItem(product.id)}
-                              onDecrement={() => decrementItem(product.id)}
+                              onIncrement={() => incrementItem(product.id, variant.id)}
+                              onDecrement={() => decrementItem(product.id, variant.id)}
                             />
                             <span className="font-bold text-forest-deep text-sm">
-                              {formatPrice(product.price * quantity)}
+                              {formatPrice(variant.price * quantity)}
                             </span>
                           </div>
                         </div>

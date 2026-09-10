@@ -22,9 +22,16 @@ const config: Config = {
           light: "#1A7D3E",
           ink: "#08301A",
         },
-        cream: "#F4F9F5",
+        cream: "#F6F1E4",
         berry: "#B5179E",
         citrus: "#F77F00",
+        accent: {
+          apple: "#9B2B19",
+          lemon: "#E8C31E",
+          orange: "#E46C0B",
+          pineapple: "#ECB722",
+          banana: "#D4AE59",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
@@ -38,8 +45,6 @@ const config: Config = {
       },
       boxShadow: {
         glass: "0 8px 32px 0 rgba(11, 102, 35, 0.15)",
-        "glow-yellow": "0 0 40px rgba(252, 209, 22, 0.35)",
-        "glow-green": "0 0 40px rgba(17, 101, 48, 0.25)",
         window:
           "0 50px 100px -20px rgba(8, 48, 26, 0.25), 0 30px 60px -30px rgba(8, 48, 26, 0.3)",
         lift: "0 20px 40px -16px rgba(8, 48, 26, 0.18)",
@@ -53,18 +58,9 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        blob: {
-          "0%, 100%": { borderRadius: "42% 58% 65% 35% / 45% 40% 60% 55%" },
-          "50%": { borderRadius: "60% 40% 30% 70% / 50% 60% 40% 50%" },
-        },
         shimmer: {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
-        },
-        aurora: {
-          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
-          "33%": { transform: "translate3d(4%,-4%,0) scale(1.08)" },
-          "66%": { transform: "translate3d(-3%,3%,0) scale(0.95)" },
         },
         marquee: {
           "0%": { transform: "translateX(0)" },
@@ -79,9 +75,7 @@ const config: Config = {
       animation: {
         float: "float 6s ease-in-out infinite",
         "float-slow": "float-slow 8s ease-in-out infinite",
-        blob: "blob 8s ease-in-out infinite",
         shimmer: "shimmer 2s infinite linear",
-        aurora: "aurora 18s ease-in-out infinite",
         marquee: "marquee 30s linear infinite",
         "pop-in": "pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both",
       },
