@@ -1,6 +1,6 @@
 "use client";
 
-import { Quote, Star } from "lucide-react";
+import { CheckCircle2, Quote, Star } from "lucide-react";
 import { seededReviews } from "@/lib/reviews";
 import { getProductById } from "@/lib/products";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -30,11 +30,14 @@ export default function Testimonials() {
             <StaggerItem key={review.id}>
               <Spotlight className="h-full">
                 <figure className="relative h-full rounded-3xl bg-white border border-forest/10 p-7 flex flex-col">
-                  <Quote
-                    size={28}
-                    className="text-sunny mb-4 shrink-0"
-                    aria-hidden
-                  />
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <Quote size={28} className="text-sunny shrink-0" aria-hidden />
+                    {review.verified && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-forest/8 text-forest text-[10px] font-bold uppercase tracking-wide px-2.5 py-1">
+                        <CheckCircle2 size={11} /> Verified Buyer
+                      </span>
+                    )}
+                  </div>
                   <div className="flex items-center gap-0.5 mb-3">
                     {Array.from({ length: 5 }).map((_, starIdx) => (
                       <Star

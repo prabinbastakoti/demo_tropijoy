@@ -8,6 +8,6 @@ export const metadata: Metadata = {
     "What personal information Tropijoy collects, why we collect it, and what we do with it.",
 };
 
-export default function PrivacyPage() {
-  return <LegalLayout doc={privacyDocument} currentHref="/privacy" />;
+export default function PrivacyPolicyPage() {
+  return <LegalLayout doc={privacyDocument} currentHref="/privacy-policy" />;
 }

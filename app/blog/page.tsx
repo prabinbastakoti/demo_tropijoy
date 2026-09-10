@@ -4,7 +4,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-  title: "Journal",
+  title: "Blog",
   description:
     "Recipes, nutrition explainers, sourcing stories and practical guides from the Tropijoy kitchen.",
 };
@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Journal" }]} />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Blog" }]} />
 
       <SectionHeading
-        eyebrow="The journal"
+        eyebrow="Our stories"
         as="h1"
         title="Things worth knowing about fruit"
         description="Recipes, nutrition explainers and honest notes from the people who dry it."

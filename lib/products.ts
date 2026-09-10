@@ -153,12 +153,31 @@ export const FRUIT_ACCENTS: Record<
     border: "border-accent-banana",
     chip: "bg-accent-banana/15 text-forest-deep",
   },
+  Mixed: {
+    hex: "#1B3B2B",
+    bg: "bg-forest",
+    text: "text-forest",
+    border: "border-forest",
+    chip: "bg-forest/10 text-forest-deep",
+  },
 };
+
+/** Curated multi-product bundles — excluded from the main shop grid/filters. */
+export function getBundles(): Product[] {
+  return products.filter((p) => p.category === "Bundle");
+}
+
+/** Real, non-bundle catalog products — what the shop page, bestseller grid, and mega menu "sliced fruit"/"powder" columns should ever show. */
+export function getShoppableProducts(): Product[] {
+  return products.filter((p) => p.category !== "Bundle");
+}
 
 export interface ProductFilters {
   keyword: string;
   category: ProductCategory | "All";
   fruitTypes: FruitType[];
+  /** "No Added Sugar" | "Vegan" | "Best Seller" | "All" — matches against `product.tags`. */
+  attribute?: string;
   minPrice: number;
   maxPrice: number;
   sort: SortOption;
@@ -182,10 +201,20 @@ export function filterAndSortProducts(
     const matchesFruit =
       filters.fruitTypes.length === 0 ||
       filters.fruitTypes.includes(p.fruitType);
+    const matchesAttribute =
+      !filters.attribute ||
+      filters.attribute === "All" ||
+      p.tags.includes(filters.attribute);
     const matchesPrice = p.variants.some(
       (v) => v.price >= filters.minPrice && v.price <= filters.maxPrice
     );
-    return matchesKeyword && matchesCategory && matchesFruit && matchesPrice;
+    return (
+      matchesKeyword &&
+      matchesCategory &&
+      matchesFruit &&
+      matchesAttribute &&
+      matchesPrice
+    );
   });
 
   switch (filters.sort) {

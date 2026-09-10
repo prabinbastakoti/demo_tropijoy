@@ -1,8 +1,14 @@
-export type ProductCategory = "Dehydrated Fruit" | "Fruit Powder";
+export type ProductCategory = "Dehydrated Fruit" | "Fruit Powder" | "Bundle";
 
-export type FruitType = "Apple" | "Lemon" | "Orange" | "Pineapple" | "Banana";
+export type FruitType =
+  | "Apple"
+  | "Lemon"
+  | "Orange"
+  | "Pineapple"
+  | "Banana"
+  | "Mixed";
 
-export type WeightOption = "50g" | "100g" | "200g";
+export type WeightOption = "50g" | "100g" | "200g" | "Bundle";
 
 export interface ProductVariant {
   id: string;

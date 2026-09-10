@@ -24,7 +24,7 @@ const facts = [
   { label: "Founded", value: "2023" },
   { label: "Based in", value: BUSINESS.location },
   { label: "Products", value: `${products.length} — dried fruit slices & banana powder` },
-  { label: "Sourcing", value: "Direct from 11 partner farms across Nepal" },
+  { label: "Sourcing", value: "Premium fruit from trusted Nepali markets" },
 ];
 
 export default function PressPage() {

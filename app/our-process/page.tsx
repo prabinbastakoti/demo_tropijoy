@@ -1,27 +1,25 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 import ProcessTimeline from "@/components/home/ProcessTimeline";
 import HeritageBand from "@/components/brand/HeritageBand";
 import { ButtonLink } from "@/components/ui/Button";
-import { FRUIT_ACCENTS } from "@/lib/products";
-import { BUSINESS } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Our Farms & Process",
+  title: "Our Quality & Process",
   description:
-    "Where Tropijoy fruit comes from, why we pay above market rate, and exactly how it's dried — from eleven Nepali farms to your pouch.",
+    "How Tropijoy selects, washes, slices, dries and packs fruit — from premium market produce to a sealed, resealable pouch.",
 };
 
-const regions = [
-  { fruit: "Apple" as const, place: "High orchards around Mustang & Jumla" },
-  { fruit: "Banana" as const, place: "Chitwan, in the warm Terai plains" },
-  { fruit: "Orange" as const, place: "Mid-hill groves in Sindhuli & Dhankuta" },
-  { fruit: "Lemon" as const, place: "Mid-hill groves in Sindhuli & Dhankuta" },
-  { fruit: "Pineapple" as const, place: "Ilam, in Nepal's eastern hills" },
+const qualityChecks = [
+  "Selected from trusted Nepali markets at peak ripeness",
+  "Washed in a sanitary, food-safe facility",
+  "Cut on precision slicing machines for uniform thickness",
+  "Dried low and slow — nothing is ever cooked",
+  "Sealed within 48 hours in nitrogen-flushed pouches",
 ];
 
 const labelSamples = [
@@ -32,43 +30,42 @@ const labelSamples = [
   { fruit: "Pineapple", src: "/labels/200g/pineapple.png" },
 ];
 
-export default function OurFarmsPage() {
+export default function OurProcessPage() {
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <Breadcrumbs
-          items={[{ label: "Home", href: "/" }, { label: "Our Farms & Process" }]}
+          items={[{ label: "Home", href: "/" }, { label: "Our Quality & Process" }]}
         />
 
         <div className="mt-10 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <Reveal>
             <span className="inline-block text-xs font-bold tracking-[0.18em] text-forest uppercase mb-4">
-              Our farms &amp; process
+              Our sourcing &amp; quality process
             </span>
             <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-display-md text-forest-deep leading-[1.05] text-balance">
-              Eleven farms, one honest process
+              From premium fruit to a sealed pouch
             </h1>
             <div className="mt-6 space-y-4 text-forest-deep/70 leading-relaxed">
               <p>
-                By the time fruit reaches a wholesale market, it has usually been
-                picked early — hard enough to survive transport and handling.
-                Early-picked fruit never develops full sugar content, and no
-                amount of drying can put flavour back in that was never there.
+                We select premium, ripe fruit from trusted Nepali markets —
+                checked by hand before anything is washed or sliced. Quality
+                starts with what we choose, not just how it&apos;s processed.
               </p>
               <p>
-                So we buy direct from eleven farms across Nepal instead, paying
-                15–20% above the prevailing market rate for fruit picked at full
-                ripeness and delivered to our facility within 24 hours.
+                From there, every batch follows the same disciplined process:
+                hygienic washing, precision machine-slicing for even texture,
+                low-temperature dehydration, and airtight resealable
+                packaging — sealed while the fruit is still at its best.
               </p>
               <p>
-                Every batch is dried the same honest way: low-temperature
-                dehydration for our fruit slices, freeze-drying for our banana
-                powder. Nothing sweetened, nothing coloured, nothing rushed.
+                No sulphites, no added sugar, no shortcuts. One ingredient on
+                every label.
               </p>
             </div>
             <div className="mt-8">
-              <ButtonLink href="/shop">
-                Shop the harvest <ArrowRight size={18} />
+              <ButtonLink href="/quality-and-safety" variant="outline">
+                Quality &amp; safety standards <ArrowRight size={18} />
               </ButtonLink>
             </div>
           </Reveal>
@@ -76,37 +73,18 @@ export default function OurFarmsPage() {
           <Reveal delay={0.12}>
             <div className="rounded-[2rem] bg-white border border-forest/10 p-7 sm:p-9">
               <p className="text-xs font-bold uppercase tracking-wider text-forest/50 mb-5">
-                Where each fruit comes from
+                What every batch goes through
               </p>
               <ul className="space-y-4">
-                {regions.map((r) => (
-                  <li key={r.fruit} className="flex items-start gap-3">
-                    <span
-                      aria-hidden
-                      className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
-                      style={{ backgroundColor: FRUIT_ACCENTS[r.fruit].hex }}
-                    />
-                    <div>
-                      <p className="font-display font-bold text-forest-deep">
-                        {r.fruit}
-                      </p>
-                      <p className="text-sm text-forest-deep/60 flex items-center gap-1.5 mt-0.5">
-                        <MapPin size={13} className="shrink-0" /> {r.place}
-                      </p>
-                    </div>
+                {qualityChecks.map((check) => (
+                  <li key={check} className="flex items-start gap-3">
+                    <CheckCircle2 size={18} className="text-forest shrink-0 mt-0.5" />
+                    <p className="text-sm text-forest-deep/75 leading-relaxed">
+                      {check}
+                    </p>
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-7 pt-6 border-t border-forest/10">
-                <p className="text-sm text-forest-deep/70 leading-relaxed">
-                  <span className="font-semibold text-forest-deep">
-                    Tahera Khatun
-                  </span>{" "}
-                  founded Tropijoy in {BUSINESS.location} to buy fruit the way
-                  farms deserved to be paid — ripe, direct, and at a fair price.
-                </p>
-              </div>
             </div>
           </Reveal>
         </div>
@@ -145,10 +123,11 @@ export default function OurFarmsPage() {
           <HeritageBand tone="dark" />
           <div className="relative">
             <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white text-balance">
-              Taste where it&apos;s from
+              Taste the difference precision makes
             </h2>
             <p className="mt-4 text-white/70 max-w-lg mx-auto text-balance">
-              Every pouch traces back to a farm we know by name.
+              Selected, washed, sliced, dried and sealed with the same care,
+              every batch.
             </p>
             <div className="mt-8">
               <ButtonLink href="/shop" size="lg">

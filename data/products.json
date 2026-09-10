@@ -141,5 +141,51 @@
     "defaultVariantId": "50g",
     "rating": 4.9,
     "reviewsCount": 10
+  },
+  {
+    "id": "trio-bundle",
+    "name": "Trio Bundle",
+    "slug": "trio-bundle",
+    "category": "Bundle",
+    "fruitType": "Mixed",
+    "accentColor": "#1B3B2B",
+    "tags": ["Bundle", "No Added Sugar", "Vegan"],
+    "description": "Three of our bestselling pouches — Dried Apple, Dried Orange, and Dried Banana (100g each) — bundled at a lower price than buying them separately. Perfect for daily snacking.",
+    "nutritionHighlights": [
+      "3 fruits, one ingredient each",
+      "No added sugar across the bundle",
+      "No artificial preservatives",
+      "No artificial colors"
+    ],
+    "images": ["/products/apple.png"],
+    "variants": [
+      { "id": "bundle", "weight": "Bundle", "price": 2350, "originalPrice": 2680, "sku": "TJ-BUNDLE-TRIO", "inStock": true }
+    ],
+    "defaultVariantId": "bundle",
+    "rating": 0,
+    "reviewsCount": 0
+  },
+  {
+    "id": "sampler-six",
+    "name": "Sampler Six",
+    "slug": "sampler-six",
+    "category": "Bundle",
+    "fruitType": "Mixed",
+    "accentColor": "#1B3B2B",
+    "tags": ["Bundle", "Best Value", "Vegan"],
+    "description": "One of everything: Dried Apple, Lemon, Orange, Pineapple, and Banana (100g each) plus Banana Powder (50g) — our full range, bundled to save. Great for gifting or a well-stocked pantry.",
+    "nutritionHighlights": [
+      "6 products, one ingredient each",
+      "No added sugar across the bundle",
+      "No artificial preservatives",
+      "No artificial colors"
+    ],
+    "images": ["/products/banana-powder.png"],
+    "variants": [
+      { "id": "bundle", "weight": "Bundle", "price": 4950, "originalPrice": 5830, "sku": "TJ-BUNDLE-SIX", "inStock": true }
+    ],
+    "defaultVariantId": "bundle",
+    "rating": 0,
+    "reviewsCount": 0
   }
 ]

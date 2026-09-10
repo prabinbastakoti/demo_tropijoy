@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  Archive,
   Briefcase,
   ChefHat,
   ChevronDown,
@@ -19,6 +20,7 @@ import {
   Package,
   PackageSearch,
   Search,
+  ShieldCheck,
   ShoppingBag,
   Sprout,
   Star,
@@ -38,8 +40,8 @@ import MegaMenu, { type MegaId } from "./MegaMenu";
 const navLinks: { label: string; href: string; mega?: MegaId }[] = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop", mega: "shop" },
-  { label: "Journal", href: "/blog", mega: "journal" },
-  { label: "Company", href: "/about", mega: "company" },
+  { label: "Blog", href: "/blog", mega: "blog" },
+  { label: "About Us", href: "/about", mega: "about" },
   { label: "Support", href: "/faq", mega: "support" },
 ];
 
@@ -48,6 +50,7 @@ const mobileGroups = [
     heading: "Shop",
     links: [
       { label: "Best Sellers", href: "/best-sellers", icon: Trophy },
+      { label: "Custom Bundles", href: "/bundles", icon: Gift },
       { label: "Gift Cards", href: "/gift-cards", icon: Gift },
       { label: "Gifting & Bulk Orders", href: "/gifting", icon: Gift },
       { label: "Recipes & Uses", href: "/recipes", icon: ChefHat },
@@ -57,7 +60,7 @@ const mobileGroups = [
   {
     heading: "Company",
     links: [
-      { label: "Our Farms & Process", href: "/our-farms", icon: Sprout },
+      { label: "Our Quality & Process", href: "/our-process", icon: Sprout },
       { label: "About Us", href: "/about", icon: Users },
       { label: "Sustainability", href: "/sustainability", icon: Leaf },
       { label: "Careers", href: "/careers", icon: Briefcase },
@@ -68,10 +71,15 @@ const mobileGroups = [
     heading: "Support",
     links: [
       { label: "FAQ", href: "/faq", icon: HelpCircle },
-      { label: "Shipping & Returns", href: "/shipping-returns", icon: Truck },
+      { label: "Quality & Safety", href: "/quality-and-safety", icon: ShieldCheck },
+      { label: "Shipping Policy", href: "/shipping-policy", icon: Truck },
+      { label: "Returns & Refunds", href: "/returns-policy", icon: PackageSearch },
+      { label: "Storage Guide", href: "/storage-guide", icon: Archive },
       { label: "Track Your Order", href: "/track-order", icon: PackageSearch },
       { label: "Contact", href: "/contact", icon: Mail },
-      { label: "Wholesale & Stockists", href: "/wholesale", icon: Store },
+      { label: "Wholesale Orders", href: "/wholesale", icon: Store },
+      { label: "Stockists", href: "/stockists", icon: Package },
+      { label: "Corporate Gifting", href: "/corporate-gifting", icon: Gift },
       { label: "Refer a Friend", href: "/refer", icon: Gift },
     ],
   },
@@ -141,10 +149,10 @@ export default function Header() {
 
   return (
     <>
-      {/* fixed so the hero's gradient runs underneath it */}
+      {/* fixed so the hero's gradient runs underneath it; sits below the announcement bar */}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
+          "fixed inset-x-0 top-[var(--announce-h)] z-40 transition-colors duration-300",
           solidHeader
             ? "bg-white/80 backdrop-blur-xl border-b border-forest/8"
             : "bg-transparent border-b border-transparent"

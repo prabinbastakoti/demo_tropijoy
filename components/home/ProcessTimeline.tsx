@@ -1,38 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Package, Snowflake, Sun, Truck } from "lucide-react";
+import { Droplets, Package, ShieldCheck, Snowflake, Zap } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 
 const steps = [
   {
-    icon: Sun,
-    title: "Picked ripe",
+    icon: ShieldCheck,
+    title: "Selecting premium fruit",
     detail:
-      "We buy direct from eleven farms and pay above market rate so fruit can be picked at full ripeness, not transport-hard.",
-    meta: "Day 0",
+      "We hand-pick premium, ripe fruit from trusted Nepali markets — checked for quality before anything is sliced.",
+    meta: "Step 1",
+  },
+  {
+    icon: Droplets,
+    title: "Hygienic washing",
+    detail:
+      "Every batch is washed in a sanitary facility to remove dirt and residue before processing begins.",
+    meta: "Step 2",
+  },
+  {
+    icon: Zap,
+    title: "Precision machine slicing",
+    detail:
+      "Uniform, machine-sliced cuts for consistent texture and even drying — no ragged hand-cut pieces.",
+    meta: "Step 3",
   },
   {
     icon: Snowflake,
-    title: "Dried gently",
+    title: "Low-temperature dehydration",
     detail:
-      "Slices go into low-temperature dehydrators at 45–55°C. Powders are freeze-dried under vacuum so nothing ever cooks.",
-    meta: "8–36 hrs",
+      "Dried slow and low at 45–55°C so flavour, colour and nutrition are protected — nothing ever cooks.",
+    meta: "Step 4",
   },
   {
     icon: Package,
-    title: "Packed small-batch",
+    title: "Airtight resealable packaging",
     detail:
-      "Sealed within 48 hours into nitrogen-flushed, resealable pouches with a silica sachet. No sulphites, no colourings.",
-    meta: "Day 2",
-  },
-  {
-    icon: Truck,
-    title: "Sent to you",
-    detail:
-      "Dispatched from Kathmandu in waterproof packaging built for monsoon delivery, anywhere in Nepal.",
-    meta: "Day 3",
+      "Sealed into nitrogen-flushed, resealable pouches with a silica sachet. No sulphites, no colourings.",
+    meta: "Step 5",
   },
 ];
 
@@ -40,9 +49,9 @@ export default function ProcessTimeline() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <SectionHeading
-        eyebrow="Behind the Bite"
-        title="From orchard to pouch in four steps"
-        description="No warehouse middlemen, no year-old stock. Here's exactly what happens to your fruit."
+        eyebrow="Our Sourcing & Quality Process"
+        title="From market fruit to pouch, five careful steps"
+        description="No shortcuts, no mystery ingredients. Here's exactly what happens before your pouch is sealed."
         className="mb-14"
       />
 
@@ -59,7 +68,7 @@ export default function ProcessTimeline() {
           />
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.12} className="relative">
               <div className="flex lg:flex-col items-start lg:items-center gap-4 lg:text-center">
@@ -87,6 +96,17 @@ export default function ProcessTimeline() {
           ))}
         </div>
       </div>
+
+      <Reveal delay={0.3}>
+        <div className="mt-10 text-center">
+          <Link
+            href="/our-process"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-forest-light transition-colors"
+          >
+            See our full quality process <ArrowRight size={15} />
+          </Link>
+        </div>
+      </Reveal>
     </section>
   );
 }

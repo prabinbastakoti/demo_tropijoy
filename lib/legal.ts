@@ -169,18 +169,18 @@ export const privacyDocument: LegalDocument = {
   ],
 };
 
-export const shippingDocument: LegalDocument = {
-  title: "Shipping & Returns",
+export const shippingPolicyDocument: LegalDocument = {
+  title: "Shipping Policy",
   updated: "2026-08-01",
   intro:
-    "Where we deliver, how long it takes, what it costs, and what happens if something is not right.",
+    "Where we deliver, how long it takes, and what it costs.",
   sections: [
     {
       heading: "Delivery areas and timing",
       list: [
-        "Kathmandu Valley — 1–2 working days",
+        "Kathmandu Valley — 24–48 hours",
         "Pokhara, Chitwan, Butwal, Biratnagar and other major cities — 2–4 working days",
-        "Remote districts — up to 7 working days, subject to courier coverage",
+        "Remote districts, via local couriers — up to 7 working days, subject to courier coverage",
       ],
       paragraphs: [
         "Estimates run from the moment your order is confirmed, not from when it is submitted. Monsoon weather and festival periods can add time.",
@@ -189,7 +189,7 @@ export const shippingDocument: LegalDocument = {
     {
       heading: "Delivery charges",
       paragraphs: [
-        "A flat Rs. 150 anywhere in Nepal. Free on orders over Rs. 3,000. The charge is shown in your cart before you check out.",
+        "A flat Rs. 150 anywhere in Nepal. Free on orders over Rs. 3,000 — our free-shipping threshold. The charge is shown in your cart before you check out.",
       ],
     },
     {
@@ -204,24 +204,117 @@ export const shippingDocument: LegalDocument = {
         "We do not ship outside Nepal yet. Dried fruit is subject to agricultural import rules that differ by country, and we would rather not sell you something that gets held at customs. India and the Gulf are on our list.",
       ],
     },
+  ],
+};
+
+export const returnsPolicyDocument: LegalDocument = {
+  title: "Returns & Refund Guarantee",
+  updated: "2026-08-01",
+  intro:
+    "What happens if something arrives damaged, missing, or just isn't right — our food-quality refund guarantee.",
+  sections: [
+    {
+      heading: "Our refund guarantee",
+      paragraphs: [
+        "If you're not happy with the quality of what arrives, we'll make it right — a replacement or a refund, whichever you'd prefer. This applies to payments made via eSewa, Khalti, card, or cash on delivery.",
+      ],
+    },
     {
       heading: "Returns",
       list: [
         "Unopened and undamaged — return within 7 days for a full refund",
         "Damaged, spoiled or incorrect — report within 48 hours for a replacement or refund, no return needed",
+        "Missing packages — report within 48 hours of the expected delivery date and we'll trace it with the courier or replace it",
         "Opened pouches cannot be returned unless the product was faulty, for food safety reasons",
       ],
     },
     {
       heading: "Refunds",
       paragraphs: [
-        "Refunds are issued to the original payment method within 5–7 working days of us agreeing the return. Cash-on-delivery orders are refunded by eSewa, Khalti or bank transfer.",
+        "Refunds are issued to the original payment method within 5–7 working days of us agreeing the return. eSewa, Khalti and card payments are refunded directly to the source; cash-on-delivery orders are refunded via eSewa, Khalti or bank transfer.",
       ],
     },
     {
       heading: "Starting a return",
       paragraphs: [
         `Reply on the channel we used to confirm your order, or email ${BUSINESS.email} with your order number and a photo if the item arrived damaged. There is no form to fill in.`,
+      ],
+    },
+  ],
+};
+
+export const storageGuideDocument: LegalDocument = {
+  title: "Storage & Shelf Life Guide",
+  updated: "2026-08-01",
+  intro:
+    "How to keep your pouches at their best — no additives means storage matters more, not less.",
+  sections: [
+    {
+      heading: "Shelf life",
+      paragraphs: [
+        "Unopened pouches keep for 6–12 months from the pack date printed on the label, thanks to our nitrogen-flushed, resealable packaging and silica sachet.",
+        "Once opened, we recommend finishing a pouch within 4–6 weeks for the best texture and flavour.",
+      ],
+    },
+    {
+      heading: "Keep pouches sealed",
+      paragraphs: [
+        "Press the air out and reseal the zip fully after every use. The resealable pouch is designed to keep moisture and air out between uses — a loosely closed pouch is the single biggest cause of premature softening.",
+      ],
+    },
+    {
+      heading: "Protect from humidity and sunlight",
+      list: [
+        "Store in a cool, dry cupboard — not the fridge, which introduces condensation",
+        "Keep out of direct sunlight, which fades colour and degrades flavour over time",
+        "Avoid steamy spots like right above the stove or a kettle",
+      ],
+    },
+    {
+      heading: "Signs it's time to toss it",
+      paragraphs: [
+        "Because there are no preservatives, trust your senses: if a pouch smells off, feels unusually soft and damp, or shows any mould, don't eat it.",
+      ],
+    },
+  ],
+};
+
+export const qualitySafetyDocument: LegalDocument = {
+  title: "Quality & Safety Standards",
+  updated: "2026-08-01",
+  intro:
+    "How every pouch is processed, and the standards we hold ourselves to before anything is sealed.",
+  sections: [
+    {
+      heading: "Hygienic processing",
+      paragraphs: [
+        "Fruit is washed and processed in a sanitary facility before slicing begins. Work surfaces and equipment are cleaned between batches, and staff follow basic food-hygiene practice throughout.",
+      ],
+    },
+    {
+      heading: "Precision machine-slicing",
+      paragraphs: [
+        "Every slice is cut by machine to a consistent thickness, so drying is even and texture is consistent pouch to pouch — no ragged, unevenly-dried pieces.",
+      ],
+    },
+    {
+      heading: "Food compliance",
+      paragraphs: [
+        "Our products are processed in line with DFTQC (Department of Food Technology and Quality Control) Nepal standards for food safety and labelling.",
+      ],
+    },
+    {
+      heading: "Zero sulphites, zero shortcuts",
+      list: [
+        "No added sugar, preservatives, or artificial colouring in any product",
+        "No sulphites used in processing or packing",
+        "One ingredient on the label — the fruit itself",
+      ],
+    },
+    {
+      heading: "Sanitary facility standards",
+      paragraphs: [
+        "Dehydration happens at controlled low temperatures, and packing takes place in a clean, pest-controlled environment within 48 hours of drying, sealed while still at peak freshness.",
       ],
     },
   ],

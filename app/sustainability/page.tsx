@@ -17,7 +17,7 @@ const pillars = [
   {
     icon: Truck,
     title: "Less distance, less waste",
-    body: "Buying direct from 11 farms means fruit travels once — farm to our facility to you — instead of through a wholesale market and back. Fewer hops means less spoilage along the way.",
+    body: "Selecting fruit close to our processing facility means it travels once — market to facility to you — instead of sitting in transit longer than it needs to. Less time in transit means less spoilage along the way.",
   },
   {
     icon: Package,
@@ -96,11 +96,11 @@ export default function SustainabilityPage() {
               See where it starts
             </h2>
             <p className="mt-4 text-white/70 max-w-lg mx-auto text-balance">
-              Our farms, our process, and the trade-offs of buying direct.
+              Our sourcing, our process, and the trade-offs we make for it.
             </p>
             <div className="mt-8">
-              <ButtonLink href="/our-farms" size="lg">
-                Our Farms &amp; Process <ArrowRight size={18} />
+              <ButtonLink href="/our-process" size="lg">
+                Our Quality &amp; Process <ArrowRight size={18} />
               </ButtonLink>
             </div>
           </div>

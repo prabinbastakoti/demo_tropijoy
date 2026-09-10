@@ -16,17 +16,22 @@ const groups = [
     links: [
       { label: "Shop All Products", href: "/shop" },
       { label: "Best Sellers", href: "/best-sellers" },
+      { label: "Custom Bundles", href: "/bundles" },
       { label: "Gift Cards", href: "/gift-cards" },
       { label: "Gifting & Bulk Orders", href: "/gifting" },
-      { label: "Wholesale & Stockists", href: "/wholesale" },
+      { label: "Corporate Gifting", href: "/corporate-gifting" },
+      { label: "Wholesale Orders", href: "/wholesale" },
+      { label: "Stockists", href: "/stockists" },
     ],
   },
   {
     title: "Learn",
     links: [
-      { label: "Our Farms & Process", href: "/our-farms" },
-      { label: "Journal", href: "/blog" },
+      { label: "Our Quality & Process", href: "/our-process" },
+      { label: "Quality & Safety Standards", href: "/quality-and-safety" },
+      { label: "Blog", href: "/blog" },
       { label: "Recipes & Uses", href: "/recipes" },
+      { label: "Storage & Shelf Life Guide", href: "/storage-guide" },
       { label: "Reviews", href: "/reviews" },
       { label: "Sustainability", href: "/sustainability" },
       { label: "FAQ", href: "/faq" },
@@ -54,9 +59,10 @@ const groups = [
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms & Conditions", href: "/terms" },
-      { label: "Shipping & Returns", href: "/shipping-returns" },
+      { label: "Shipping Policy", href: "/shipping-policy" },
+      { label: "Returns & Refund Guarantee", href: "/returns-policy" },
       { label: "Cookie Policy", href: "/cookies" },
       { label: "Accessibility", href: "/accessibility" },
     ],

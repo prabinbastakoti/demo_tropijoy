@@ -12,17 +12,18 @@ const config: Config = {
     extend: {
       colors: {
         sunny: {
-          DEFAULT: "#FCD116",
-          bright: "#FFC72C",
-          dark: "#E8B800",
+          DEFAULT: "#E88D35",
+          bright: "#D96B27",
+          dark: "#B8551F",
         },
         forest: {
-          DEFAULT: "#116530",
-          deep: "#0B6623",
-          light: "#1A7D3E",
-          ink: "#08301A",
+          DEFAULT: "#1B3B2B",
+          deep: "#1B3B2B",
+          light: "#2E5D45",
+          ink: "#0F241A",
         },
-        cream: "#F6F1E4",
+        cream: "#FAF8F5",
+        sage: "#E2E8E0",
         berry: "#B5179E",
         citrus: "#F77F00",
         accent: {
@@ -62,10 +63,6 @@ const config: Config = {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
         },
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
         "pop-in": {
           "0%": { transform: "scale(0.8)", opacity: "0" },
           "70%": { transform: "scale(1.05)" },
@@ -76,7 +73,6 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         "float-slow": "float-slow 8s ease-in-out infinite",
         shimmer: "shimmer 2s infinite linear",
-        marquee: "marquee 30s linear infinite",
         "pop-in": "pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both",
       },
     },

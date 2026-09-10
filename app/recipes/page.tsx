@@ -6,7 +6,9 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 import BlogCard from "@/components/blog/BlogCard";
 import { posts } from "@/lib/blog";
-import { products, FRUIT_ACCENTS } from "@/lib/products";
+import { getShoppableProducts, FRUIT_ACCENTS } from "@/lib/products";
+
+const products = getShoppableProducts();
 
 export const metadata: Metadata = {
   title: "Recipes & Uses",

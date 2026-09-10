@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: PageParams) {
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
-              { label: "Journal", href: "/blog" },
+              { label: "Blog", href: "/blog" },
               { label: post.category },
             ]}
           />

@@ -1,81 +1,43 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, Leaf, Sprout, Sun } from "lucide-react";
-import { products, priceFrom, FRUIT_ACCENTS } from "@/lib/products";
+import { Leaf, Sprout, Star } from "lucide-react";
+import { getShoppableProducts, priceFrom } from "@/lib/products";
 import { formatPrice } from "@/lib/utils";
 import Reveal from "@/components/motion/Reveal";
-import CountUp from "@/components/motion/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
+import ProductCard from "@/components/product/ProductCard";
 
 export default function CategoryGrid() {
-  const cheapest = Math.min(...products.map(priceFrom));
+  const bestsellers = getShoppableProducts();
+  const cheapest = Math.min(...bestsellers.map(priceFrom));
+  const avgRating =
+    bestsellers.reduce((sum, p) => sum + p.rating, 0) / bestsellers.length;
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
       <SectionHeading
         align="left"
-        eyebrow="Our collection"
-        title="Shop by Fruit"
+        eyebrow="Bestsellers"
+        title="Loved Across Nepal"
         description="Six fruits, dried the same honest way — nothing added, nothing hidden."
         className="mb-10"
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-        {products.map((product, i) => {
-          const accent = FRUIT_ACCENTS[product.fruitType];
-          return (
-            <Reveal key={product.id} delay={Math.min(i * 0.05, 0.3)}>
-              <Link
-                href={`/shop/${product.slug}`}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white border border-forest/10 hover:shadow-lift hover:-translate-y-1 transition-all duration-300"
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-1.5"
-                  style={{ backgroundColor: accent.hex }}
-                />
-                <div className="relative aspect-square bg-cream">
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 16vw"
-                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-display font-bold text-forest-deep leading-tight">
-                    {product.name}
-                  </h3>
-                  <div className="mt-1.5 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-forest-deep/70">
-                      From {formatPrice(priceFrom(product))}
-                    </span>
-                    <ArrowUpRight
-                      size={16}
-                      className="text-forest-deep/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-forest"
-                    />
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-          );
-        })}
+        {bestsellers.map((product, i) => (
+          <ProductCard key={product.id} product={product} index={i} />
+        ))}
       </div>
 
       <Reveal delay={0.2}>
         <div className="mt-6 grid sm:grid-cols-3 gap-4">
           <div className="flex items-center gap-4 rounded-3xl bg-white border border-forest/10 p-5">
             <div className="w-11 h-11 rounded-2xl bg-forest/8 flex items-center justify-center shrink-0">
-              <Sun size={20} className="text-forest" />
+              <Star size={20} className="text-forest" />
             </div>
             <div>
               <p className="font-display font-extrabold text-2xl text-forest-deep leading-none">
-                <CountUp to={11} />
+                {avgRating.toFixed(1)}★
               </p>
-              <p className="text-xs text-forest-deep/55 mt-1">partner farms across Nepal</p>
+              <p className="text-xs text-forest-deep/55 mt-1">average customer rating</p>
             </div>
           </div>
           <div className="flex items-center gap-4 rounded-3xl bg-white border border-forest/10 p-5">
@@ -84,9 +46,9 @@ export default function CategoryGrid() {
             </div>
             <div>
               <p className="font-display font-extrabold text-2xl text-forest-deep leading-none">
-                {products.length}
+                {bestsellers.length}
               </p>
-              <p className="text-xs text-forest-deep/55 mt-1">real products, one ingredient each</p>
+              <p className="text-xs text-forest-deep/55 mt-1">one ingredient each</p>
             </div>
           </div>
           <div className="flex items-center gap-4 rounded-3xl bg-forest-deep p-5 text-cream">

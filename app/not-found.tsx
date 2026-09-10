@@ -6,7 +6,7 @@ import HeritageBand from "@/components/brand/HeritageBand";
 const suggestions = [
   { label: "Shop all products", href: "/shop" },
   { label: "Best sellers", href: "/best-sellers" },
-  { label: "Our Farms & Process", href: "/our-farms" },
+  { label: "Our Quality & Process", href: "/our-process" },
   { label: "The journal", href: "/blog" },
   { label: "Contact us", href: "/contact" },
 ];

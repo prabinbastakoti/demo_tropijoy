@@ -9,9 +9,9 @@ type Variant = "primary" | "secondary" | "outline" | "ghost" | "dark";
 type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
-  primary: "bg-forest text-white font-semibold hover:bg-forest-light shadow-lift",
-  secondary:
-    "bg-sunny text-forest-deep font-semibold hover:bg-sunny-bright",
+  // Primary conversion CTA — solid mango/accent fill, per the brand's secondary-accent color role.
+  primary: "bg-sunny text-forest-deep font-semibold hover:bg-sunny-bright shadow-lift",
+  secondary: "bg-forest text-white font-semibold hover:bg-forest-light",
   outline:
     "border-2 border-forest text-forest font-semibold hover:bg-forest hover:text-white",
   ghost: "text-forest hover:bg-forest/10 font-medium",

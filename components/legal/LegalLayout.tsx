@@ -4,9 +4,12 @@ import { formatDate } from "@/lib/utils";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 const legalLinks = [
+  { label: "Quality & Safety", href: "/quality-and-safety" },
+  { label: "Shipping Policy", href: "/shipping-policy" },
+  { label: "Returns & Refunds", href: "/returns-policy" },
+  { label: "Storage Guide", href: "/storage-guide" },
   { label: "Terms & Conditions", href: "/terms" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Shipping & Returns", href: "/shipping-returns" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Cookie Policy", href: "/cookies" },
   { label: "Accessibility", href: "/accessibility" },
 ];
@@ -68,7 +71,7 @@ export default function LegalLayout({
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
           <p className="text-xs font-bold uppercase tracking-wider text-forest/45 mb-3">
-            Policies
+            Policies &amp; Guides
           </p>
           <nav className="flex flex-col gap-1">
             {legalLinks.map((link) => {

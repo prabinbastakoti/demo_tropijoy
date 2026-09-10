@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Accessibility,
+  Archive,
   ArrowRight,
   Briefcase,
   Cookie,
@@ -16,18 +17,28 @@ import {
   Leaf,
   Mail,
   Newspaper,
+  Package,
   PackageSearch,
+  ShieldCheck,
   Shield,
   Sprout,
   Store,
   Truck,
   Users,
 } from "lucide-react";
-import { products, priceFrom } from "@/lib/products";
+import { getShoppableProducts, getBundles, priceFrom } from "@/lib/products";
 import { posts } from "@/lib/blog";
 import { formatDate, formatPrice } from "@/lib/utils";
 
-export type MegaId = "shop" | "journal" | "company" | "support";
+export type MegaId = "shop" | "blog" | "about" | "support";
+
+const slicedFruits = getShoppableProducts().filter(
+  (p) => p.category === "Dehydrated Fruit"
+);
+const powders = getShoppableProducts().filter(
+  (p) => p.category === "Fruit Powder"
+);
+const bundles = getBundles();
 
 type LinkItem = {
   label: string;
@@ -70,7 +81,7 @@ const companyColumns: { heading: string; links: LinkItem[] }[] = [
   {
     heading: "Our Story",
     links: [
-      { label: "Our Farms & Process", href: "/our-farms", icon: Sprout, description: "Where the fruit comes from" },
+      { label: "Our Quality & Process", href: "/our-process", icon: Sprout, description: "From market fruit to pouch" },
       { label: "About Us", href: "/about", icon: Users, description: "Why we started" },
       { label: "Sustainability", href: "/sustainability", icon: Leaf, description: "Packaging & waste, honestly" },
     ],
@@ -89,22 +100,26 @@ const supportColumns: { heading: string; links: LinkItem[] }[] = [
     heading: "Help",
     links: [
       { label: "FAQ", href: "/faq", icon: HelpCircle },
-      { label: "Shipping & Returns", href: "/shipping-returns", icon: Truck },
-      { label: "Track Your Order", href: "/track-order", icon: PackageSearch },
+      { label: "Quality & Safety", href: "/quality-and-safety", icon: ShieldCheck },
+      { label: "Shipping Policy", href: "/shipping-policy", icon: Truck },
+      { label: "Returns & Refunds", href: "/returns-policy", icon: PackageSearch },
+      { label: "Storage Guide", href: "/storage-guide", icon: Archive },
       { label: "Contact Us", href: "/contact", icon: Mail },
     ],
   },
   {
     heading: "For Business",
     links: [
-      { label: "Wholesale & Stockists", href: "/wholesale", icon: Store },
+      { label: "Wholesale Orders", href: "/wholesale", icon: Store },
+      { label: "Stockists", href: "/stockists", icon: Package },
+      { label: "Corporate Gifting", href: "/corporate-gifting", icon: Gift },
       { label: "Refer a Friend", href: "/refer", icon: Gift },
     ],
   },
   {
     heading: "Legal",
     links: [
-      { label: "Privacy Policy", href: "/privacy", icon: Shield },
+      { label: "Privacy Policy", href: "/privacy-policy", icon: Shield },
       { label: "Terms & Conditions", href: "/terms", icon: FileText },
       { label: "Cookie Policy", href: "/cookies", icon: Cookie },
       { label: "Accessibility", href: "/accessibility", icon: Accessibility },
@@ -144,29 +159,29 @@ export default function MegaMenu({
           transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          className="fixed inset-x-0 top-[var(--header-h)] z-[45] border-b border-forest/10 bg-cream shadow-window"
+          className="fixed inset-x-0 top-[calc(var(--announce-h)+var(--header-h))] z-[45] border-b border-forest/10 bg-cream shadow-window"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {activeMega === "shop" && (
-              <div className="grid lg:grid-cols-[1fr_240px] gap-10">
+              <div className="grid lg:grid-cols-[1fr_1fr_1fr_220px] gap-8">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-forest-deep/40 mb-4">
-                    Shop by Fruit
+                    Sliced Fruits
                   </p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {products.map((product) => (
+                  <div className="space-y-1">
+                    {slicedFruits.map((product) => (
                       <Link
                         key={product.id}
                         href={`/shop/${product.slug}`}
-                        className="group flex items-center gap-3 rounded-2xl p-2 hover:bg-forest/5 transition-colors"
+                        className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
                       >
-                        <div className="relative w-14 h-14 rounded-xl bg-white shrink-0 overflow-hidden border border-forest/8">
+                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
                           <Image
                             src={product.images[0]}
                             alt={product.name}
                             fill
-                            sizes="56px"
-                            className="object-contain p-1.5"
+                            sizes="44px"
+                            className="object-contain p-1"
                           />
                         </div>
                         <div className="min-w-0">
@@ -181,6 +196,79 @@ export default function MegaMenu({
                     ))}
                   </div>
                 </div>
+
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-forest-deep/40 mb-4">
+                    Superfood Powders
+                  </p>
+                  <div className="space-y-1">
+                    {powders.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={`/shop/${product.slug}`}
+                        className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
+                      >
+                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
+                          <Image
+                            src={product.images[0]}
+                            alt={product.name}
+                            fill
+                            sizes="44px"
+                            className="object-contain p-1"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-forest-deep truncate group-hover:text-forest">
+                            {product.name}
+                          </p>
+                          <p className="text-xs text-forest-deep/50">
+                            From {formatPrice(priceFrom(product))}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-forest-deep/40 mb-4">
+                    Custom Bundles
+                  </p>
+                  <div className="space-y-1">
+                    {bundles.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={`/shop/${product.slug}`}
+                        className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
+                      >
+                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
+                          <Image
+                            src={product.images[0]}
+                            alt={product.name}
+                            fill
+                            sizes="44px"
+                            className="object-contain p-1"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-forest-deep truncate group-hover:text-forest">
+                            {product.name}
+                          </p>
+                          <p className="text-xs text-forest-deep/50">
+                            {formatPrice(priceFrom(product))}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                    <Link
+                      href="/bundles"
+                      className="flex items-center justify-between gap-2 rounded-xl px-2 py-2.5 text-sm font-semibold text-forest hover:bg-forest/5 transition-colors"
+                    >
+                      Build Your Bundle <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+
                 <div className="border-l border-forest/10 pl-8">
                   <p className="text-xs font-bold uppercase tracking-wider text-forest-deep/40 mb-4">
                     Explore
@@ -211,7 +299,7 @@ export default function MegaMenu({
               </div>
             )}
 
-            {activeMega === "journal" && (
+            {activeMega === "blog" && (
               <div className="grid lg:grid-cols-[1fr_240px] gap-10">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-forest-deep/40 mb-4">
@@ -262,7 +350,7 @@ export default function MegaMenu({
               </div>
             )}
 
-            {activeMega === "company" && (
+            {activeMega === "about" && (
               <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8 max-w-2xl">
                 {companyColumns.map((col) => (
                   <div key={col.heading}>

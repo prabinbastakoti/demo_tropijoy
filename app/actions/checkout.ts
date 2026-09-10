@@ -23,22 +23,22 @@ function buildEmailHtml(payload: CheckoutPayload): string {
 
   return `
   <div style="font-family: Arial, sans-serif; max-width:600px; margin:0 auto;">
-    <div style="background:#116530;padding:24px;border-radius:12px 12px 0 0;">
-      <h1 style="color:#FCD116;margin:0;font-size:22px;">🍏 New Tropijoy Order</h1>
+    <div style="background:#1B3B2B;padding:24px;border-radius:12px 12px 0 0;">
+      <h1 style="color:#E88D35;margin:0;font-size:22px;">🍏 New Tropijoy Order</h1>
     </div>
     <div style="padding:24px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 12px 12px;">
-      <h2 style="color:#116530;font-size:16px;">Customer Details</h2>
+      <h2 style="color:#1B3B2B;font-size:16px;">Customer Details</h2>
       <p style="margin:4px 0;"><strong>Name:</strong> ${payload.shipping.fullName}</p>
       <p style="margin:4px 0;"><strong>Address:</strong> ${payload.shipping.address}, ${payload.shipping.city} ${payload.shipping.postalCode}</p>
 
-      <h2 style="color:#116530;font-size:16px;margin-top:20px;">Preferred Contact</h2>
+      <h2 style="color:#1B3B2B;font-size:16px;margin-top:20px;">Preferred Contact</h2>
       <p style="margin:4px 0;"><strong>Platform:</strong> ${payload.contactPlatform}</p>
       <p style="margin:4px 0;"><strong>Handle / Number:</strong> ${payload.contactHandle}</p>
 
-      <h2 style="color:#116530;font-size:16px;margin-top:20px;">Order Summary</h2>
+      <h2 style="color:#1B3B2B;font-size:16px;margin-top:20px;">Order Summary</h2>
       <table style="width:100%;border-collapse:collapse;">
         <thead>
-          <tr style="background:#F4F9F5;">
+          <tr style="background:#FAF8F5;">
             <th style="padding:8px 12px;text-align:left;">Item</th>
             <th style="padding:8px 12px;text-align:center;">Qty</th>
             <th style="padding:8px 12px;text-align:right;">Price</th>
@@ -49,7 +49,7 @@ function buildEmailHtml(payload: CheckoutPayload): string {
       <table style="width:100%;margin-top:12px;">
         <tr><td style="padding:4px 12px;">Subtotal</td><td style="padding:4px 12px;text-align:right;">Rs. ${payload.subtotal.toLocaleString("en-IN")}</td></tr>
         <tr><td style="padding:4px 12px;">Shipping</td><td style="padding:4px 12px;text-align:right;">${payload.shipping_cost === 0 ? "Free" : `Rs. ${payload.shipping_cost.toLocaleString("en-IN")}`}</td></tr>
-        <tr><td style="padding:8px 12px;font-weight:bold;border-top:2px solid #116530;">Total</td><td style="padding:8px 12px;text-align:right;font-weight:bold;border-top:2px solid #116530;">Rs. ${payload.total.toLocaleString("en-IN")}</td></tr>
+        <tr><td style="padding:8px 12px;font-weight:bold;border-top:2px solid #1B3B2B;">Total</td><td style="padding:8px 12px;text-align:right;font-weight:bold;border-top:2px solid #1B3B2B;">Rs. ${payload.total.toLocaleString("en-IN")}</td></tr>
       </table>
     </div>
   </div>`;

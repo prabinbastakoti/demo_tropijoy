@@ -87,7 +87,7 @@ export default function OrderDetailPage({
               }}
               className="absolute w-2.5 h-3.5 rounded-sm"
               style={{
-                backgroundColor: ["#FCD116", "#116530", "#FFC72C", "#B5179E", "#F77F00"][
+                backgroundColor: ["#E88D35", "#1B3B2B", "#D96B27", "#B5179E", "#F77F00"][
                   i % 5
                 ],
               }}

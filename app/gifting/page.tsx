@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Gift } from "lucide-react";
+import { ArrowRight, Gift } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 import BundleCard from "@/components/gifting/BundleCard";
-import InquiryForm from "@/components/shared/InquiryForm";
+import { ButtonLink } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Gifting & Bulk Orders",
@@ -70,33 +70,22 @@ export default function GiftingPage() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_420px] gap-10 items-start">
-        <div className="rounded-3xl bg-forest-deep text-cream p-8 sm:p-10">
-          <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
-            <Gift size={22} className="text-sunny" />
-          </span>
-          <h2 className="font-display font-extrabold text-2xl sm:text-3xl mb-3">
-            Corporate gifting &amp; bulk orders
-          </h2>
-          <p className="text-cream/70 leading-relaxed mb-4">
-            Festival hampers, office gifting, or a large one-off order — tell us
-            the quantity and occasion and we&apos;ll put together pricing and
-            custom pouch counts.
-          </p>
-          <ul className="text-sm text-cream/70 space-y-2">
-            <li>• Mixed-fruit hampers for Dashain, Tihar and New Year gifting</li>
-            <li>• Branded or plain packaging available on larger orders</li>
-            <li>• Discounted per-unit pricing above 50 pouches</li>
-          </ul>
-        </div>
-
-        <InquiryForm
-          source="gifting-bulk-inquiry"
-          title="Get bulk pricing"
-          subtitle="Tell us what you're planning — we'll follow up with options."
-          messageLabel="What are you looking for?"
-          messagePlaceholder="e.g. 100 x 100g mixed pouches for a Dashain office gift"
-        />
+      <div className="rounded-3xl bg-forest-deep text-cream p-8 sm:p-10">
+        <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
+          <Gift size={22} className="text-sunny" />
+        </span>
+        <h2 className="font-display font-extrabold text-2xl sm:text-3xl mb-3">
+          Corporate gifting &amp; bulk orders
+        </h2>
+        <p className="text-cream/70 leading-relaxed mb-6 max-w-xl">
+          Festival hampers, office gifting, weddings, or a large one-off
+          order — tell us the quantity and occasion and we&apos;ll put
+          together pricing, custom pouch counts, and branded packaging
+          options.
+        </p>
+        <ButtonLink href="/corporate-gifting">
+          Explore Corporate Gifting <ArrowRight size={18} />
+        </ButtonLink>
       </div>
     </div>
   );

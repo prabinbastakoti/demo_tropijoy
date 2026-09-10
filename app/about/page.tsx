@@ -11,11 +11,11 @@ import { products } from "@/lib/products";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Tropijoy buys direct from eleven Nepali farms and dries fruit in small batches, with nothing added. Here's why.",
+    "Tropijoy selects premium Nepali market fruit and dries it in small batches, with nothing added. Here's why.",
 };
 
 const stats = [
-  { value: 11, suffix: "", label: "partner farms" },
+  { value: 100, suffix: "%", label: "natural ingredients" },
   { value: products.length, suffix: "", label: "products" },
   { value: 2400, suffix: "+", label: "happy customers" },
   { value: 0, suffix: "", label: "grams of added sugar" },
@@ -24,8 +24,8 @@ const stats = [
 const pillars = [
   {
     icon: Sun,
-    title: "Sun-grown, picked ripe",
-    body: "We pay 15–20% above market rate so our farms can pick at full ripeness rather than transport-hard. Riper fruit means more sugar, better flavour and better yield.",
+    title: "Selected, not just sourced",
+    body: "We hand-select ripe, premium fruit from trusted Nepali markets rather than accepting whatever's cheapest. Riper fruit means more sugar, better flavour and better yield.",
   },
   {
     icon: Leaf,
@@ -72,9 +72,10 @@ export default function AboutPage() {
                 shelf for two years.
               </p>
               <p>
-                So we started buying direct from farms, drying in small batches,
-                and putting exactly one ingredient in each pouch. It costs more
-                and yields less. We think it&apos;s obviously the right trade.
+                So we started selecting premium fruit ourselves, drying it in
+                small batches, and putting exactly one ingredient in each
+                pouch. It costs more and yields less. We think it&apos;s
+                obviously the right trade.
               </p>
             </div>
             <div className="mt-8">
@@ -134,10 +135,10 @@ export default function AboutPage() {
               What we get wrong
             </h2>
             <p className="text-forest-deep/70 leading-relaxed mb-4">
-              Buying direct means accepting the season. There are weeks when a
-              variety is simply unavailable, and we go out of stock rather than
-              substitute in market fruit. Customers notice, and occasionally
-              they&apos;re annoyed.
+              Sourcing seasonally means accepting the season. There are weeks
+              when a variety simply isn&apos;t at the quality we want, and we
+              go out of stock rather than lower our bar. Customers notice, and
+              occasionally they&apos;re annoyed.
             </p>
             <p className="text-forest-deep/70 leading-relaxed">
               Our fruit also changes colour over its shelf life, and batches

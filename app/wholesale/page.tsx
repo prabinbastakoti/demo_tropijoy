@@ -6,9 +6,9 @@ import Reveal from "@/components/motion/Reveal";
 import InquiryForm from "@/components/shared/InquiryForm";
 
 export const metadata: Metadata = {
-  title: "Wholesale & Stockists",
+  title: "Bulk & Wholesale Orders",
   description:
-    "Stock Tropijoy dried fruit and banana powder in your cafe, hotel or shop — wholesale pricing and case sizes for Nepal-based retailers.",
+    "Stock Tropijoy dried fruit and banana powder at your cafe, bar, bakery or organic mart — wholesale pricing and case sizes for Nepal-based businesses.",
 };
 
 const perks = [
@@ -38,14 +38,14 @@ export default function WholesalePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Breadcrumbs
-        items={[{ label: "Home", href: "/" }, { label: "Wholesale & Stockists" }]}
+        items={[{ label: "Home", href: "/" }, { label: "Bulk & Wholesale Orders" }]}
       />
 
       <SectionHeading
-        eyebrow="For retailers"
+        eyebrow="For businesses"
         as="h1"
-        title="Stock Tropijoy in your shop"
-        description="Cafes, hotels, trekking outfitters and grocers across Nepal carry our fruit. Here's how to become one of them."
+        title="Bulk & wholesale orders"
+        description="Cafes, bars (dried citrus makes a great cocktail garnish), bakeries and organic marts across Nepal carry our fruit. Here's how to become one of them."
         className="my-10"
       />
 
@@ -93,7 +93,7 @@ export default function WholesalePage() {
           title="Enquire about wholesale"
           subtitle="Tell us about your business and we'll send pricing and minimums."
           messageLabel="About your business"
-          messagePlaceholder="e.g. Cafe in Pokhara, ~40 customers/day, interested in apple and banana powder"
+          messagePlaceholder="e.g. Cocktail bar in Kathmandu, interested in dried citrus for garnishes"
         />
       </div>
     </div>
