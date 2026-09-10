@@ -99,7 +99,7 @@ export default function ReferPage() {
             Refer a friend
           </h2>
           <p className="text-sm text-forest-deep/55 mb-6">
-            One code per friend — they'll get it by email.
+            One code per friend — they&apos;ll get it by email.
           </p>
 
           <div className="space-y-4">
@@ -125,7 +125,7 @@ export default function ReferPage() {
                 htmlFor="friend-email"
                 className="text-xs font-semibold text-forest-deep/70 mb-1.5 block"
               >
-                Friend's email
+                Friend&apos;s email
               </label>
               <input
                 id="friend-email"
