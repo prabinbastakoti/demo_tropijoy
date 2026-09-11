@@ -143,8 +143,17 @@ export default function Header() {
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
 
-  /** The link the moving indicator should sit under. */
-  const indicatorFor = hovered ?? navLinks.find((l) => isActive(l.href))?.href;
+  /**
+   * The link the moving indicator should sit under. Falls back through:
+   * the literally-hovered nav link, then — since the mega menu is a portal
+   * rendered outside `<nav>`, moving the pointer into it fires `<nav>`'s
+   * onMouseLeave and clears `hovered` even though the menu is still open —
+   * whichever link opened the still-open mega menu, then the active route.
+   */
+  const indicatorFor =
+    hovered ??
+    (activeMega ? navLinks.find((l) => l.mega === activeMega)?.href : undefined) ??
+    navLinks.find((l) => isActive(l.href))?.href;
   const solidHeader = scrolled || activeMega !== null;
 
   return (
@@ -160,21 +169,23 @@ export default function Header() {
       >
         {/* same container as the hero so the two align exactly */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[68px] sm:h-[84px]">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center h-[60px] sm:h-[76px]">
             <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
               <Image
-                src="/brand/logo-green.png"
+                src="/logo.png"
                 alt="Tropijoy"
                 width={221}
                 height={100}
                 priority
-                className="h-7 sm:h-9 w-auto object-contain"
+                className="h-[2.875rem] w-auto object-contain"
               />
             </Link>
 
-            {/* desktop nav with a single indicator that follows hover, resting on the active route */}
+            {/* desktop nav with a single indicator that follows hover, resting on the active route.
+                Grid's middle column keeps this truly centered on the page regardless of how wide
+                the logo vs. action icons are — justify-between only equalized the gaps, not this. */}
             <nav
-              className="hidden md:flex items-center gap-0.5"
+              className="hidden md:flex items-center gap-2 justify-self-center"
               onMouseLeave={() => {
                 setHovered(null);
                 scheduleCloseMega();
@@ -199,9 +210,7 @@ export default function Header() {
                     className={cn(
                       "relative flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
                       pillHere
-                        ? active
-                          ? "text-white"
-                          : "text-forest-deep"
+                        ? "text-white"
                         : active
                         ? "text-forest-deep"
                         : "text-forest-deep/60"
@@ -210,12 +219,7 @@ export default function Header() {
                     {indicatorFor === link.href && (
                       <motion.span
                         layoutId="nav-indicator"
-                        className={cn(
-                          "absolute inset-0 -z-10 rounded-full",
-                          active
-                            ? "bg-forest shadow-[0_2px_10px_-2px_rgba(17,101,48,0.5)]"
-                            : "bg-white/70 shadow-[0_2px_10px_-4px_rgba(8,48,26,0.25)]"
-                        )}
+                        className="absolute inset-0 -z-10 rounded-full bg-forest shadow-[0_2px_10px_-2px_rgba(35,65,40,0.5)]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
@@ -241,7 +245,7 @@ export default function Header() {
             />
 
             {/* actions */}
-            <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+            <div className="flex items-center gap-0.5 sm:gap-1 shrink-0 justify-self-end">
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
@@ -295,7 +299,7 @@ export default function Header() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute top-0.5 right-0.5 bg-sunny text-forest-deep text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1"
+                      className="absolute top-0.5 right-0.5 bg-sunny text-white text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1"
                     >
                       {itemCount > 9 ? "9+" : itemCount}
                     </motion.span>

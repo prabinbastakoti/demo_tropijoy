@@ -38,7 +38,7 @@ export default function BestSellersPage() {
         {podium.map((product, i) => (
           <Reveal key={product.id} delay={i * 0.1}>
             <div className="relative">
-              <span className="absolute -top-3 -left-3 z-10 w-11 h-11 rounded-2xl bg-sunny text-forest-deep font-display font-extrabold text-lg flex items-center justify-center shadow-lift border-2 border-cream">
+              <span className="absolute -top-3 -left-3 z-10 w-11 h-11 rounded-2xl bg-sunny text-white font-display font-extrabold text-lg flex items-center justify-center shadow-lift border-2 border-cream">
                 {i + 1}
               </span>
               <div className="rounded-3xl bg-white border border-forest/10 p-5 h-full">

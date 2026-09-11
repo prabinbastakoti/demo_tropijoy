@@ -7,13 +7,13 @@
   --font-baloo: "Baloo 2", system-ui, sans-serif;
   /* Shared so the fixed announcement bar + header and the hero can overlap precisely. */
   --announce-h: 34px;
-  --header-h: 68px;
+  --header-h: 60px;
 }
 
 @media (min-width: 640px) {
   :root {
     --announce-h: 38px;
-    --header-h: 84px;
+    --header-h: 76px;
   }
 }
 
@@ -23,7 +23,7 @@ html {
 
 body {
   background-color: #faf8f5;
-  color: #1b3b2b;
+  color: #234128;
 }
 
 ::selection {
@@ -38,7 +38,7 @@ body {
   background: #f1ede4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b3b2b;
+  background: #234128;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -87,7 +87,7 @@ body {
   pointer-events: none;
   background: radial-gradient(
     360px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(27, 59, 43, 0.12),
+    rgba(35, 65, 40, 0.12),
     transparent 65%
   );
 }
@@ -96,7 +96,7 @@ body {
 }
 
 .ring-glow {
-  box-shadow: 0 0 0 1px rgba(27, 59, 43, 0.08), 0 0 0 6px rgba(232, 141, 53, 0.1);
+  box-shadow: 0 0 0 1px rgba(35, 65, 40, 0.08), 0 0 0 6px rgba(232, 141, 53, 0.1);
 }
 
 /* ---------- layout helpers ---------- */

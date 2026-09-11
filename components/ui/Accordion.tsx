@@ -43,7 +43,7 @@ export default function Accordion({
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
                 className={cn(
                   "shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors",
-                  open ? "bg-sunny text-forest-deep" : "bg-forest/10 text-forest"
+                  open ? "bg-sunny text-white" : "bg-forest/10 text-forest"
                 )}
               >
                 <Plus size={15} />

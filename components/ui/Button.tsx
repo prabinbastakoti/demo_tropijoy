@@ -10,7 +10,7 @@ type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   // Primary conversion CTA — solid mango/accent fill, per the brand's secondary-accent color role.
-  primary: "bg-sunny text-forest-deep font-semibold hover:bg-sunny-bright shadow-lift",
+  primary: "bg-sunny text-white font-semibold hover:bg-sunny-bright shadow-lift",
   secondary: "bg-forest text-white font-semibold hover:bg-forest-light",
   outline:
     "border-2 border-forest text-forest font-semibold hover:bg-forest hover:text-white",

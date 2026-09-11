@@ -17,8 +17,8 @@ const config: Config = {
           dark: "#B8551F",
         },
         forest: {
-          DEFAULT: "#1B3B2B",
-          deep: "#1B3B2B",
+          DEFAULT: "#234128",
+          deep: "#234128",
           light: "#2E5D45",
           ink: "#0F241A",
         },

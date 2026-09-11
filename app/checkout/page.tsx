@@ -203,7 +203,7 @@ export default function CheckoutPage() {
                       i < step
                         ? "bg-forest text-white"
                         : i === step
-                        ? "bg-sunny text-forest-deep"
+                        ? "bg-sunny text-white"
                         : "bg-forest/10 text-forest/40"
                     )}
                   >

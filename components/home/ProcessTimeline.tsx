@@ -76,7 +76,7 @@ export default function ProcessTimeline() {
                   <div className="w-[76px] h-[76px] rounded-2xl bg-white border border-forest/10 shadow-lift flex items-center justify-center">
                     <step.icon size={26} className="text-forest" />
                   </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-sunny text-forest-deep text-xs font-bold flex items-center justify-center border-2 border-cream">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-sunny text-white text-xs font-bold flex items-center justify-center border-2 border-cream">
                     {i + 1}
                   </span>
                 </div>

@@ -28,7 +28,7 @@ export default function BlogIndex() {
             className={cn(
               "relative rounded-full px-4 py-2 text-sm font-semibold transition-colors",
               category === cat
-                ? "text-forest-deep"
+                ? "text-white"
                 : "text-forest-deep/50 hover:text-forest-deep/80 border border-forest/10"
             )}
           >

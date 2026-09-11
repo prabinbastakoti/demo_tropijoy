@@ -135,7 +135,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-sunny hover:text-forest-deep transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-sunny hover:text-white transition-colors"
               >
                 <Icon size={14} />
               </a>

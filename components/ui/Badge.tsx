@@ -8,7 +8,7 @@ interface BadgeProps {
 }
 
 const variantClasses = {
-  sunny: "bg-sunny text-forest-deep",
+  sunny: "bg-sunny text-white",
   forest: "bg-forest text-white",
   sale: "bg-red-500 text-white",
   outline: "border border-forest/30 text-forest bg-white/70",

@@ -87,7 +87,7 @@ export default function OrderDetailPage({
               }}
               className="absolute w-2.5 h-3.5 rounded-sm"
               style={{
-                backgroundColor: ["#E88D35", "#1B3B2B", "#D96B27", "#B5179E", "#F77F00"][
+                backgroundColor: ["#E88D35", "#234128", "#D96B27", "#B5179E", "#F77F00"][
                   i % 5
                 ],
               }}
@@ -119,7 +119,7 @@ export default function OrderDetailPage({
               transition={{ delay: 0.15, type: "spring", stiffness: 300 }}
               className="w-16 h-16 rounded-full bg-sunny flex items-center justify-center mx-auto mb-5"
             >
-              <Check size={30} className="text-forest-deep" />
+              <Check size={30} className="text-white" />
             </motion.div>
             <h1 className="font-display font-extrabold text-2xl sm:text-3xl">
               Thank you, {order.shipping.fullName.split(" ")[0]}!
