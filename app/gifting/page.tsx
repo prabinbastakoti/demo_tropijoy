@@ -72,7 +72,7 @@ export default function GiftingPage() {
 
       <div className="rounded-3xl bg-forest text-cream p-8 sm:p-10">
         <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
-          <Gift size={22} className="text-sunny" />
+          <Gift size={22} className="text-white" />
         </span>
         <h2 className="font-display font-extrabold text-2xl sm:text-3xl mb-3">
           Corporate gifting &amp; bulk orders

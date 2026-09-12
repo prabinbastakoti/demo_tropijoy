@@ -8,6 +8,7 @@ import LoadingScreen from "@/components/layout/LoadingScreen";
 import CartDrawer from "@/components/cart/CartDrawer";
 import PageTransition from "@/components/motion/PageTransition";
 import ScrollToTop from "@/components/layout/ScrollToTop";
+import { SITE_URL } from "@/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ const baloo = Baloo_2({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tropijoy.np"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Tropijoy — Pure Joy In Every Bite",
     template: "%s · Tropijoy",

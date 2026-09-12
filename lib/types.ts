@@ -13,10 +13,14 @@ export type WeightOption = "50g" | "100g" | "200g" | "Bundle";
 export interface ProductVariant {
   id: string;
   weight: WeightOption;
+  /** Optional second variant dimension, e.g. "With Peel" / "Without Peel". */
+  style?: string;
   price: number;
   originalPrice: number | null;
   sku: string;
   inStock: boolean;
+  /** Units on hand. Omitted for variants we don't track a count for (stays governed by `inStock` alone). */
+  stock?: number;
 }
 
 export interface Product {

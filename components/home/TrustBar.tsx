@@ -30,7 +30,7 @@ export default function TrustBar() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {claims.map((claim) => (
             <div key={claim.title} className="flex flex-col items-center text-center gap-2.5 sm:flex-row sm:text-left sm:gap-3">
-              <span className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-sunny shrink-0">
+              <span className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0">
                 <claim.icon size={19} />
               </span>
               <div>

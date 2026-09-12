@@ -1,8 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartItem, Product, ProductVariant } from "@/lib/types";
-import { getProductById, getVariant } from "@/lib/products";
+import { getProductById, getVariant, stockRemaining } from "@/lib/products";
 import { FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE } from "@/lib/utils";
+
+/** Units left for a cart line's variant, or Infinity if untracked/product missing. */
+function remainingFor(productId: string, variantId: string): number {
+  const product = getProductById(productId);
+  if (!product) return Infinity;
+  return stockRemaining(getVariant(product, variantId));
+}
 
 interface CartState {
   items: CartItem[];
@@ -28,17 +35,23 @@ export const useCartStore = create<CartState>()(
       isOpen: false,
       addItem: (productId, variantId, quantity = 1) => {
         const items = get().items;
+        const max = remainingFor(productId, variantId);
         const existing = items.find((i) => sameLine(i, productId, variantId));
         if (existing) {
           set({
             items: items.map((i) =>
               sameLine(i, productId, variantId)
-                ? { ...i, quantity: i.quantity + quantity }
+                ? { ...i, quantity: Math.min(i.quantity + quantity, max) }
                 : i
             ),
           });
         } else {
-          set({ items: [...items, { productId, variantId, quantity }] });
+          set({
+            items: [
+              ...items,
+              { productId, variantId, quantity: Math.min(quantity, max) },
+            ],
+          });
         }
         set({ isOpen: true });
       },
@@ -46,14 +59,16 @@ export const useCartStore = create<CartState>()(
         set({
           items: get().items.filter((i) => !sameLine(i, productId, variantId)),
         }),
-      incrementItem: (productId, variantId) =>
+      incrementItem: (productId, variantId) => {
+        const max = remainingFor(productId, variantId);
         set({
           items: get().items.map((i) =>
             sameLine(i, productId, variantId)
-              ? { ...i, quantity: i.quantity + 1 }
+              ? { ...i, quantity: Math.min(i.quantity + 1, max) }
               : i
           ),
-        }),
+        });
+      },
       decrementItem: (productId, variantId) => {
         const items = get().items;
         const target = items.find((i) => sameLine(i, productId, variantId));
@@ -78,9 +93,12 @@ export const useCartStore = create<CartState>()(
           });
           return;
         }
+        const max = remainingFor(productId, variantId);
         set({
           items: get().items.map((i) =>
-            sameLine(i, productId, variantId) ? { ...i, quantity } : i
+            sameLine(i, productId, variantId)
+              ? { ...i, quantity: Math.min(quantity, max) }
+              : i
           ),
         });
       },

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface AccordionEntry {
@@ -38,16 +38,9 @@ export default function Accordion({
               >
                 {item.question}
               </span>
-              <motion.span
-                animate={{ rotate: open ? 45 : 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className={cn(
-                  "shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors",
-                  open ? "bg-sunny text-white" : "bg-forest/10 text-forest"
-                )}
-              >
-                <Plus size={15} />
-              </motion.span>
+              <span className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-forest/10 text-forest transition-colors">
+                {open ? <Minus size={15} /> : <Plus size={15} />}
+              </span>
             </button>
 
             <AnimatePresence initial={false}>

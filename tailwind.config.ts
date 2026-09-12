@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
@@ -12,9 +13,9 @@ const config: Config = {
     extend: {
       colors: {
         sunny: {
-          DEFAULT: "#E88D35",
-          bright: "#D96B27",
-          dark: "#B8551F",
+          DEFAULT: "#1A7D3E",
+          bright: "#116530",
+          dark: "#09381A",
         },
         forest: {
           DEFAULT: "#116530",
@@ -25,7 +26,7 @@ const config: Config = {
         cream: "#FAF8F5",
         sage: "#E8F0EC",
         berry: "#B5179E",
-        citrus: "#F77F00",
+        citrus: "#2F9E52",
         accent: {
           apple: "#9B2B19",
           lemon: "#E8C31E",
@@ -77,7 +78,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssAnimate],
 };
 
 export default config;

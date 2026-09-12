@@ -16,7 +16,7 @@ export default function BundleBanner() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2rem] bg-sage px-6 py-12 sm:px-14 sm:py-16 grid lg:grid-cols-[1fr_auto] gap-10 items-center">
+        <div className="relative overflow-hidden rounded-[2rem] bg-sage px-6 py-12 sm:px-14 sm:py-16 flex flex-col lg:flex-row lg:items-center lg:justify-center gap-8 lg:gap-14">
           <div className="text-center lg:text-left">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 mb-5 text-xs font-semibold text-forest-deep">
               <Gift size={14} className="text-forest" />
@@ -36,14 +36,23 @@ export default function BundleBanner() {
             </div>
           </div>
 
-          <div className="flex -space-x-4 justify-center">
+          <div className="flex -space-x-9 sm:-space-x-12 justify-center shrink-0">
             {previewImages.map((src, i) => (
               <div
                 key={src}
-                style={{ zIndex: previewImages.length - i }}
-                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-cream bg-white overflow-hidden shrink-0 shadow-lift"
+                style={{
+                  zIndex: previewImages.length - i,
+                  transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (4 + i)}deg)`,
+                }}
+                className="relative w-28 h-36 sm:w-36 sm:h-48 shrink-0 drop-shadow-xl transition-transform hover:-translate-y-1 hover:z-20"
               >
-                <Image src={src} alt="" fill sizes="80px" className="object-contain p-2" />
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="144px"
+                  className="object-contain"
+                />
               </div>
             ))}
           </div>

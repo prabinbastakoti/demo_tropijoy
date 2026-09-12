@@ -60,7 +60,7 @@ export default function GiftCardsPage() {
       <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-start">
         <Reveal>
           <div className="rounded-3xl bg-gradient-to-br from-forest via-forest-light to-forest-deep p-8 sm:p-10 text-white relative overflow-hidden">
-            <Gift size={28} className="text-sunny mb-6" />
+            <Gift size={28} className="text-white mb-6" />
             <p className="text-sm text-white/60 mb-1">Tropijoy Gift Card</p>
             <p className="font-display font-extrabold text-4xl sm:text-5xl mb-6">
               {formatPrice(amount)}

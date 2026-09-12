@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface BadgeProps {
   children: ReactNode;
-  variant?: "sunny" | "forest" | "sale" | "outline";
+  variant?: "sunny" | "forest" | "sale" | "outline" | "warning";
   className?: string;
 }
 
@@ -12,6 +12,7 @@ const variantClasses = {
   forest: "bg-forest text-white",
   sale: "bg-red-500 text-white",
   outline: "border border-forest/30 text-forest bg-white/70",
+  warning: "border border-sunny/40 text-sunny-dark bg-white/85",
 };
 
 export default function Badge({ children, variant = "forest", className }: BadgeProps) {

@@ -57,6 +57,17 @@ export function isProductInStock(product: Product): boolean {
   return product.variants.some((v) => v.inStock);
 }
 
+/** "100g" or, when a variant also carries a style (e.g. peel type), "100g · With Peel". */
+export function variantLabel(variant: ProductVariant): string {
+  return variant.style ? `${variant.weight} · ${variant.style}` : variant.weight;
+}
+
+/** Units purchasable right now. Untracked variants (no `stock` count) are treated as unlimited. */
+export function stockRemaining(variant: ProductVariant): number {
+  if (!variant.inStock) return 0;
+  return variant.stock ?? Infinity;
+}
+
 /** Lowest variant price — used for "From Rs. X" card pricing. */
 export function priceFrom(product: Product): number {
   return Math.min(...product.variants.map((v) => v.price));

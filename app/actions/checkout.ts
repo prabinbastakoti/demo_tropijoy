@@ -24,7 +24,7 @@ function buildEmailHtml(payload: CheckoutPayload): string {
   return `
   <div style="font-family: Arial, sans-serif; max-width:600px; margin:0 auto;">
     <div style="background:#116530;padding:24px;border-radius:12px 12px 0 0;">
-      <h1 style="color:#E88D35;margin:0;font-size:22px;">🍏 New Tropijoy Order</h1>
+      <h1 style="color:#FFFFFF;margin:0;font-size:22px;">🍏 New Tropijoy Order</h1>
     </div>
     <div style="padding:24px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 12px 12px;">
       <h2 style="color:#116530;font-size:16px;">Customer Details</h2>
@@ -72,7 +72,7 @@ export async function submitOrder(payload: CheckoutPayload): Promise<CheckoutRes
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: "Tropijoy Orders <orders@tropijoy.com>",
+      from: "Tropijoy Orders <orders@tropijoynp.com>",
       to: toEmail,
       subject: `New Order from ${payload.shipping.fullName} — Rs. ${payload.total.toLocaleString("en-IN")}`,
       html: buildEmailHtml(payload),
@@ -121,7 +121,7 @@ export async function submitLead(payload: LeadPayload): Promise<CheckoutResult> 
   try {
     const resend = new Resend(apiKey);
     await resend.emails.send({
-      from: "Tropijoy <hello@tropijoy.com>",
+      from: "Tropijoy <hello@tropijoynp.com>",
       to: toEmail,
       subject: `New Lead: ${payload.email}`,
       html: `<p>New newsletter signup from <strong>${payload.email}</strong> via ${payload.source}.</p>`,

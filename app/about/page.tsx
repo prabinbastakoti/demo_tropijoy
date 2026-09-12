@@ -88,11 +88,16 @@ export default function AboutPage() {
           {/* stat panel — typography instead of photography */}
           <Reveal delay={0.15}>
             <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest via-forest-light to-forest-deep p-8 sm:p-10 noise">
-              <HeritageBand tone="dark" />
+              <HeritageBand
+                tone="dark"
+                imageClassName="object-top"
+                heightClassName="h-32 sm:h-44"
+                className="-bottom-[15px]"
+              />
               <div className="relative grid grid-cols-2 gap-8">
                 {stats.map((stat) => (
                   <div key={stat.label}>
-                    <p className="font-display font-extrabold text-4xl sm:text-5xl text-sunny leading-none">
+                    <p className="font-display font-extrabold text-4xl sm:text-5xl text-white leading-none">
                       <CountUp to={stat.value} suffix={stat.suffix} />
                     </p>
                     <p className="mt-2 text-sm text-white/65 leading-snug">

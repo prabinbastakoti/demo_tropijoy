@@ -37,32 +37,32 @@ export default function BestSellersPage() {
       <div className="grid md:grid-cols-3 gap-5 mb-14">
         {podium.map((product, i) => (
           <Reveal key={product.id} delay={i * 0.1}>
-            <div className="relative">
-              <span className="absolute -top-3 -left-3 z-10 w-11 h-11 rounded-2xl bg-sunny text-white font-display font-extrabold text-lg flex items-center justify-center shadow-lift border-2 border-cream">
-                {i + 1}
-              </span>
-              <div className="rounded-3xl bg-white border border-forest/10 p-5 h-full">
-                <div className="flex items-center gap-2 mb-4">
+            <div className="rounded-3xl bg-white border border-forest/10 p-5 h-full">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-7 h-7 shrink-0 rounded-full bg-sunny text-white font-display font-extrabold text-sm flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <div className="flex items-center gap-2">
                   <Trophy size={15} className="text-sunny-dark" />
                   <span className="text-xs font-bold uppercase tracking-wider text-forest/50">
                     {product.rating.toFixed(1)} average · {product.reviewsCount}{" "}
                     reviews
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-xl text-forest-deep mb-2">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-forest-deep/60 leading-relaxed line-clamp-3 mb-4">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-forest-deep">
-                    {formatPrice(priceFrom(product))}
-                  </span>
-                  <ButtonLink href={`/shop/${product.slug}`} size="sm">
-                    View
-                  </ButtonLink>
-                </div>
+              </div>
+              <h3 className="font-display font-bold text-xl text-forest-deep mb-2">
+                {product.name}
+              </h3>
+              <p className="text-sm text-forest-deep/60 leading-relaxed line-clamp-3 mb-4">
+                {product.description}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-forest-deep">
+                  {formatPrice(priceFrom(product))}
+                </span>
+                <ButtonLink href={`/shop/${product.slug}`} size="sm">
+                  View
+                </ButtonLink>
               </div>
             </div>
           </Reveal>

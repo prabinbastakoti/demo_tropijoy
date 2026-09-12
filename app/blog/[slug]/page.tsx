@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: PageParams) {
     <article>
       {/* header panel — flat accent bar + heritage motif stand in for a cover photo */}
       <header className="relative overflow-hidden bg-cream py-14 sm:py-20">
-        <HeritageBand />
+        <HeritageBand imageClassName="object-top" heightClassName="h-56 sm:h-80" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[

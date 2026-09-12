@@ -14,7 +14,7 @@ const suggestions = [
 export default function NotFound() {
   return (
     <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-20 overflow-hidden">
-      <HeritageBand />
+      <HeritageBand imageClassName="object-top" heightClassName="h-40 sm:h-56" />
       <div className="relative text-center max-w-lg">
         <div className="w-20 h-20 rounded-3xl bg-white border border-forest/10 flex items-center justify-center mx-auto mb-7">
           <Compass size={32} className="text-forest" />

@@ -53,7 +53,7 @@ export default function CategoryGrid() {
           </div>
           <div className="flex items-center gap-4 rounded-3xl bg-forest p-5 text-cream">
             <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-              <Sprout size={20} className="text-sunny" />
+              <Sprout size={20} className="text-white" />
             </div>
             <div>
               <p className="font-display font-extrabold text-2xl leading-none">

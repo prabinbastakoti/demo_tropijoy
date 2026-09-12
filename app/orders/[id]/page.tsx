@@ -87,7 +87,7 @@ export default function OrderDetailPage({
               }}
               className="absolute w-2.5 h-3.5 rounded-sm"
               style={{
-                backgroundColor: ["#E88D35", "#116530", "#D96B27", "#B5179E", "#F77F00"][
+                backgroundColor: ["#1A7D3E", "#116530", "#09381A", "#B5179E", "#2F9E52"][
                   i % 5
                 ],
               }}
@@ -111,21 +111,25 @@ export default function OrderDetailPage({
           transition={{ type: "spring", damping: 20, stiffness: 260 }}
           className="mt-6 rounded-3xl bg-gradient-to-br from-forest via-forest-light to-forest-deep p-7 sm:p-9 text-center text-white noise relative overflow-hidden"
         >
-          <HeritageBand tone="dark" />
+          <HeritageBand
+            tone="dark"
+            imageClassName="object-top"
+            heightClassName="h-40 sm:h-56"
+          />
           <div className="relative">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 300 }}
-              className="w-16 h-16 rounded-full bg-sunny flex items-center justify-center mx-auto mb-5"
+              className="w-16 h-16 rounded-full bg-white flex items-center justify-center mx-auto mb-5"
             >
-              <Check size={30} className="text-white" />
+              <Check size={30} className="text-forest" />
             </motion.div>
             <h1 className="font-display font-extrabold text-2xl sm:text-3xl">
               Thank you, {order.shipping.fullName.split(" ")[0]}!
             </h1>
             <p className="mt-3 text-white/75 max-w-md mx-auto text-sm leading-relaxed">
-              Order <strong className="text-sunny">{order.id}</strong> is in. We&apos;ll
+              Order <strong className="text-white">{order.id}</strong> is in. We&apos;ll
               message you on <strong>{order.contactPlatform}</strong> at{" "}
               <strong>{order.contactHandle}</strong> to confirm payment and delivery.
             </p>

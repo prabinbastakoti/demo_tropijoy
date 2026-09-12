@@ -213,7 +213,7 @@ export default function Header() {
   const headerHidden = hiddenByScroll && !activeMega && !searchOpen && !mobileOpen;
 
   const iconBtnClass =
-    "relative w-9 h-9 rounded-full flex items-center justify-center text-forest-ink/70 transition-colors duration-200 hover:bg-forest/10 hover:text-forest";
+    "relative w-10 h-10 rounded-full flex items-center justify-center text-forest-ink/70 transition-colors duration-200 hover:bg-forest/10 hover:text-forest";
   const mobileIconBtnClass =
     "relative w-10 h-10 rounded-full flex items-center justify-center text-forest transition-colors duration-300 hover:bg-forest/8";
 
@@ -301,35 +301,35 @@ export default function Header() {
 
             <div className="flex items-center gap-3 shrink-0 justify-self-end">
               {/* grouped icon toolbar, md+ */}
-              <div className="hidden md:flex items-center gap-0.5 rounded-full bg-white/60 border border-forest/10 p-1">
+              <div className="hidden md:flex items-center gap-1 rounded-full bg-white/60 border border-forest/10 p-1.5">
                 <button
                   onClick={() => setSearchOpen(true)}
                   aria-label="Search products"
                   title="Search (⌘K)"
                   className={iconBtnClass}
                 >
-                  <Search size={17} />
+                  <Search size={18} />
                 </button>
                 <Link href="/orders" aria-label="Order history" title="Orders" className={iconBtnClass}>
-                  <Package size={17} />
+                  <Package size={18} />
                 </Link>
                 <Link href="/wishlist" aria-label="Wishlist" title="Wishlist" className={iconBtnClass}>
-                  <Heart size={17} />
+                  <Heart size={18} />
                   {hydrated && wishlistCount > 0 && (
-                    <span className="absolute top-0.5 right-0.5 bg-forest text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-white">
+                    <span className="absolute top-0 right-0 bg-forest text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-0.5 border-2 border-white">
                       {wishlistCount > 9 ? "9+" : wishlistCount}
                     </span>
                   )}
                 </Link>
                 <button onClick={toggleCart} aria-label="Open cart" title="Cart" className={iconBtnClass}>
-                  <ShoppingBag size={17} />
+                  <ShoppingBag size={18} />
                   <AnimatePresence>
                     {hydrated && itemCount > 0 && (
                       <motion.span
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0 }}
-                        className="absolute top-0.5 right-0.5 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-white"
+                        className="absolute top-0 right-0 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-0.5 border-2 border-white"
                       >
                         {itemCount > 9 ? "9+" : itemCount}
                       </motion.span>

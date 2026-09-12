@@ -34,12 +34,12 @@ export default function UsageIdeas() {
               href="/recipes"
               className="group flex items-center gap-5 rounded-3xl bg-white border border-forest/10 p-6 hover:shadow-lift transition-shadow h-full"
             >
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-cream shrink-0 overflow-hidden">
+              <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-cream shrink-0 overflow-hidden">
                 <Image
                   src={idea.image}
                   alt={idea.title}
                   fill
-                  sizes="96px"
+                  sizes="144px"
                   className="object-contain p-3"
                 />
               </div>

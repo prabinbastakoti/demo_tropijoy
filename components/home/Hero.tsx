@@ -68,9 +68,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-6 text-base sm:text-lg text-forest-ink/80 max-w-md mx-auto lg:mx-0 leading-relaxed text-balance"
           >
-            Real Nepali fruit, machine-sliced for precision and gently
-            dehydrated in small batches. One ingredient on every label — no
-            added sugar, no preservatives, no shortcuts.
+            100% pure, single-ingredient Nepali fruit—precision-sliced and
+            small-batch dehydrated with zero added sugar or preservatives.
           </motion.p>
 
           <motion.div

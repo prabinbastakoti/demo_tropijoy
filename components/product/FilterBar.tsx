@@ -9,6 +9,13 @@ import {
 } from "@/store/filter-store";
 import { CATEGORIES } from "@/lib/products";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 import type { ProductCategory, SortOption } from "@/lib/types";
 
 const categoryLabels: Record<ProductCategory | "All", string> = {
@@ -33,9 +40,6 @@ const sortOptions: { value: SortOption; label: string }[] = [
   { value: "price-desc", label: "Price: High to Low" },
   { value: "rating-desc", label: "Customer Rating" },
 ];
-
-const selectClass =
-  "rounded-full border border-forest/15 bg-white px-4 py-2.5 text-sm font-medium text-forest-deep outline-none focus:ring-2 focus:ring-forest/30 cursor-pointer";
 
 export default function FilterBar() {
   const {
@@ -85,45 +89,51 @@ export default function FilterBar() {
           />
         </div>
 
-        <select
+        <Select
           value={category}
-          onChange={(e) => setCategory(e.target.value as ProductCategory | "All")}
-          aria-label="Category"
-          className={selectClass}
+          onValueChange={(v) => setCategory(v as ProductCategory | "All")}
         >
-          {categories.map((c) => (
-            <option key={c} value={c}>
-              {categoryLabels[c]}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger aria-label="Category">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {categories.map((c) => (
+              <SelectItem key={c} value={c}>
+                {categoryLabels[c]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-        <select
+        <Select
           value={attribute}
-          onChange={(e) => setAttribute(e.target.value as Attribute)}
-          aria-label="Dietary attribute"
-          className={selectClass}
+          onValueChange={(v) => setAttribute(v as Attribute)}
         >
-          <option value="All">All Products</option>
-          {ATTRIBUTE_OPTIONS.map((a) => (
-            <option key={a} value={a}>
-              {attributeLabels[a]}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger aria-label="Dietary attribute">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All Products</SelectItem>
+            {ATTRIBUTE_OPTIONS.map((a) => (
+              <SelectItem key={a} value={a}>
+                {attributeLabels[a]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value as SortOption)}
-          aria-label="Sort by"
-          className={selectClass}
-        >
-          {sortOptions.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
+          <SelectTrigger aria-label="Sort by">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {sortOptions.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {chips.length > 0 && (

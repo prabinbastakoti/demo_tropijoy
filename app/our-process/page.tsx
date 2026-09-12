@@ -120,7 +120,11 @@ export default function OurProcessPage() {
       {/* closing CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest via-forest-light to-forest-deep px-6 py-14 sm:px-14 sm:py-20 text-center noise">
-          <HeritageBand tone="dark" />
+          <HeritageBand
+            tone="dark"
+            imageClassName="object-top"
+            heightClassName="h-40 sm:h-56"
+          />
           <div className="relative">
             <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white text-balance">
               Taste the difference precision makes

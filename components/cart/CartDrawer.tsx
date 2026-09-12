@@ -7,8 +7,10 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag, Trash2, X } from "lucide-react";
 import { useCartStore, useCartTotals } from "@/store/cart-store";
+import { variantLabel, stockRemaining } from "@/lib/products";
 import { formatPrice, FREE_SHIPPING_THRESHOLD } from "@/lib/utils";
 import { useHydrated } from "@/lib/use-hydrated";
+import { trackEvent } from "@/lib/analytics";
 import Button from "@/components/ui/Button";
 import QuantityStepper from "@/components/ui/QuantityStepper";
 
@@ -35,6 +37,10 @@ export default function CartDrawer() {
   const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
 
   function goToCheckout() {
+    trackEvent("begin_checkout", {
+      item_count: detailed.reduce((sum, { quantity }) => sum + quantity, 0),
+      subtotal,
+    });
     closeCart();
     router.push("/checkout");
   }
@@ -152,7 +158,7 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <p className="text-xs text-forest-deep/50 mb-2">
-                            {variant.weight}
+                            {variantLabel(variant)}
                           </p>
                           <div className="mt-auto flex items-center justify-between">
                             <QuantityStepper
@@ -160,6 +166,7 @@ export default function CartDrawer() {
                               quantity={quantity}
                               onIncrement={() => incrementItem(product.id, variant.id)}
                               onDecrement={() => decrementItem(product.id, variant.id)}
+                              incrementDisabled={quantity >= stockRemaining(variant)}
                             />
                             <span className="font-bold text-forest-deep text-sm">
                               {formatPrice(variant.price * quantity)}

@@ -7,6 +7,7 @@ interface QuantityStepperProps {
   quantity: number;
   onIncrement: () => void;
   onDecrement: () => void;
+  incrementDisabled?: boolean;
   size?: "sm" | "md";
   className?: string;
 }
@@ -15,6 +16,7 @@ export default function QuantityStepper({
   quantity,
   onIncrement,
   onDecrement,
+  incrementDisabled,
   size = "md",
   className,
 }: QuantityStepperProps) {
@@ -51,10 +53,11 @@ export default function QuantityStepper({
       </span>
       <button
         onClick={onIncrement}
+        disabled={incrementDisabled}
         aria-label="Increase quantity"
         className={cn(
           btn,
-          "bg-white flex items-center justify-center text-forest hover:bg-forest hover:text-white transition-colors"
+          "bg-white flex items-center justify-center text-forest hover:bg-forest hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-forest"
         )}
       >
         <Plus size={icon} />

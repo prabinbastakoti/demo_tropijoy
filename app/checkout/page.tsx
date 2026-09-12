@@ -19,8 +19,10 @@ import {
 import { toast } from "sonner";
 import { useCartStore, useCartTotals } from "@/store/cart-store";
 import { useOrdersStore } from "@/store/orders-store";
+import { variantLabel } from "@/lib/products";
 import { useHydrated } from "@/lib/use-hydrated";
 import { cn, formatPrice } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 import { submitOrder } from "@/app/actions/checkout";
 import type { ContactPlatform, ShippingDetails } from "@/lib/types";
 import Button from "@/components/ui/Button";
@@ -109,7 +111,7 @@ export default function CheckoutPage() {
           name: product.name,
           quantity,
           price: variant.price,
-          weight: variant.weight,
+          weight: variantLabel(variant),
         })),
         subtotal,
         shipping_cost: shippingCost,
@@ -126,7 +128,7 @@ export default function CheckoutPage() {
           productId: product.id,
           variantId: variant.id,
           name: product.name,
-          weight: variant.weight,
+          weight: variantLabel(variant),
           price: variant.price,
           quantity,
           image: product.images[0],
@@ -140,6 +142,14 @@ export default function CheckoutPage() {
         demoMode: result.demoMode,
       });
 
+      trackEvent("purchase", {
+        order_id: orderId,
+        item_count: detailed.reduce((sum, { quantity }) => sum + quantity, 0),
+        subtotal,
+        shipping_cost: shippingCost,
+        total,
+        contact_platform: platform,
+      });
       clearCart();
       toast.success(result.message);
       router.push(`/orders/${orderId}?new=1`);
@@ -200,10 +210,8 @@ export default function CheckoutPage() {
                   <span
                     className={cn(
                       "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors",
-                      i < step
+                      i <= step
                         ? "bg-forest text-white"
-                        : i === step
-                        ? "bg-sunny text-white"
                         : "bg-forest/10 text-forest/40"
                     )}
                   >
@@ -458,7 +466,7 @@ export default function CheckoutPage() {
                             />
                           </div>
                           <p className="text-sm text-forest-deep flex-1 min-w-0 truncate">
-                            {product.name} ({variant.weight}) &times;{quantity}
+                            {product.name} ({variantLabel(variant)}) &times;{quantity}
                           </p>
                           <p className="text-sm font-semibold text-forest-deep shrink-0">
                             {formatPrice(variant.price * quantity)}
@@ -501,27 +509,29 @@ export default function CheckoutPage() {
               Order summary
             </h2>
 
-            <div className="space-y-3 mb-5 max-h-72 overflow-y-auto">
+            <div className="space-y-3 mb-5 max-h-72 overflow-y-auto -mt-1 -mr-1 pt-1 pr-1">
               {detailed.map(({ product, variant, quantity }) => (
                 <Link
                   key={`${product.id}:${variant.id}`}
                   href={`/shop/${product.slug}`}
                   className="flex items-center gap-3 group"
                 >
-                  <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-cream shrink-0">
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      sizes="48px"
-                      className="object-contain p-1"
-                    />
+                  <div className="relative w-12 h-12 shrink-0">
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-cream">
+                      <Image
+                        src={product.images[0]}
+                        alt={product.name}
+                        fill
+                        sizes="48px"
+                        className="object-contain p-1"
+                      />
+                    </div>
                     <span className="absolute -top-1 -right-1 bg-forest text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                       {quantity}
                     </span>
                   </div>
                   <p className="text-sm text-forest-deep/80 flex-1 min-w-0 truncate group-hover:text-forest">
-                    {product.name} <span className="text-forest-deep/40">({variant.weight})</span>
+                    {product.name} <span className="text-forest-deep/40">({variantLabel(variant)})</span>
                   </p>
                   <span className="text-sm font-semibold text-forest-deep shrink-0">
                     {formatPrice(variant.price * quantity)}

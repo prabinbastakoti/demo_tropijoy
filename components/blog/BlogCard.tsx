@@ -36,7 +36,11 @@ export default function BlogCard({
           className="absolute inset-x-0 top-0 h-1.5"
           style={{ backgroundColor: accentColor }}
         />
-        <HeritageBand />
+        <HeritageBand
+          className={size === "lg" ? "-bottom-[45px]" : undefined}
+          imageClassName={size === "lg" ? "object-top" : undefined}
+          heightClassName={size === "lg" ? "h-40 sm:h-56" : undefined}
+        />
         <div className="relative flex items-start justify-between gap-3">
           <span
             className={cn(

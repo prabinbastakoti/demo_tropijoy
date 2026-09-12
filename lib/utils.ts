@@ -5,6 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Canonical production URL — used for metadataBase, sitemap.xml and robots.txt. */
+export const SITE_URL = "https://tropijoynp.com";
+
 /** Nepali Rupee, e.g. 1150 -> "Rs. 1,150" */
 export function formatPrice(value: number): string {
   return `Rs. ${Math.round(value).toLocaleString("en-IN")}`;

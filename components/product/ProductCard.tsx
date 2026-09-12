@@ -14,10 +14,12 @@ import {
   getDefaultVariant,
   isProductInStock,
   priceFrom,
+  stockRemaining,
 } from "@/lib/products";
 import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useHydrated } from "@/lib/use-hydrated";
+import { trackEvent } from "@/lib/analytics";
 import Badge from "@/components/ui/Badge";
 import StarRating from "@/components/ui/StarRating";
 
@@ -37,6 +39,7 @@ export default function ProductCard({
   const inStock = isProductInStock(product);
   const discount = bestDiscount(product);
   const defaultVariant = getDefaultVariant(product);
+  const lowStock = inStock && stockRemaining(defaultVariant) <= 5;
   const accent = FRUIT_ACCENTS[product.fruitType];
   const hasMultipleSizes = product.variants.length > 1;
 
@@ -45,6 +48,13 @@ export default function ProductCard({
     e.stopPropagation();
     if (!inStock) return;
     addItem(product.id, defaultVariant.id);
+    trackEvent("add_to_cart", {
+      product_id: product.id,
+      product_name: product.name,
+      variant_id: defaultVariant.id,
+      price: defaultVariant.price,
+      source: "product_card",
+    });
     toast.success(`${product.name} added to cart`);
   }
 
@@ -90,6 +100,7 @@ export default function ProductCard({
               <Badge variant="sunny">Best Seller</Badge>
             )}
             {!inStock && <Badge variant="outline">Sold Out</Badge>}
+            {lowStock && <Badge variant="warning">Low Stock</Badge>}
           </div>
 
           <button
@@ -111,7 +122,12 @@ export default function ProductCard({
             <button
               onClick={handleAdd}
               disabled={!inStock}
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-forest/95 backdrop-blur text-white text-sm font-semibold py-2.5 hover:bg-forest-light disabled:opacity-50 disabled:cursor-not-allowed"
+              className={cn(
+                "w-full flex items-center justify-center gap-2 rounded-full backdrop-blur text-sm font-semibold py-2.5 transition-colors",
+                inStock
+                  ? "bg-forest/95 text-white hover:bg-forest-light"
+                  : "bg-white/95 text-forest-deep/50 cursor-not-allowed"
+              )}
             >
               <ShoppingBag size={15} />
               {inStock ? "Quick Add" : "Sold Out"}
@@ -151,7 +167,12 @@ export default function ProductCard({
               onClick={handleAdd}
               disabled={!inStock}
               aria-label={`Add ${product.name} to cart`}
-              className="sm:hidden shrink-0 w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center disabled:opacity-40"
+              className={cn(
+                "sm:hidden shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
+                inStock
+                  ? "bg-forest text-white"
+                  : "bg-forest/10 text-forest-deep/30 cursor-not-allowed"
+              )}
             >
               <ShoppingBag size={14} />
             </button>

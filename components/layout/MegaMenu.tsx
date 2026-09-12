@@ -177,12 +177,12 @@ export default function MegaMenu({
                         href={`/shop/${product.slug}`}
                         className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
                       >
-                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
+                        <div className="relative w-16 h-16 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
                           <Image
                             src={product.images[0]}
                             alt={product.name}
                             fill
-                            sizes="44px"
+                            sizes="64px"
                             className="object-contain p-1"
                           />
                         </div>
@@ -210,12 +210,12 @@ export default function MegaMenu({
                         href={`/shop/${product.slug}`}
                         className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
                       >
-                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
+                        <div className="relative w-16 h-16 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
                           <Image
                             src={product.images[0]}
                             alt={product.name}
                             fill
-                            sizes="44px"
+                            sizes="64px"
                             className="object-contain p-1"
                           />
                         </div>
@@ -243,12 +243,12 @@ export default function MegaMenu({
                         href={`/shop/${product.slug}`}
                         className="group flex items-center gap-3 rounded-xl p-2 hover:bg-forest/5 transition-colors"
                       >
-                        <div className="relative w-11 h-11 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
+                        <div className="relative w-16 h-16 rounded-lg bg-white shrink-0 overflow-hidden border border-forest/8">
                           <Image
                             src={product.images[0]}
                             alt={product.name}
                             fill
-                            sizes="44px"
+                            sizes="64px"
                             className="object-contain p-1"
                           />
                         </div>

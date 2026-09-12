@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,10 +17,16 @@ import {
 import { toast } from "sonner";
 import type { Product } from "@/lib/types";
 import { calculateDiscount, cn, formatPrice } from "@/lib/utils";
-import { FRUIT_ACCENTS, getDefaultVariant } from "@/lib/products";
+import {
+  FRUIT_ACCENTS,
+  getDefaultVariant,
+  stockRemaining,
+  variantLabel,
+} from "@/lib/products";
 import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useHydrated } from "@/lib/use-hydrated";
+import { trackEvent } from "@/lib/analytics";
 import Badge from "@/components/ui/Badge";
 import StarRating from "@/components/ui/StarRating";
 import Button from "@/components/ui/Button";
@@ -34,22 +40,48 @@ const guarantees = [
 export default function ProductDetail({ product }: { product: Product }) {
   const [activeImage, setActiveImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [variantId, setVariantId] = useState(getDefaultVariant(product).id);
+  const defaultVariant = getDefaultVariant(product);
+  const [style, setStyle] = useState(defaultVariant.style);
+  const [weight, setWeight] = useState(defaultVariant.weight);
   const addItem = useCartStore((s) => s.addItem);
   const wishlisted = useWishlistStore((s) => s.productIds.includes(product.id));
   const toggleWishlist = useWishlistStore((s) => s.toggle);
   const hydrated = useHydrated();
 
   const accent = FRUIT_ACCENTS[product.fruitType];
+  const styles = Array.from(
+    new Set(product.variants.map((v) => v.style).filter(Boolean))
+  ) as string[];
+  const weights = Array.from(new Set(product.variants.map((v) => v.weight)));
+  const hasStyles = styles.length > 1;
+  const hasMultipleSizes = weights.length > 1;
+
   const variant =
-    product.variants.find((v) => v.id === variantId) ?? product.variants[0];
+    product.variants.find(
+      (v) => v.weight === weight && (!hasStyles || v.style === style)
+    ) ??
+    product.variants.find((v) => v.weight === weight) ??
+    defaultVariant;
+
   const discount = calculateDiscount(variant.price, variant.originalPrice);
-  const hasMultipleSizes = product.variants.length > 1;
+  const maxQty = stockRemaining(variant);
+
+  useEffect(() => {
+    setQuantity((q) => Math.max(1, Math.min(q, maxQty)));
+  }, [maxQty]);
 
   function handleAdd() {
     if (!variant.inStock) return;
     addItem(product.id, variant.id, quantity);
-    toast.success(`${quantity} × ${product.name} (${variant.weight}) added to cart`);
+    trackEvent("add_to_cart", {
+      product_id: product.id,
+      product_name: product.name,
+      variant_id: variant.id,
+      price: variant.price,
+      quantity,
+      source: "product_detail",
+    });
+    toast.success(`${quantity} × ${product.name} (${variantLabel(variant)}) added to cart`);
   }
 
   return (
@@ -145,33 +177,73 @@ export default function ProductDetail({ product }: { product: Product }) {
           )}
         </div>
 
-        {/* size/weight selector */}
+        {/* type/weight selector */}
+        {hasStyles && (
+          <div className="mt-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-forest/50 mb-2">
+              Type
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {styles.map((s) => {
+                const optionVariant =
+                  product.variants.find(
+                    (v) => v.style === s && v.weight === weight
+                  ) ?? product.variants.find((v) => v.style === s);
+                return (
+                  <button
+                    key={s}
+                    onClick={() => setStyle(s)}
+                    disabled={!optionVariant?.inStock}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
+                      style === s
+                        ? "border-forest bg-forest text-white"
+                        : "border-forest/20 text-forest-deep/70 hover:border-forest/50"
+                    )}
+                  >
+                    {s}
+                    {!optionVariant?.inStock && " — Sold Out"}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {hasMultipleSizes ? (
           <div className="mt-5">
             <p className="text-xs font-bold uppercase tracking-wider text-forest/50 mb-2">
               Size
             </p>
             <div className="flex flex-wrap gap-2">
-              {product.variants.map((v) => (
-                <button
-                  key={v.id}
-                  onClick={() => setVariantId(v.id)}
-                  disabled={!v.inStock}
-                  className={cn(
-                    "rounded-full border px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
-                    variantId === v.id
-                      ? "border-forest bg-forest text-white"
-                      : "border-forest/20 text-forest-deep/70 hover:border-forest/50"
-                  )}
-                >
-                  {v.weight}
-                  {!v.inStock && " — Sold Out"}
-                </button>
-              ))}
+              {weights.map((w) => {
+                const optionVariant =
+                  product.variants.find(
+                    (v) => v.weight === w && (!hasStyles || v.style === style)
+                  ) ?? product.variants.find((v) => v.weight === w);
+                return (
+                  <button
+                    key={w}
+                    onClick={() => setWeight(w)}
+                    disabled={!optionVariant?.inStock}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
+                      weight === w
+                        ? "border-forest bg-forest text-white"
+                        : "border-forest/20 text-forest-deep/70 hover:border-forest/50"
+                    )}
+                  >
+                    {w}
+                    {!optionVariant?.inStock && " — Sold Out"}
+                  </button>
+                );
+              })}
             </div>
           </div>
         ) : (
-          <p className="mt-4 text-sm text-forest-deep/50">{variant.weight} pouch</p>
+          !hasStyles && (
+            <p className="mt-4 text-sm text-forest-deep/50">{variant.weight} pouch</p>
+          )
         )}
 
         <p className="mt-5 text-forest-deep/70 leading-relaxed">
@@ -222,9 +294,10 @@ export default function ProductDetail({ product }: { product: Product }) {
               {quantity}
             </span>
             <button
-              onClick={() => setQuantity((q) => q + 1)}
+              onClick={() => setQuantity((q) => Math.min(q + 1, maxQty))}
+              disabled={quantity >= maxQty}
               aria-label="Increase quantity"
-              className="w-9 h-9 rounded-full flex items-center justify-center text-forest hover:bg-forest hover:text-white transition-colors"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-forest hover:bg-forest hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-forest"
             >
               <Plus size={16} />
             </button>
@@ -268,11 +341,17 @@ export default function ProductDetail({ product }: { product: Product }) {
           </button>
         </div>
 
-        {!variant.inStock && (
+        {!variant.inStock ? (
           <p className="mt-3 text-sm text-forest-deep/55">
-            This size sold out — we restock seasonally. Check back after the
+            This option sold out — we restock seasonally. Check back after the
             next harvest.
           </p>
+        ) : (
+          maxQty <= 5 && (
+            <p className="mt-3 text-sm font-semibold text-sunny-dark">
+              Low Stock
+            </p>
+          )
         )}
 
         <ul className="mt-7 space-y-2.5 border-t border-forest/10 pt-6">

@@ -15,13 +15,10 @@ export const metadata: Metadata = {
 
 const logoDownloads = [
   { label: "Logo — Forest Green", src: "/brand/logo-green.png" },
-  { label: "Logo — Black", src: "/brand/logo-black.png" },
-  { label: "Logo — White", src: "/brand/logo-white.png" },
-  { label: "Logo — Vector (SVG)", src: "/brand/logo.svg" },
 ];
 
 const facts = [
-  { label: "Founded", value: "2023" },
+  { label: "Founded", value: "2026" },
   { label: "Based in", value: BUSINESS.location },
   { label: "Products", value: `${products.length} — dried fruit slices & banana powder` },
   { label: "Sourcing", value: "Premium fruit from trusted Nepali markets" },
@@ -69,7 +66,7 @@ export default function PressPage() {
                 Please use these as provided — don&apos;t recolour, stretch or
                 add effects to the wordmark.
               </p>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid gap-3">
                 {logoDownloads.map((asset) => (
                   <a
                     key={asset.src}
@@ -106,7 +103,7 @@ export default function PressPage() {
         <Reveal delay={0.12}>
           <div className="rounded-3xl bg-forest text-cream p-8 sticky top-28">
             <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
-              <Mail size={20} className="text-sunny" />
+              <Mail size={20} className="text-white" />
             </span>
             <h2 className="font-display font-bold text-xl mb-3">Media contact</h2>
             <p className="text-cream/70 leading-relaxed mb-5">
@@ -115,7 +112,7 @@ export default function PressPage() {
             </p>
             <a
               href={`mailto:${BUSINESS.email}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-sunny hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:underline"
             >
               {BUSINESS.email}
             </a>

@@ -1,14 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Banknote,
-  CreditCard,
-  Facebook,
-  Instagram,
-  Music2,
-  Smartphone,
-  Wallet,
-} from "lucide-react";
+import { Facebook, Instagram, Music2 } from "lucide-react";
 import HeritageBand from "@/components/brand/HeritageBand";
 
 const quickLinks = [
@@ -29,12 +21,9 @@ const supportLegalLinks = [
 ];
 
 const paymentMethods = [
-  { label: "eSewa", icon: Wallet },
-  { label: "Khalti", icon: Wallet },
-  { label: "Fonepay", icon: Smartphone },
-  { label: "Visa", icon: CreditCard },
-  { label: "Mastercard", icon: CreditCard },
-  { label: "Cash on Delivery", icon: Banknote },
+  { label: "eSewa", image: "/payments/esewa.png", ratio: 124 / 33, heightPx: 24 },
+  { label: "Khalti", image: "/payments/khalti.png", ratio: 1513 / 575, heightPx: 32 },
+  { label: "Fonepay", image: "/payments/fonepay.webp", ratio: 1008 / 308, heightPx: 24 },
 ];
 
 const socialLinks = [
@@ -57,9 +46,11 @@ export default function Footer() {
               height={100}
               className="h-10 w-auto object-contain mb-4"
             />
-            <p className="text-cream/60 text-sm leading-relaxed max-w-xs">
-              100% natural, machine-sliced, low-temperature dried fruits in
-              Nepal.
+            <p className="text-[11px] font-bold uppercase tracking-wider text-cream/45">
+              100% Natural &middot; Pure Goodness
+            </p>
+            <p className="font-display font-semibold text-cream/85 mt-1.5 max-w-xs">
+              Pure joy in every bite.
             </p>
           </div>
 
@@ -91,20 +82,23 @@ export default function Footer() {
 
           <div>
             <h4 className="font-display font-semibold text-white mb-4">We Accept</h4>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {paymentMethods.map(({ label, icon: Icon }) => (
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+              {paymentMethods.map(({ label, image, ratio, heightPx }) => (
                 <span
                   key={label}
-                  className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-cream/80"
+                  className="relative shrink-0"
+                  style={{ width: `${heightPx * ratio}px`, height: `${heightPx}px` }}
                 >
-                  <Icon size={13} />
-                  {label}
+                  <Image
+                    src={image}
+                    alt={label}
+                    fill
+                    sizes="96px"
+                    className="object-contain"
+                  />
                 </span>
               ))}
             </div>
-            <p className="text-sm text-cream/60">
-              Delivering natural goodness across Nepal.
-            </p>
           </div>
         </div>
 

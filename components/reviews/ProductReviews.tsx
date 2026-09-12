@@ -10,6 +10,13 @@ import { useReviewsStore } from "@/store/reviews-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { cn, formatDate } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 import StarPicker from "./StarPicker";
 
 const sortLabels: { value: ReviewSort; label: string }[] = [
@@ -268,20 +275,27 @@ export default function ProductReviews({
               Showing {visible.length} review{visible.length !== 1 && "s"}
               {starFilter !== null && ` rated ${starFilter}★`}
             </p>
-            <label className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-sm">
               <span className="text-forest-deep/55">Sort</span>
-              <select
+              <Select
                 value={sort}
-                onChange={(e) => setSort(e.target.value as ReviewSort)}
-                className="rounded-lg border border-forest/15 bg-white px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-forest/30"
+                onValueChange={(v) => setSort(v as ReviewSort)}
               >
-                {sortLabels.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+                <SelectTrigger
+                  aria-label="Sort reviews"
+                  className="rounded-lg px-3 py-1.5"
+                >
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {sortLabels.map((s) => (
+                    <SelectItem key={s.value} value={s.value}>
+                      {s.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           <div className="space-y-4">

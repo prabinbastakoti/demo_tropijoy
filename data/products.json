@@ -16,8 +16,8 @@
     ],
     "images": ["/products/apple.png"],
     "variants": [
-      { "id": "100g", "weight": "100g", "price": 850, "originalPrice": null, "sku": "TJ-APPLE-100", "inStock": true },
-      { "id": "200g", "weight": "200g", "price": 1550, "originalPrice": 1750, "sku": "TJ-APPLE-200", "inStock": true }
+      { "id": "100g", "weight": "100g", "price": 319, "originalPrice": null, "sku": "TJ-APPLE-100", "inStock": true, "stock": 4 },
+      { "id": "200g", "weight": "200g", "price": 629, "originalPrice": 638, "sku": "TJ-APPLE-200", "inStock": false, "stock": 0 }
     ],
     "defaultVariantId": "100g",
     "rating": 4.8,
@@ -40,8 +40,8 @@
     ],
     "images": ["/products/lemon.png"],
     "variants": [
-      { "id": "100g", "weight": "100g", "price": 900, "originalPrice": null, "sku": "TJ-LEMON-100", "inStock": true },
-      { "id": "200g", "weight": "200g", "price": 1650, "originalPrice": null, "sku": "TJ-LEMON-200", "inStock": true }
+      { "id": "100g", "weight": "100g", "price": 249, "originalPrice": null, "sku": "TJ-LEMON-100", "inStock": false, "stock": 0 },
+      { "id": "200g", "weight": "200g", "price": 489, "originalPrice": 498, "sku": "TJ-LEMON-200", "inStock": false, "stock": 0 }
     ],
     "defaultVariantId": "100g",
     "rating": 4.6,
@@ -64,8 +64,8 @@
     ],
     "images": ["/products/orange.png"],
     "variants": [
-      { "id": "100g", "weight": "100g", "price": 950, "originalPrice": null, "sku": "TJ-ORANGE-100", "inStock": true },
-      { "id": "200g", "weight": "200g", "price": 1700, "originalPrice": 1900, "sku": "TJ-ORANGE-200", "inStock": true }
+      { "id": "100g", "weight": "100g", "price": 339, "originalPrice": null, "sku": "TJ-ORANGE-100", "inStock": true, "stock": 9 },
+      { "id": "200g", "weight": "200g", "price": 669, "originalPrice": 678, "sku": "TJ-ORANGE-200", "inStock": false, "stock": 0 }
     ],
     "defaultVariantId": "100g",
     "rating": 4.7,
@@ -88,10 +88,12 @@
     ],
     "images": ["/products/pineapple.png"],
     "variants": [
-      { "id": "100g", "weight": "100g", "price": 1000, "originalPrice": null, "sku": "TJ-PINEAPPLE-100", "inStock": true },
-      { "id": "200g", "weight": "200g", "price": 1800, "originalPrice": null, "sku": "TJ-PINEAPPLE-200", "inStock": true }
+      { "id": "100g-with-peel", "weight": "100g", "style": "With Peel", "price": 469, "originalPrice": null, "sku": "TJ-PINEAPPLE-WP-100", "inStock": true, "stock": 5 },
+      { "id": "100g-without-peel", "weight": "100g", "style": "Without Peel", "price": 499, "originalPrice": null, "sku": "TJ-PINEAPPLE-NP-100", "inStock": true, "stock": 1 },
+      { "id": "200g-with-peel", "weight": "200g", "style": "With Peel", "price": 929, "originalPrice": 938, "sku": "TJ-PINEAPPLE-WP-200", "inStock": false, "stock": 0 },
+      { "id": "200g-without-peel", "weight": "200g", "style": "Without Peel", "price": 989, "originalPrice": 998, "sku": "TJ-PINEAPPLE-NP-200", "inStock": false, "stock": 0 }
     ],
-    "defaultVariantId": "100g",
+    "defaultVariantId": "100g-with-peel",
     "rating": 4.5,
     "reviewsCount": 9
   },
@@ -112,8 +114,8 @@
     ],
     "images": ["/products/banana.png"],
     "variants": [
-      { "id": "100g", "weight": "100g", "price": 880, "originalPrice": null, "sku": "TJ-BANANA-100", "inStock": true },
-      { "id": "200g", "weight": "200g", "price": 1600, "originalPrice": 1750, "sku": "TJ-BANANA-200", "inStock": true }
+      { "id": "100g", "weight": "100g", "price": 319, "originalPrice": null, "sku": "TJ-BANANA-100", "inStock": false, "stock": 0},
+      { "id": "200g", "weight": "200g", "price": 629, "originalPrice": 638, "sku": "TJ-BANANA-200", "inStock": false, "stock": 0 }
     ],
     "defaultVariantId": "100g",
     "rating": 4.8,
@@ -136,7 +138,7 @@
     ],
     "images": ["/products/banana-powder.png"],
     "variants": [
-      { "id": "50g", "weight": "50g", "price": 1250, "originalPrice": null, "sku": "TJ-BANPOWDER-50", "inStock": true }
+      { "id": "50g", "weight": "50g", "price": 199, "originalPrice": null, "sku": "TJ-BANPOWDER-50", "inStock": false, "stock": 0 }
     ],
     "defaultVariantId": "50g",
     "rating": 4.9,
