@@ -4,43 +4,23 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useVideoReadyStore } from "@/store/video-ready-store";
 
 /** Minimum time the splash stays up, so it reads as a deliberate loading
  *  moment rather than a flicker on fast connections. */
 const MIN_VISIBLE_MS = 500;
-/** Upper bound in case a page never signals ready (slow network, blocked
- *  request, etc.) — the splash must not be able to get stuck forever. */
-const MAX_WAIT_MS = 3000;
 
 export default function LoadingScreen() {
   const pathname = usePathname();
-  const videoReady = useVideoReadyStore((s) => s.ready);
-  const resetVideoReady = useVideoReadyStore((s) => s.reset);
-  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
-  const [forceReady, setForceReady] = useState(false);
+  const [ready, setReady] = useState(false);
 
   // Re-arm on every route change — the App Router unmounts the previous
   // page's tree before the next one paints, so each navigation deserves
-  // its own "is this page ready" moment, not just the very first load.
+  // its own brief loading moment.
   useEffect(() => {
-    setMinTimeElapsed(false);
-    setForceReady(false);
-    if (pathname === "/") resetVideoReady();
-
-    const minTimer = setTimeout(() => setMinTimeElapsed(true), MIN_VISIBLE_MS);
-    const maxTimer = setTimeout(() => setForceReady(true), MAX_WAIT_MS);
-    return () => {
-      clearTimeout(minTimer);
-      clearTimeout(maxTimer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setReady(false);
+    const timer = setTimeout(() => setReady(true), MIN_VISIBLE_MS);
+    return () => clearTimeout(timer);
   }, [pathname]);
-
-  // Only the homepage has a video worth waiting on; every other route is
-  // ready as soon as the minimum splash time has passed.
-  const needsVideo = pathname === "/";
-  const ready = minTimeElapsed && (!needsVideo || videoReady || forceReady);
 
   useEffect(() => {
     document.body.style.overflow = ready ? "" : "hidden";

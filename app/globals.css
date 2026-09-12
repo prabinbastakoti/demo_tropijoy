@@ -5,8 +5,8 @@
 :root {
   --font-inter: "Inter", system-ui, sans-serif;
   --font-baloo: "Baloo 2", system-ui, sans-serif;
-  /* Shared so the fixed header (h-16) and the hero can overlap precisely. */
-  --header-h: 64px;
+  /* Shared so the fixed header (h-20) and the hero can overlap precisely. */
+  --header-h: 80px;
 }
 
 html {

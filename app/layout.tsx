@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   },
   description:
     "Premium dehydrated fruits and freeze-dried fruit powders from Nepal. 100% organic, no added sugar, no preservatives.",
+  icons: {
+    icon: "/brand/favicon-white.png",
+  },
   openGraph: {
     title: "Tropijoy — Pure Joy In Every Bite",
     description:

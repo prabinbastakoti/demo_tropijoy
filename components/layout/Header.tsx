@@ -93,11 +93,13 @@ const mobileGroups = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [activeMega, setActiveMega] = useState<MegaId | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastScrollY = useRef(0);
   const pathname = usePathname();
 
   /** Opens (or switches) the mega menu, cancelling any pending close. */
@@ -119,7 +121,20 @@ export default function Header() {
   const hydrated = useHydrated();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    lastScrollY.current = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      // stay put near the top, and ignore sub-pixel jitter either direction
+      if (y < 96) {
+        setHiddenByScroll(false);
+      } else if (y > lastScrollY.current + 4) {
+        setHiddenByScroll(true);
+      } else if (y < lastScrollY.current - 4) {
+        setHiddenByScroll(false);
+      }
+      lastScrollY.current = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -127,6 +142,10 @@ export default function Header() {
 
   useEffect(() => setMobileOpen(false), [pathname]);
   useEffect(() => setActiveMega(null), [pathname]);
+  // never hide the header mid-interaction — only once the mega menu, search, and mobile drawer are all closed
+  useEffect(() => {
+    if (activeMega || searchOpen || mobileOpen) setHiddenByScroll(false);
+  }, [activeMega, searchOpen, mobileOpen]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -143,7 +162,7 @@ export default function Header() {
     pathname === href || pathname.startsWith(`${href}/`);
 
   /**
-   * The link the moving indicator should sit under. Falls back through:
+   * The link the moving underline should sit under. Falls back through:
    * the literally-hovered nav link, then — since the mega menu is a portal
    * rendered outside `<nav>`, moving the pointer into it fires `<nav>`'s
    * onMouseLeave and clears `hovered` even though the menu is still open —
@@ -154,63 +173,51 @@ export default function Header() {
     (activeMega ? navLinks.find((l) => l.mega === activeMega)?.href : undefined) ??
     navLinks.find((l) => isActive(l.href))?.href;
   const solidHeader = scrolled || activeMega !== null;
-  /** The homepage opens on a full-bleed video hero — everywhere else, before
-   *  scrolling, the header sits transparent over that page's own light content. */
-  const overVideo = pathname === "/" && !solidHeader;
-  const darkSurface = overVideo;
+  const headerHidden = hiddenByScroll && !activeMega && !searchOpen && !mobileOpen;
 
   const actionClass = (extra?: string) =>
     cn(
-      "relative flex items-center gap-1.5 rounded-full px-2.5 lg:px-3.5 py-2.5 transition-colors duration-300",
-      darkSurface
-        ? "text-white/80 hover:bg-white/15 hover:text-white"
-        : "text-forest-deep/70 hover:bg-forest/8 hover:text-forest",
+      "relative flex items-center gap-1.5 rounded-full px-2.5 lg:px-3.5 py-2.5 text-forest-ink/70 transition-colors duration-300 hover:bg-forest/8 hover:text-forest",
       extra
     );
 
   return (
     <>
-      {/* fixed so the hero's gradient runs underneath it */}
+      {/* fixed — fully transparent at rest so it reads as part of the hero underneath it,
+          then gains a glassmorphism surface once content scrolls beneath it for legibility.
+          Slides fully out of view on scroll-down and reappears on scroll-up, rather than staying permanently pinned. */}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-out",
-          solidHeader
-            ? "bg-white/80 backdrop-blur-xl border-b border-forest/8"
-            : "bg-transparent border-b border-transparent"
+          "fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-out",
+          headerHidden ? "-translate-y-full" : "translate-y-0"
         )}
       >
+        <div
+          className={cn(
+            "transition-all duration-500 ease-out border-b",
+            solidHeader
+              ? "bg-white/80 backdrop-blur-xl border-forest/10 shadow-[0_1px_0_0_rgba(9,56,26,0.04)]"
+              : "bg-transparent border-transparent"
+          )}
+        >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* single row — logo left, nav genuinely centered (1fr column), actions right */}
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-8 h-16">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-8 h-20">
             <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
-              <span className="relative h-10 aspect-[2336/824] block">
+              <span className="relative h-9 sm:h-10 aspect-[2336/824] block">
                 <Image
                   src="/brand/logo-green.png"
                   alt="Tropijoy"
                   fill
                   priority
                   sizes="150px"
-                  className={cn(
-                    "object-contain transition-opacity duration-300",
-                    darkSurface ? "opacity-0" : "opacity-100"
-                  )}
-                />
-                <Image
-                  src="/brand/logo-white.png"
-                  alt="Tropijoy"
-                  fill
-                  priority
-                  sizes="150px"
-                  className={cn(
-                    "object-contain transition-opacity duration-300",
-                    darkSurface ? "opacity-100" : "opacity-0"
-                  )}
+                  className="object-contain"
                 />
               </span>
             </Link>
 
             <nav
-              className="hidden md:flex items-center gap-3 justify-self-center"
+              className="hidden md:flex items-center gap-9 lg:gap-10 justify-self-center"
               onMouseLeave={() => {
                 setHovered(null);
                 scheduleCloseMega();
@@ -218,11 +225,11 @@ export default function Header() {
             >
               {navLinks.map((link) => {
                 const active = isActive(link.href);
-                // The pill only actually sits behind this link when nothing
-                // else is hovered (or this one is). If hover moved the pill
-                // elsewhere, this link must fall back to a readable color —
-                // `active` alone isn't enough, since that stays true for the
-                // current route even while its pill has slid away.
+                // The underline only actually sits under this link when nothing
+                // else is hovered (or this one is). If hover moved it elsewhere,
+                // this link must fall back to a readable color — `active` alone
+                // isn't enough, since that stays true for the current route even
+                // while its underline has slid away.
                 const pillHere = indicatorFor === link.href;
                 return (
                   <Link
@@ -233,24 +240,22 @@ export default function Header() {
                       openMega(link.mega ?? null);
                     }}
                     className={cn(
-                      "relative flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
+                      "relative flex items-center gap-1 py-2 text-sm font-semibold uppercase tracking-wide transition-colors duration-200",
                       pillHere
-                        ? "text-white"
-                        : darkSurface
-                        ? "text-white/75"
+                        ? "text-forest"
                         : active
                         ? "text-forest-deep"
-                        : "text-forest-deep/60"
+                        : "text-forest-ink/70 hover:text-forest"
                     )}
                   >
-                    {indicatorFor === link.href && (
+                    {link.label}
+                    {pillHere && (
                       <motion.span
-                        layoutId="nav-indicator"
-                        className="absolute inset-0 -z-10 rounded-full bg-forest shadow-[0_2px_10px_-2px_rgba(17,101,48,0.5)]"
+                        layoutId="nav-underline"
+                        className="absolute -bottom-0.5 left-0 right-0 h-[2px] rounded-full bg-forest"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
-                    {link.label}
                   </Link>
                 );
               })}
@@ -267,23 +272,13 @@ export default function Header() {
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
                 className={cn(
-                  "flex items-center gap-2 rounded-full transition-colors duration-300",
-                  "w-10 h-10 justify-center sm:w-auto sm:h-auto sm:justify-start sm:border sm:px-3.5 sm:py-2.5",
-                  darkSurface
-                    ? "text-white hover:bg-white/15 sm:border-white/25 sm:bg-white/10 sm:text-white/80 sm:hover:border-white/40 sm:hover:text-white"
-                    : "text-forest hover:bg-forest/8 sm:border-forest/12 sm:bg-white/60 sm:text-forest-deep/60 sm:hover:border-forest/30 sm:hover:text-forest"
+                  "flex items-center gap-2 rounded-full text-forest transition-colors duration-300 hover:bg-forest/8",
+                  "w-10 h-10 justify-center sm:w-auto sm:h-auto sm:justify-start sm:border sm:border-forest/12 sm:bg-white/60 sm:px-3.5 sm:py-2.5 sm:text-forest-deep/60 sm:hover:border-forest/30 sm:hover:text-forest"
                 )}
               >
                 <Search size={18} className="shrink-0" />
                 <span className="hidden lg:inline text-sm font-medium">Search</span>
-                <kbd
-                  className={cn(
-                    "hidden lg:inline rounded border px-1.5 py-0.5 text-[10px] font-semibold transition-colors duration-300",
-                    darkSurface
-                      ? "border-white/25 bg-white/10 text-white/60"
-                      : "border-forest/15 bg-white/70 text-forest-deep/40"
-                  )}
-                >
+                <kbd className="hidden lg:inline rounded border border-forest/15 bg-white/70 px-1.5 py-0.5 text-[10px] font-semibold text-forest-deep/40">
                   ⌘K
                 </kbd>
               </button>
@@ -327,15 +322,13 @@ export default function Header() {
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className={cn(
-                  "md:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300",
-                  darkSurface ? "text-white hover:bg-white/15" : "text-forest hover:bg-forest/8"
-                )}
+                className="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest transition-colors duration-300 hover:bg-forest/8"
               >
                 <Menu size={22} />
               </button>
             </div>
           </div>
+        </div>
         </div>
       </header>
 
@@ -380,7 +373,7 @@ export default function Header() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "rounded-xl px-4 py-3 text-base font-semibold transition-colors",
+                      "rounded-xl px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors",
                       isActive(link.href)
                         ? "bg-forest text-white"
                         : "text-forest-deep/75 hover:bg-forest/6"
