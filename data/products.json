@@ -134,7 +134,7 @@
       "Natural sweetener and thickener",
       "No added sugar"
     ],
-    "images": ["/products/banana-powder.png", "/products/banana-powder-alt.png"],
+    "images": ["/products/banana-powder.png"],
     "variants": [
       { "id": "50g", "weight": "50g", "price": 1250, "originalPrice": null, "sku": "TJ-BANPOWDER-50", "inStock": true }
     ],

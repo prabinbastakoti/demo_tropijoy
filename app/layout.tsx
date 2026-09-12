@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import LoadingScreen from "@/components/layout/LoadingScreen";
 import CartDrawer from "@/components/cart/CartDrawer";
 import PageTransition from "@/components/motion/PageTransition";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   description:
     "Premium dehydrated fruits and freeze-dried fruit powders from Nepal. 100% organic, no added sugar, no preservatives.",
   icons: {
-    icon: "/brand/favicon-white.png",
+    icon: "/brand/favicon-t-white.png",
   },
   openGraph: {
     title: "Tropijoy — Pure Joy In Every Bite",
@@ -55,8 +56,10 @@ export default function RootLayout({
         </main>
         <Footer />
         <CartDrawer />
+        <ScrollToTop />
         <Toaster
           position="bottom-right"
+          offset={{ bottom: "96px", right: "24px" }}
           toastOptions={{
             style: {
               background: "#116530",

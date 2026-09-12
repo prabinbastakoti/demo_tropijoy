@@ -22,12 +22,12 @@ const qualityChecks = [
   "Sealed within 48 hours in nitrogen-flushed pouches",
 ];
 
-const labelSamples = [
-  { fruit: "Apple", src: "/labels/200g/apple.png" },
-  { fruit: "Orange", src: "/labels/200g/orange.png" },
-  { fruit: "Banana", src: "/labels/200g/banana.png" },
-  { fruit: "Lemon", src: "/labels/200g/lemon.png" },
-  { fruit: "Pineapple", src: "/labels/200g/pineapple.png" },
+const productSamples = [
+  { fruit: "Apple", src: "/products/apple.png" },
+  { fruit: "Orange", src: "/products/orange.png" },
+  { fruit: "Banana", src: "/products/banana.png" },
+  { fruit: "Lemon", src: "/products/lemon.png" },
+  { fruit: "Pineapple", src: "/products/pineapple.png" },
 ];
 
 export default function OurProcessPage() {
@@ -101,15 +101,15 @@ export default function OurProcessPage() {
           className="mb-10"
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {labelSamples.map((label, i) => (
-            <Reveal key={label.fruit} delay={i * 0.06}>
+          {productSamples.map((product, i) => (
+            <Reveal key={product.fruit} delay={i * 0.06}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-forest/10 bg-white">
                 <Image
-                  src={label.src}
-                  alt={`Tropijoy ${label.fruit} packaging`}
+                  src={product.src}
+                  alt={`Tropijoy ${product.fruit} packaging`}
                   fill
                   sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 18vw"
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
               </div>
             </Reveal>

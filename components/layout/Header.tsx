@@ -44,6 +44,35 @@ const navLinks: { label: string; href: string; mega?: MegaId }[] = [
   { label: "Support", href: "/faq", mega: "support" },
 ];
 
+/**
+ * Every route reachable only through a mega menu (not one of navLinks'
+ * own hrefs) — e.g. /our-process is an "About Us" page but its URL
+ * doesn't start with /about, so isActive() alone would never light up
+ * a tab for it. Mirrors MegaMenu.tsx's actual groupings; keep in sync
+ * when a page moves between menus or a new one is added there.
+ */
+const megaMemberPaths: Record<MegaId, string[]> = {
+  shop: ["/best-sellers", "/bundles", "/gift-cards", "/gifting"],
+  blog: ["/recipes", "/reviews"],
+  about: ["/our-process", "/sustainability", "/careers", "/press"],
+  support: [
+    "/quality-and-safety",
+    "/shipping-policy",
+    "/returns-policy",
+    "/storage-guide",
+    "/track-order",
+    "/contact",
+    "/wholesale",
+    "/stockists",
+    "/corporate-gifting",
+    "/refer",
+    "/privacy-policy",
+    "/terms",
+    "/cookies",
+    "/accessibility",
+  ],
+};
+
 const mobileGroups = [
   {
     heading: "Shop",
@@ -158,8 +187,16 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(`${href}/`);
+  const pathMatches = (path: string) =>
+    pathname === path || pathname.startsWith(`${path}/`);
+
+  /** True for a link's own href, or — for a link that owns a mega menu —
+   *  any page listed under that mega menu (see megaMemberPaths above),
+   *  so e.g. /our-process still lights up "About Us" even though its URL
+   *  doesn't start with /about. */
+  const isActive = (link: (typeof navLinks)[number]) =>
+    pathMatches(link.href) ||
+    (link.mega ? megaMemberPaths[link.mega].some(pathMatches) : false);
 
   /**
    * The link the moving underline should sit under. Falls back through:
@@ -171,15 +208,51 @@ export default function Header() {
   const indicatorFor =
     hovered ??
     (activeMega ? navLinks.find((l) => l.mega === activeMega)?.href : undefined) ??
-    navLinks.find((l) => isActive(l.href))?.href;
+    navLinks.find(isActive)?.href;
   const solidHeader = scrolled || activeMega !== null;
   const headerHidden = hiddenByScroll && !activeMega && !searchOpen && !mobileOpen;
 
-  const actionClass = (extra?: string) =>
-    cn(
-      "relative flex items-center gap-1.5 rounded-full px-2.5 lg:px-3.5 py-2.5 text-forest-ink/70 transition-colors duration-300 hover:bg-forest/8 hover:text-forest",
-      extra
+  const iconBtnClass =
+    "relative w-9 h-9 rounded-full flex items-center justify-center text-forest-ink/70 transition-colors duration-200 hover:bg-forest/10 hover:text-forest";
+  const mobileIconBtnClass =
+    "relative w-10 h-10 rounded-full flex items-center justify-center text-forest transition-colors duration-300 hover:bg-forest/8";
+
+  function renderNavLink(link: (typeof navLinks)[number]) {
+    const active = isActive(link);
+    // The underline only actually sits under this link when nothing else is
+    // hovered (or this one is). If hover moved it elsewhere, this link must
+    // fall back to a readable color — `active` alone isn't enough, since
+    // that stays true for the current route even while its underline has
+    // slid away.
+    const pillHere = indicatorFor === link.href;
+    return (
+      <Link
+        key={link.href}
+        href={link.href}
+        onMouseEnter={() => {
+          setHovered(link.href);
+          openMega(link.mega ?? null);
+        }}
+        className={cn(
+          "relative flex items-center gap-1 py-2 text-sm font-semibold uppercase tracking-wide transition-colors duration-200",
+          pillHere
+            ? "text-forest"
+            : active
+            ? "text-forest-deep"
+            : "text-forest-ink/70 hover:text-forest"
+        )}
+      >
+        {link.label}
+        {pillHere && (
+          <motion.span
+            layoutId="nav-underline"
+            className="absolute -bottom-0.5 left-0 right-0 h-[2px] rounded-full bg-forest"
+            transition={{ type: "spring", stiffness: 380, damping: 32 }}
+          />
+        )}
+      </Link>
     );
+  }
 
   return (
     <>
@@ -202,7 +275,7 @@ export default function Header() {
         >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* single row — logo left, nav genuinely centered (1fr column), actions right */}
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-8 h-20">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 h-20">
             <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
               <span className="relative h-9 sm:h-10 aspect-[2336/824] block">
                 <Image
@@ -217,118 +290,103 @@ export default function Header() {
             </Link>
 
             <nav
-              className="hidden md:flex items-center gap-9 lg:gap-10 justify-self-center"
+              className="hidden md:flex items-center gap-8 lg:gap-10 justify-self-center"
               onMouseLeave={() => {
                 setHovered(null);
                 scheduleCloseMega();
               }}
             >
-              {navLinks.map((link) => {
-                const active = isActive(link.href);
-                // The underline only actually sits under this link when nothing
-                // else is hovered (or this one is). If hover moved it elsewhere,
-                // this link must fall back to a readable color — `active` alone
-                // isn't enough, since that stays true for the current route even
-                // while its underline has slid away.
-                const pillHere = indicatorFor === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onMouseEnter={() => {
-                      setHovered(link.href);
-                      openMega(link.mega ?? null);
-                    }}
-                    className={cn(
-                      "relative flex items-center gap-1 py-2 text-sm font-semibold uppercase tracking-wide transition-colors duration-200",
-                      pillHere
-                        ? "text-forest"
-                        : active
-                        ? "text-forest-deep"
-                        : "text-forest-ink/70 hover:text-forest"
-                    )}
-                  >
-                    {link.label}
-                    {pillHere && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        className="absolute -bottom-0.5 left-0 right-0 h-[2px] rounded-full bg-forest"
-                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
+              {navLinks.map(renderNavLink)}
             </nav>
 
-            <MegaMenu
-              activeMega={activeMega}
-              onMouseEnter={() => openMega(activeMega)}
-              onMouseLeave={scheduleCloseMega}
-            />
-
-            <div className="flex items-center gap-1 shrink-0 justify-self-end">
-              <button
-                onClick={() => setSearchOpen(true)}
-                aria-label="Search products"
-                className={cn(
-                  "flex items-center gap-2 rounded-full text-forest transition-colors duration-300 hover:bg-forest/8",
-                  "w-10 h-10 justify-center sm:w-auto sm:h-auto sm:justify-start sm:border sm:border-forest/12 sm:bg-white/60 sm:px-3.5 sm:py-2.5 sm:text-forest-deep/60 sm:hover:border-forest/30 sm:hover:text-forest"
-                )}
-              >
-                <Search size={18} className="shrink-0" />
-                <span className="hidden lg:inline text-sm font-medium">Search</span>
-                <kbd className="hidden lg:inline rounded border border-forest/15 bg-white/70 px-1.5 py-0.5 text-[10px] font-semibold text-forest-deep/40">
-                  ⌘K
-                </kbd>
-              </button>
-
-              <Link href="/orders" aria-label="Order history" className={cn(actionClass(), "hidden sm:flex")}>
-                <Package size={18} />
-                <span className="hidden lg:inline text-sm font-semibold">Orders</span>
-              </Link>
-
-              <Link href="/wishlist" aria-label="Wishlist" className={cn(actionClass(), "hidden sm:flex")}>
-                <span className="relative">
-                  <Heart size={18} />
+            <div className="flex items-center gap-3 shrink-0 justify-self-end">
+              {/* grouped icon toolbar, md+ */}
+              <div className="hidden md:flex items-center gap-0.5 rounded-full bg-white/60 border border-forest/10 p-1">
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  aria-label="Search products"
+                  title="Search (⌘K)"
+                  className={iconBtnClass}
+                >
+                  <Search size={17} />
+                </button>
+                <Link href="/orders" aria-label="Order history" title="Orders" className={iconBtnClass}>
+                  <Package size={17} />
+                </Link>
+                <Link href="/wishlist" aria-label="Wishlist" title="Wishlist" className={iconBtnClass}>
+                  <Heart size={17} />
                   {hydrated && wishlistCount > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-forest text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream">
+                    <span className="absolute top-0.5 right-0.5 bg-forest text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-white">
                       {wishlistCount > 9 ? "9+" : wishlistCount}
                     </span>
                   )}
-                </span>
-                <span className="hidden lg:inline text-sm font-semibold">Wishlist</span>
-              </Link>
-
-              <button onClick={toggleCart} aria-label="Open cart" className={actionClass()}>
-                <span className="relative">
-                  <ShoppingBag size={18} />
+                </Link>
+                <button onClick={toggleCart} aria-label="Open cart" title="Cart" className={iconBtnClass}>
+                  <ShoppingBag size={17} />
                   <AnimatePresence>
                     {hydrated && itemCount > 0 && (
                       <motion.span
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0 }}
-                        className="absolute -top-1.5 -right-1.5 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream"
+                        className="absolute top-0.5 right-0.5 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-white"
                       >
                         {itemCount > 9 ? "9+" : itemCount}
                       </motion.span>
                     )}
                   </AnimatePresence>
-                </span>
-                <span className="hidden lg:inline text-sm font-semibold">Cart</span>
-              </button>
+                </button>
+              </div>
 
-              <button
-                onClick={() => setMobileOpen(true)}
-                aria-label="Open menu"
-                className="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest transition-colors duration-300 hover:bg-forest/8"
-              >
-                <Menu size={22} />
-              </button>
+              {/* compact actions below md — everything else lives in the mobile drawer */}
+              <div className="flex md:hidden items-center gap-1">
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  aria-label="Search products"
+                  className={mobileIconBtnClass}
+                >
+                  <Search size={19} />
+                </button>
+                <Link href="/wishlist" aria-label="Wishlist" className={mobileIconBtnClass}>
+                  <Heart size={19} />
+                  {hydrated && wishlistCount > 0 && (
+                    <span className="absolute top-1 right-1 bg-forest text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream">
+                      {wishlistCount > 9 ? "9+" : wishlistCount}
+                    </span>
+                  )}
+                </Link>
+                <button onClick={toggleCart} aria-label="Open cart" className={mobileIconBtnClass}>
+                  <ShoppingBag size={19} />
+                  <AnimatePresence>
+                    {hydrated && itemCount > 0 && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="absolute top-1 right-1 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream"
+                      >
+                        {itemCount > 9 ? "9+" : itemCount}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
+                <button
+                  onClick={() => setMobileOpen(true)}
+                  aria-label="Open menu"
+                  className={mobileIconBtnClass}
+                >
+                  <Menu size={22} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
+        <MegaMenu
+          activeMega={activeMega}
+          onMouseEnter={() => openMega(activeMega)}
+          onMouseLeave={scheduleCloseMega}
+        />
         </div>
       </header>
 
@@ -374,7 +432,7 @@ export default function Header() {
                     href={link.href}
                     className={cn(
                       "rounded-xl px-4 py-3 text-base font-semibold uppercase tracking-wide transition-colors",
-                      isActive(link.href)
+                      isActive(link)
                         ? "bg-forest text-white"
                         : "text-forest-deep/75 hover:bg-forest/6"
                     )}
