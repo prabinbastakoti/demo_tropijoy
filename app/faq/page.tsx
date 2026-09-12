@@ -42,7 +42,7 @@ export default function FaqPage() {
       <Reveal>
         <Link
           href="/contact"
-          className="group mt-8 flex items-center justify-between gap-4 rounded-3xl bg-forest-deep p-7 text-cream hover:bg-forest transition-colors"
+          className="group mt-8 flex items-center justify-between gap-4 rounded-3xl bg-forest p-7 text-cream hover:bg-forest-light transition-colors"
         >
           <span>
             <span className="block font-display font-bold text-lg">

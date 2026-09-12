@@ -17,13 +17,13 @@ const config: Config = {
           dark: "#B8551F",
         },
         forest: {
-          DEFAULT: "#234128",
-          deep: "#234128",
-          light: "#2E5D45",
-          ink: "#0F241A",
+          DEFAULT: "#116530",
+          deep: "#09381A",
+          light: "#1A7D3E",
+          ink: "#2C3E35",
         },
         cream: "#FAF8F5",
-        sage: "#E2E8E0",
+        sage: "#E8F0EC",
         berry: "#B5179E",
         citrus: "#F77F00",
         accent: {

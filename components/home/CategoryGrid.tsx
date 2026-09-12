@@ -51,7 +51,7 @@ export default function CategoryGrid() {
               <p className="text-xs text-forest-deep/55 mt-1">one ingredient each</p>
             </div>
           </div>
-          <div className="flex items-center gap-4 rounded-3xl bg-forest-deep p-5 text-cream">
+          <div className="flex items-center gap-4 rounded-3xl bg-forest p-5 text-cream">
             <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
               <Sprout size={20} className="text-sunny" />
             </div>

@@ -5,16 +5,8 @@
 :root {
   --font-inter: "Inter", system-ui, sans-serif;
   --font-baloo: "Baloo 2", system-ui, sans-serif;
-  /* Shared so the fixed announcement bar + header and the hero can overlap precisely. */
-  --announce-h: 34px;
-  --header-h: 60px;
-}
-
-@media (min-width: 640px) {
-  :root {
-    --announce-h: 38px;
-    --header-h: 76px;
-  }
+  /* Shared so the fixed header (h-16) and the hero can overlap precisely. */
+  --header-h: 64px;
 }
 
 html {
@@ -23,7 +15,7 @@ html {
 
 body {
   background-color: #faf8f5;
-  color: #234128;
+  color: #2c3e35;
 }
 
 ::selection {
@@ -38,11 +30,11 @@ body {
   background: #f1ede4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #234128;
+  background: #116530;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2e5d45;
+  background: #1a7d3e;
 }
 
 /* ---------- surfaces ---------- */
@@ -87,7 +79,7 @@ body {
   pointer-events: none;
   background: radial-gradient(
     360px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(35, 65, 40, 0.12),
+    rgba(17, 101, 48, 0.12),
     transparent 65%
   );
 }
@@ -96,7 +88,7 @@ body {
 }
 
 .ring-glow {
-  box-shadow: 0 0 0 1px rgba(35, 65, 40, 0.08), 0 0 0 6px rgba(232, 141, 53, 0.1);
+  box-shadow: 0 0 0 1px rgba(17, 101, 48, 0.08), 0 0 0 6px rgba(232, 141, 53, 0.1);
 }
 
 /* ---------- layout helpers ---------- */

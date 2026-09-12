@@ -159,7 +159,7 @@ export default function MegaMenu({
           transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          className="fixed inset-x-0 top-[calc(var(--announce-h)+var(--header-h))] z-[45] border-b border-forest/10 bg-cream shadow-window"
+          className="fixed inset-x-0 top-[var(--header-h)] z-[45] border-b border-forest/10 bg-cream shadow-window"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {activeMega === "shop" && (

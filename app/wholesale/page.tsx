@@ -68,7 +68,7 @@ export default function WholesalePage() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_420px] gap-10 items-start">
-        <div className="rounded-3xl bg-forest-deep text-cream p-8 sm:p-10">
+        <div className="rounded-3xl bg-forest text-cream p-8 sm:p-10">
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl mb-3">
             How it works
           </h2>

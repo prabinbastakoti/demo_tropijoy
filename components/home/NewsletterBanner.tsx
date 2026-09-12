@@ -59,7 +59,7 @@ export default function NewsletterBanner() {
               <button
                 type="submit"
                 disabled={loading}
-                className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-sunny text-white text-sm font-semibold px-6 py-3 hover:bg-sunny-bright transition-colors disabled:opacity-50"
+                className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-forest text-white text-sm font-semibold px-6 py-3 hover:bg-forest-light transition-colors disabled:opacity-50"
               >
                 {loading ? "Sending…" : "Claim 10% Off"}
                 {!loading && <ArrowRight size={16} />}

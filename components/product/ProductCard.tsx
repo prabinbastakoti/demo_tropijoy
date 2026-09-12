@@ -111,7 +111,7 @@ export default function ProductCard({
             <button
               onClick={handleAdd}
               disabled={!inStock}
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-forest-deep/95 backdrop-blur text-white text-sm font-semibold py-2.5 hover:bg-forest disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 rounded-full bg-forest/95 backdrop-blur text-white text-sm font-semibold py-2.5 hover:bg-forest-light disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ShoppingBag size={15} />
               {inStock ? "Quick Add" : "Sold Out"}

@@ -1,15 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useVideoReadyStore } from "@/store/video-ready-store";
 
 export default function HeroVisual() {
+  const setReady = useVideoReadyStore((s) => s.setReady);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7, delay: 0.1 }}
-      className="relative aspect-square sm:aspect-[6/5] rounded-[2rem] overflow-hidden shadow-window"
-    >
+    <div className="absolute inset-0 -z-10 overflow-hidden">
       <video
         autoPlay
         muted
@@ -17,12 +14,18 @@ export default function HeroVisual() {
         playsInline
         preload="auto"
         poster="/products/apple.png"
+        onLoadedData={setReady}
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/video/hero.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/40 via-transparent to-transparent pointer-events-none" />
-    </motion.div>
+      {/* flat dim across the whole clip so text stays readable no matter what's playing */}
+      <div className="absolute inset-0 bg-forest-deep/35" />
+      {/* top scrim keeps the navbar legible over whatever the video is doing */}
+      <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-forest-deep/75 via-forest-deep/30 to-transparent" />
+      {/* bottom scrim keeps the headline/CTAs legible */}
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-forest-deep/85 via-forest-deep/35 to-transparent" />
+    </div>
   );
 }

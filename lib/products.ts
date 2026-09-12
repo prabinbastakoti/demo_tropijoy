@@ -154,7 +154,7 @@ export const FRUIT_ACCENTS: Record<
     chip: "bg-accent-banana/15 text-forest-deep",
   },
   Mixed: {
-    hex: "#234128",
+    hex: "#116530",
     bg: "bg-forest",
     text: "text-forest",
     border: "border-forest",

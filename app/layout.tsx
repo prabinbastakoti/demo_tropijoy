@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Baloo_2 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import LoadingScreen from "@/components/layout/LoadingScreen";
 import CartDrawer from "@/components/cart/CartDrawer";
 import PageTransition from "@/components/motion/PageTransition";
 
@@ -45,9 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${baloo.variable}`}>
       <body className="font-sans antialiased bg-cream min-h-screen flex flex-col">
-        <AnnouncementBar />
+        <LoadingScreen />
         <Header />
-        <main className="flex-1 pt-[calc(var(--announce-h)+var(--header-h))]">
+        <main className="flex-1 pt-[var(--header-h)]">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
@@ -56,7 +56,7 @@ export default function RootLayout({
           position="bottom-right"
           toastOptions={{
             style: {
-              background: "#234128",
+              background: "#116530",
               color: "#FAF8F5",
               border: "1px solid rgba(232,141,53,0.3)",
             },

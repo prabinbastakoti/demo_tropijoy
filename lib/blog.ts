@@ -67,7 +67,7 @@ export const accentStyles: Record<
  * when the post has a `heroFruit`, otherwise a flat forest fallback.
  */
 export function getPostAccentColor(post: BlogPost): string {
-  return post.heroFruit ? FRUIT_ACCENTS[post.heroFruit].hex : "#234128";
+  return post.heroFruit ? FRUIT_ACCENTS[post.heroFruit].hex : "#116530";
 }
 
 export function getPostAccentChip(post: BlogPost): string {

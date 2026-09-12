@@ -9,7 +9,6 @@ import {
   Archive,
   Briefcase,
   ChefHat,
-  ChevronDown,
   Gift,
   Heart,
   HelpCircle,
@@ -155,37 +154,63 @@ export default function Header() {
     (activeMega ? navLinks.find((l) => l.mega === activeMega)?.href : undefined) ??
     navLinks.find((l) => isActive(l.href))?.href;
   const solidHeader = scrolled || activeMega !== null;
+  /** The homepage opens on a full-bleed video hero — everywhere else, before
+   *  scrolling, the header sits transparent over that page's own light content. */
+  const overVideo = pathname === "/" && !solidHeader;
+  const darkSurface = overVideo;
+
+  const actionClass = (extra?: string) =>
+    cn(
+      "relative flex items-center gap-1.5 rounded-full px-2.5 lg:px-3.5 py-2.5 transition-colors duration-300",
+      darkSurface
+        ? "text-white/80 hover:bg-white/15 hover:text-white"
+        : "text-forest-deep/70 hover:bg-forest/8 hover:text-forest",
+      extra
+    );
 
   return (
     <>
-      {/* fixed so the hero's gradient runs underneath it; sits below the announcement bar */}
+      {/* fixed so the hero's gradient runs underneath it */}
       <header
         className={cn(
-          "fixed inset-x-0 top-[var(--announce-h)] z-40 transition-colors duration-300",
+          "fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-out",
           solidHeader
             ? "bg-white/80 backdrop-blur-xl border-b border-forest/8"
             : "bg-transparent border-b border-transparent"
         )}
       >
-        {/* same container as the hero so the two align exactly */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center h-[60px] sm:h-[76px]">
+          {/* single row — logo left, nav genuinely centered (1fr column), actions right */}
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-8 h-16">
             <Link href="/" className="flex items-center shrink-0" aria-label="Tropijoy home">
-              <Image
-                src="/logo.png"
-                alt="Tropijoy"
-                width={221}
-                height={100}
-                priority
-                className="h-[2.875rem] w-auto object-contain"
-              />
+              <span className="relative h-10 aspect-[2336/824] block">
+                <Image
+                  src="/brand/logo-green.png"
+                  alt="Tropijoy"
+                  fill
+                  priority
+                  sizes="150px"
+                  className={cn(
+                    "object-contain transition-opacity duration-300",
+                    darkSurface ? "opacity-0" : "opacity-100"
+                  )}
+                />
+                <Image
+                  src="/brand/logo-white.png"
+                  alt="Tropijoy"
+                  fill
+                  priority
+                  sizes="150px"
+                  className={cn(
+                    "object-contain transition-opacity duration-300",
+                    darkSurface ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </span>
             </Link>
 
-            {/* desktop nav with a single indicator that follows hover, resting on the active route.
-                Grid's middle column keeps this truly centered on the page regardless of how wide
-                the logo vs. action icons are — justify-between only equalized the gaps, not this. */}
             <nav
-              className="hidden md:flex items-center gap-2 justify-self-center"
+              className="hidden md:flex items-center gap-3 justify-self-center"
               onMouseLeave={() => {
                 setHovered(null);
                 scheduleCloseMega();
@@ -211,6 +236,8 @@ export default function Header() {
                       "relative flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
                       pillHere
                         ? "text-white"
+                        : darkSurface
+                        ? "text-white/75"
                         : active
                         ? "text-forest-deep"
                         : "text-forest-deep/60"
@@ -219,20 +246,11 @@ export default function Header() {
                     {indicatorFor === link.href && (
                       <motion.span
                         layoutId="nav-indicator"
-                        className="absolute inset-0 -z-10 rounded-full bg-forest shadow-[0_2px_10px_-2px_rgba(35,65,40,0.5)]"
+                        className="absolute inset-0 -z-10 rounded-full bg-forest shadow-[0_2px_10px_-2px_rgba(17,101,48,0.5)]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
                     {link.label}
-                    {link.mega && (
-                      <ChevronDown
-                        size={13}
-                        className={cn(
-                          "transition-transform duration-200",
-                          activeMega === link.mega && "rotate-180"
-                        )}
-                      />
-                    )}
                   </Link>
                 );
               })}
@@ -244,73 +262,75 @@ export default function Header() {
               onMouseLeave={scheduleCloseMega}
             />
 
-            {/* actions */}
-            <div className="flex items-center gap-0.5 sm:gap-1 shrink-0 justify-self-end">
+            <div className="flex items-center gap-1 shrink-0 justify-self-end">
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
-                className="group hidden sm:flex items-center gap-2 rounded-full border border-forest/12 bg-white/60 px-3 py-1.5 text-forest-deep/50 transition-colors hover:border-forest/30 hover:text-forest"
+                className={cn(
+                  "flex items-center gap-2 rounded-full transition-colors duration-300",
+                  "w-10 h-10 justify-center sm:w-auto sm:h-auto sm:justify-start sm:border sm:px-3.5 sm:py-2.5",
+                  darkSurface
+                    ? "text-white hover:bg-white/15 sm:border-white/25 sm:bg-white/10 sm:text-white/80 sm:hover:border-white/40 sm:hover:text-white"
+                    : "text-forest hover:bg-forest/8 sm:border-forest/12 sm:bg-white/60 sm:text-forest-deep/60 sm:hover:border-forest/30 sm:hover:text-forest"
+                )}
               >
-                <Search size={15} />
-                <span className="text-xs font-medium">Search</span>
-                <kbd className="rounded border border-forest/15 bg-white/70 px-1 text-[10px] font-semibold text-forest-deep/40">
+                <Search size={18} className="shrink-0" />
+                <span className="hidden lg:inline text-sm font-medium">Search</span>
+                <kbd
+                  className={cn(
+                    "hidden lg:inline rounded border px-1.5 py-0.5 text-[10px] font-semibold transition-colors duration-300",
+                    darkSurface
+                      ? "border-white/25 bg-white/10 text-white/60"
+                      : "border-forest/15 bg-white/70 text-forest-deep/40"
+                  )}
+                >
                   ⌘K
                 </kbd>
               </button>
 
-              <button
-                onClick={() => setSearchOpen(true)}
-                aria-label="Search products"
-                className="sm:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
-              >
-                <Search size={19} />
-              </button>
-
-              <Link
-                href="/orders"
-                aria-label="Order history"
-                className="hidden sm:flex w-10 h-10 rounded-full items-center justify-center text-forest hover:bg-forest/8 transition-colors"
-              >
-                <Package size={19} />
+              <Link href="/orders" aria-label="Order history" className={cn(actionClass(), "hidden sm:flex")}>
+                <Package size={18} />
+                <span className="hidden lg:inline text-sm font-semibold">Orders</span>
               </Link>
 
-              <Link
-                href="/wishlist"
-                aria-label="Wishlist"
-                className="relative w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
-              >
-                <Heart size={19} />
-                {hydrated && wishlistCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 bg-forest text-white text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1">
-                    {wishlistCount > 9 ? "9+" : wishlistCount}
-                  </span>
-                )}
-              </Link>
-
-              <button
-                onClick={toggleCart}
-                aria-label="Open cart"
-                className="relative w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
-              >
-                <ShoppingBag size={19} />
-                <AnimatePresence>
-                  {hydrated && itemCount > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute top-0.5 right-0.5 bg-sunny text-white text-[10px] font-bold rounded-full min-w-[17px] h-[17px] flex items-center justify-center border-2 border-cream px-1"
-                    >
-                      {itemCount > 9 ? "9+" : itemCount}
-                    </motion.span>
+              <Link href="/wishlist" aria-label="Wishlist" className={cn(actionClass(), "hidden sm:flex")}>
+                <span className="relative">
+                  <Heart size={18} />
+                  {hydrated && wishlistCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-forest text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream">
+                      {wishlistCount > 9 ? "9+" : wishlistCount}
+                    </span>
                   )}
-                </AnimatePresence>
+                </span>
+                <span className="hidden lg:inline text-sm font-semibold">Wishlist</span>
+              </Link>
+
+              <button onClick={toggleCart} aria-label="Open cart" className={actionClass()}>
+                <span className="relative">
+                  <ShoppingBag size={18} />
+                  <AnimatePresence>
+                    {hydrated && itemCount > 0 && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="absolute -top-1.5 -right-1.5 bg-sunny text-white text-[9px] font-bold rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-0.5 border border-cream"
+                      >
+                        {itemCount > 9 ? "9+" : itemCount}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
+                <span className="hidden lg:inline text-sm font-semibold">Cart</span>
               </button>
 
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest hover:bg-forest/8 transition-colors"
+                className={cn(
+                  "md:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300",
+                  darkSurface ? "text-white hover:bg-white/15" : "text-forest hover:bg-forest/8"
+                )}
               >
                 <Menu size={22} />
               </button>

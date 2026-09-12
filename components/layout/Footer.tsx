@@ -55,7 +55,7 @@ export default function Footer() {
               alt="Tropijoy"
               width={221}
               height={100}
-              className="h-11 w-auto object-contain mb-4"
+              className="h-10 w-auto object-contain mb-4"
             />
             <p className="text-cream/60 text-sm leading-relaxed max-w-xs">
               100% natural, machine-sliced, low-temperature dried fruits in
@@ -64,11 +64,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold text-sunny mb-4">Quick Links</h4>
+            <h4 className="font-display font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm text-cream/70">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="hover:text-sunny transition-colors">
+                  <Link href={link.href} className="hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -77,11 +77,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold text-sunny mb-4">Support &amp; Legal</h4>
+            <h4 className="font-display font-semibold text-white mb-4">Support &amp; Legal</h4>
             <ul className="space-y-2 text-sm text-cream/70">
               {supportLegalLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="hover:text-sunny transition-colors">
+                  <Link href={link.href} className="hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -90,7 +90,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold text-sunny mb-4">We Accept</h4>
+            <h4 className="font-display font-semibold text-white mb-4">We Accept</h4>
             <div className="flex flex-wrap gap-2 mb-4">
               {paymentMethods.map(({ label, icon: Icon }) => (
                 <span
@@ -135,7 +135,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-sunny hover:text-white transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-forest-deep transition-colors"
               >
                 <Icon size={14} />
               </a>

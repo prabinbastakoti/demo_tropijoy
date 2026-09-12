@@ -104,7 +104,7 @@ export default function PressPage() {
         </div>
 
         <Reveal delay={0.12}>
-          <div className="rounded-3xl bg-forest-deep text-cream p-8 sticky top-28">
+          <div className="rounded-3xl bg-forest text-cream p-8 sticky top-28">
             <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
               <Mail size={20} className="text-sunny" />
             </span>

@@ -70,7 +70,7 @@ export default function GiftingPage() {
         ))}
       </div>
 
-      <div className="rounded-3xl bg-forest-deep text-cream p-8 sm:p-10">
+      <div className="rounded-3xl bg-forest text-cream p-8 sm:p-10">
         <span className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
           <Gift size={22} className="text-sunny" />
         </span>

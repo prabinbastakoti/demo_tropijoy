@@ -134,7 +134,7 @@ export default function ContactPage() {
 
           <Reveal delay={0.2}>
             <div className="mt-6 grid sm:grid-cols-2 gap-4">
-              <div className="rounded-3xl bg-forest-deep text-cream p-6">
+              <div className="rounded-3xl bg-forest text-cream p-6">
                 <MapPin size={19} className="text-sunny mb-3" />
                 <p className="font-semibold mb-1">Where we are</p>
                 <p className="text-sm text-cream/65 leading-relaxed">
